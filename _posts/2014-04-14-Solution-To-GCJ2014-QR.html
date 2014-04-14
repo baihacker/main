@@ -49,9 +49,11 @@ We can claim that, if it can be solved by a click, then:
 <li>Each cell with a label great label has a ZERO cell as its neighbour.</li>
 </lu>
 So the strategy is to enumerate the configuration which can satisfy the condition above <font color="red"><b>easily</b></font>.<br/>
-The left-top corner is a u * v rectangle with star.
+The left-top corner is a u * v rectangle with star.<br/>
 Then put the left stars in the left-bottom corner column by column, and from top to bottom in<br/>
 each column.<br/>
+We can see the above configurations can satisfy the first three condition and <br/>
+most of them satisfy the last condition.</br>
 After enumerating each configuration, check it.<br/>
 Note: the configuration satisfy the condition easily does not mean all the configuration satisfy the condition.</br>
 </p>
@@ -65,7 +67,7 @@ So, Ken's strategy is very simple:<br/>
 <li>If I have a heavier one, choose the lightest one I can get a point.</li>
 <li>Otherwise, I choose the lightest on and get none point.</li>
 </lu>
-And Naomi's best strategy is to choose each from heavier to lighter.<br/>
+And Naomi's best strategy is to choose each from heavier to lighter.<br/><br/>
 In Deceitful War, Naomi's strategy is to make each block as useful as possible.<br/>
 If the lightest one is than the lightest of Ken's,<br/>
 Naomi can say that it is very heavy, and Ken choose his lightest one, so Naomi get a point.<br/>
