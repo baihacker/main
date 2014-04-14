@@ -1,0 +1,75 @@
+---
+layout: default
+title: Solution To GCJ2014
+---
+
+<h1>{{ page.title }}</h1>
+
+<hr>
+<h2>Magic Trick</h2>
+<p> Enumerate all possible card and check each card and obtain the possible card set POSSIBLE.<br/>
+If |POSSIBLE| == 0, we say "Volunteer cheated!"<br/>
+If |POSSIBLE| > 1, we say "Bad magician!"<br/>
+If |POSSIBLE| == 1, we just output the unique card.<br/>
+</p>
+
+<hr>
+<h2>Cookie Clicker Alpha</h2>
+<p>
+Consider the final situation: there are U farms producing cookies.<br/>
+What is the best strategy to buy U farms? <br/>
+After buying the Uth farm, how many cookies we left?<br/>
+Supposing we have some cookies left, why do not we buy the Uth farm in a earlier time?<br/>
+If we buy it earlier, the situation is certain better.<br/>
+So, the best strategy to buy U farms is "To buy each farm as early as possible, and the other<br/>
+strategy is always worse than this one.<br/>
+Using A[i] to record the best time to buy i farms, and A[i] can be easily calculate through A[i-1]<br/>
+where A[0] = 0.<br/>
+So we can enumerate each possible U and calculate the time to achieve the goal to find the best one.<br/>
+When the time with i farms is longer than the best time to achieve the goal through no more than i-1 farms,<br/>
+we stop enumerating.<br/>
+What's the complexity of this algorithm?<br/>
+We using S to denote the number that buying S+1 farms become worse than all the previous solutions.<br/>
+We also using K to denote the number that buying S+1 farms become worse than the previous solutions.<br/>
+It is easy to see K >= S.<br/>
+We solve the inequality: TIME(K) &gt; TIME(K+1) and get:</br>
+(X-C)/X &gt; (2 + K * F) / (2+(K+1)*F)</br>
+The maximum of K which satisfy the above inequality is a upper bound of the algorithm.
+</p>
+
+<hr>
+<h2>Minesweeper Master</h2>
+<p>
+M == R*C - 1 is a special case, we solve it alone.<br/>
+We can claim that, if it can be solved by a click, then:
+<lu>
+<li>There exist at least one ZERO cell (cell labelled 0).</li>
+<li>All the ZERO cells are in the same connected component.</li>
+<li>All the non-star cells are in a connected component.</li>
+<li>Each cell with a label great label has a ZERO cell as its neighbour.</li>
+</lu>
+So the strategy is to enumerate the configuration which can satisfy the condition above <font color="red"><b>easily</b></font>.<br/>
+The left-top corner is a u * v rectangle with star.
+Then put the left stars in the left-bottom corner column by column, and from top to bottom in<br/>
+each column.<br/>
+After enumerating each configuration, check it.<br/>
+Note: the configuration satisfy the condition easily does not mean all the configuration satisfy the condition.</br>
+</p>
+
+<hr>
+<h2>Deceitful War</h2>
+<p>
+The most important information in the description is "2.Naomi tells Ken the mass of the block she chose."<br/>
+So, Ken's strategy is very simple:<br/>
+<lu>
+<li>If I have a heavier one, choose the lightest one I can get a point.</li>
+<li>Otherwise, I choose the lightest on and get none point.</li>
+</u>
+And Naomi's best strategy is to choose each from heavier to lighter.<br/>
+In Deceitful War, Naomi's strategy is to make each block as useful as possible.<br/>
+If the lightest one is than the lightest of Ken's,<br/>
+Naomi can say that it is very heavy, and Ken choose his lightest one, so Naomi get a point.<br/>
+Otherwise, Naomi can say it is a little lighter than Ken's heaviest one, and make Ken's situation worse.<br/>
+We can sort all the block and using to variable to indicate the lightest one and the heaviest one, and simulate<br/>
+the game to get the answer.
+</p>
