@@ -29,8 +29,8 @@ So we can enumerate each possible U and calculate the time to achieve the goal t
 When the time with i farms is longer than the best time to achieve the goal through no more than i-1 farms,<br/>
 we stop enumerating.<br/>
 What's the complexity of this algorithm?<br/>
-We using S to denote the number that buying S+1 farms become worse than all the previous solutions.<br/>
-We also using K to denote the number that buying S+1 farms become worse than the previous solutions.<br/>
+We use S to denote the number that buying S+1 farms become worse than all the previous solutions.<br/>
+We also use K to denote the number that buying S+1 farms become worse than the previous solutions.<br/>
 It is easy to see K >= S.(It seems that K == S because of the monotonicity of solution)<br/>
 We solve the inequality: TIME(K) &gt; TIME(K+1) and get:</br>
 (X-C)/X &gt; (2 + K * F) / (2+(K+1)*F)</br>
