@@ -38,7 +38,7 @@ But, a much easier way is to simulate the non-uniform shuffle algorithm one mill
 We use p[I][J] to denote the probability of number I exists on position J.<br/>
 The strategy is to compare p[input[0]][0] * p[input[1]][1] * ... * p[input[N-1]][N-1] to (1/N)^N.<br/>
 The value may be too small, so we apply log function on each value.<br/>
-When the first value is smaller, the probability of the uniform-random algorithm is bigger, and vice versa.<br/>
+When the first value is bigger, the probability of the non-uniform random algorithm is bigger, and vice versa.<br/>
 
 There are some other strategies based on other characteristic of the random shuffle algorithm.<br/>
 </p>
