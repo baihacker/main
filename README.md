@@ -12,3 +12,4 @@
 
 [bbic 2014](http://cstest.scu.edu.cn/soj/contest/contest.action?cid=346) is coming soon
 
+[Contact me](https://github.com/baihacker/main/issues/1)
