@@ -10,6 +10,6 @@
 
 [bbic 2012](http://cstest.scu.edu.cn/soj/contest/contest.action?cid=329)
 
-[bbic 2014](http://cstest.scu.edu.cn/soj/contest/contest.action?cid=346) is coming soon
+[bbic 2014](http://cstest.scu.edu.cn/soj/contest/contest.action?cid=346)
 
 [Contact me](https://github.com/baihacker/main/issues/1)
