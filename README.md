@@ -8,7 +8,7 @@ My Blogs
 
 [Baidu Blog(Chinese)](http://hi.baidu.com/feixue)
 
-BBIC Solutions
+BBIC
 
 [bbic 2009](http://cstest.scu.edu.cn/soj/contest/contest.action?cid=202)
 
