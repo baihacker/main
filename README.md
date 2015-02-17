@@ -1,8 +1,14 @@
-[About me] (http://baihacker.github.io/main/)
+[baihacker.me](http://baihacker.me/)
 
-[CSDN Blog](http://blog.csdn.net/baihacker)
+My Blogs
 
-[Baidu Blog](http://hi.baidu.com/feixue)
+[GitHub Blog](http://baihacker.github.io/main/)
+
+[CSDN Blog(Chinese)](http://blog.csdn.net/baihacker)
+
+[Baidu Blog(Chinese)](http://hi.baidu.com/feixue)
+
+BBIC Solutions
 
 [bbic 2009](http://cstest.scu.edu.cn/soj/contest/contest.action?cid=202)
 
@@ -11,5 +17,7 @@
 [bbic 2012](http://cstest.scu.edu.cn/soj/contest/contest.action?cid=329)
 
 [bbic 2014](http://cstest.scu.edu.cn/soj/contest/contest.action?cid=346)
+
+Others
 
 [Contact me](https://github.com/baihacker/main/issues/1)
