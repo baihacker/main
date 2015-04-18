@@ -10,15 +10,15 @@ title: Solution To GCJ2015 R1A
 <p>For the first method, if data[i] is greater than data[i+1] we add data[i] - data[i+1] to the answer<br/>
 For the second method, we find the maximum value of data[i] - data[i+1] first, which is denoted by speed.<br/>
 The maximum value means the minimum number of mushrooms Kaylin should eat in 10 seconds.<br/>
-We add min(speed, data[i]) (0 <= 0 <= n -1) to the answer.
+We add min(speed, data[i]) (0 <= 0 <= n - 1) to the answer.
 </p>
 
 <hr>
 <h2>Haircut</h2>
 <p>
-Give a time X, we can compute the number of customers who have been cut hair or is being cutting hair,<br/>
+Given a time X, we can compute the number of customers who have been cut hair or is being cutting hair,<br/>
 which will be denoted as F(X). If a barber finishes cutting one customer's hair at that time, we<br/>
-think the next customer is not being cutting hair. Find the smallest X such that F(X) >= n by binary search.<br/>
+think the next customer is not being cutting hair. Find the smallest X such that F(X) >= n by binary searching.<br/>
 Then we can consider situation when X-1 minutes finished, and compute the time a barber can serve for the<br/>
 next customers. Sort the the barbers by the time and find the n-F[x-1] one.
 </p>
