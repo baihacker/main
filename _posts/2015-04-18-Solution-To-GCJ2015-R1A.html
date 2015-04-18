@@ -27,13 +27,13 @@ next customers. Sort the the barbers by the time and find the n-F[x-1] one.
 <h2>Logging</h2>
 <p>
 We can use brute force to solve the small test case.<br/>
-For the large test case, imagine that a tree is on the convex hull after, there must exist a line such<br/>
-that all the tree is on the line or lie in the same side of the line. By enumerating all the possible<br/>
-lines and checking other trees position, we can cut all the trees on one side of the line to make the<br>
-trees on the line on the convex hull. From this observation we obtain an algorithm of O(n^3).<br/>
-We can fix a tree and consider all the line through this tree together. Use P[i] to denote the position<br/>
-of the ith tree. If P[i] is fixed, we sort all the other points by the angle of vector P[x] - P[i].<br/>
-Use Q to denote the sorted trees, we draw a line through point P[i] and Q[0], which divides the trees<br/>
-into three classes. Then, we draw a line through point P[i] and Q[1]. We can reuse the result of the<br/>
-previous drawing.
+For the large test case, imagine that a tree is on the convex hull after cutting some trees, there<br/>
+must exist a line such that all the tree is on the line or lie in the same side of the line. By<br/>
+enumerating all the possible lines and checking other trees position, we can cut all the trees on<br/>
+one side of the line to make the trees on the line on the convex hull. From this observation we obtain<br/>
+an algorithm of O(n^3). We can fix a tree and consider all the line through this tree together. Use<br/>
+P[i] to denote the position of the ith tree. If P[i] is fixed, we sort all the other points by the<br/>
+angle of vector P[x] - P[i]. Use Q to denote the sorted trees, we draw a line through point P[i] and<br/>
+Q[0] first, which divides the trees into three classes. Then, we draw a line through point P[i] and<br/>
+Q[1]. We can reuse the result of the previous drawing.
 </p>
