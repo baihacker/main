@@ -2,6 +2,8 @@
 
 本文上一个版本:[Windows下vs2015编译Chromium[2017/04/01]](https://blog.csdn.net/baihacker/article/details/68948978)
 
+已编译好的binary可以在[这里](http://pan.baidu.com/share/link?shareid=288371&uk=2684621311#path=%252F%25E8%25BD%25AF%25E4%25BB%25B6%25E5%25BC%2580%25E5%258F%2591%25E8%25B5%2584%25E6%2596%2599%252Fchrome%252Fbin)找到。
+
 准备
 ===
 * python2
