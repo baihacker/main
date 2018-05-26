@@ -20,7 +20,7 @@ My Blogs
 
 [Baidu Blog(Chinese)(Not available)](http://hi.baidu.com/feixue)
   * My articles from 2005 to 2014
-  * This link is not available now since baidu didn't provide the service 
+  * This link is not available now since baidu didn't provide the service  from 2015
 
 BBIC (baihacker's birthday invitation contest)
 ====
