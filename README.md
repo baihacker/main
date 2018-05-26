@@ -35,4 +35,4 @@ BBIC (baihacker's birthday invitation contest)
 
 Others
 ======
-[How to build chromium (chinese)] (https://github.com/baihacker/main/tree/master/chromium)
+[How to build chromium (chinese)](https://github.com/baihacker/main/tree/master/chromium)
