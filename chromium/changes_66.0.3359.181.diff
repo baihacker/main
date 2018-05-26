@@ -1,0 +1,128 @@
+diff --git a/build/config/BUILDCONFIG.gn b/build/config/BUILDCONFIG.gn
+index 7d60dd920904..3df5e6238684 100644
+--- a/build/config/BUILDCONFIG.gn
++++ b/build/config/BUILDCONFIG.gn
+@@ -128,7 +128,7 @@ declare_args() {
+   # release (!is_debug). This might be better expressed as a tri-state
+   # (debug, release, official) but for historical reasons there are two
+   # separate flags.
+-  is_official_build = false
++  is_official_build = true
+ 
+   # Whether we're a traditional desktop unix.
+   is_desktop_linux = current_os == "linux"
+diff --git a/build/config/compiler/BUILD.gn b/build/config/compiler/BUILD.gn
+index 9a10137aa405..b66be9375bd2 100644
+--- a/build/config/compiler/BUILD.gn
++++ b/build/config/compiler/BUILD.gn
+@@ -185,7 +185,7 @@ config("compiler") {
+   ldflags = []
+   defines = []
+   configs = []
+-  inputs = []
++  # inputs = []
+ 
+   # System-specific flags. If your compiler flags apply to one of the
+   # categories here, add it to the associated file to keep this shared config
+diff --git a/build/toolchain/win/BUILD.gn b/build/toolchain/win/BUILD.gn
+index 53f767a0bddb..2d9d1a32fae9 100644
+--- a/build/toolchain/win/BUILD.gn
++++ b/build/toolchain/win/BUILD.gn
+@@ -175,7 +175,7 @@ template("msvc_toolchain") {
+         "$object_subdir/{{source_name_part}}.obj",
+       ]
+ 
+-      command = "$env_wrapper$cl /nologo /showIncludes ${clflags} $sys_include_flags{{defines}} {{include_dirs}} {{cflags}} {{cflags_c}} /c {{source}} /Fo{{output}} /Fd\"$pdbname\""
++      command = "$env_wrapper$cl /nologo ${clflags} $sys_include_flags{{defines}} {{include_dirs}} {{cflags}} {{cflags_c}} /c {{source}} /Fo{{output}} /Fd\"$pdbname\""
+     }
+ 
+     tool("cxx") {
+@@ -191,7 +191,7 @@ template("msvc_toolchain") {
+         "$object_subdir/{{source_name_part}}.obj",
+       ]
+ 
+-      command = "$env_wrapper$cl /nologo /showIncludes ${clflags} $sys_include_flags{{defines}} {{include_dirs}} {{cflags}} {{cflags_cc}} /c {{source}} /Fo{{output}} /Fd\"$pdbname\""
++      command = "$env_wrapper$cl /nologo ${clflags} $sys_include_flags{{defines}} {{include_dirs}} {{cflags}} {{cflags_cc}} /c {{source}} /Fo{{output}} /Fd\"$pdbname\""
+     }
+ 
+     tool("rc") {
+diff --git a/chrome/browser/ui/startup/google_api_keys_infobar_delegate.cc b/chrome/browser/ui/startup/google_api_keys_infobar_delegate.cc
+index f7af1a5abfdc..fcf38d54af31 100644
+--- a/chrome/browser/ui/startup/google_api_keys_infobar_delegate.cc
++++ b/chrome/browser/ui/startup/google_api_keys_infobar_delegate.cc
+@@ -14,6 +14,11 @@
+ 
+ // static
+ void GoogleApiKeysInfoBarDelegate::Create(InfoBarService* infobar_service) {
++  
++  #ifndef NO_BAIHACKER_MODIFY
++    return;
++  #endif
++
+   infobar_service->AddInfoBar(infobar_service->CreateConfirmInfoBar(
+       std::unique_ptr<ConfirmInfoBarDelegate>(
+           new GoogleApiKeysInfoBarDelegate())));
+diff --git a/chrome/browser/ui/views/tabs/tab.cc b/chrome/browser/ui/views/tabs/tab.cc
+index 66f7beb03971..a2aeba6a1102 100644
+--- a/chrome/browser/ui/views/tabs/tab.cc
++++ b/chrome/browser/ui/views/tabs/tab.cc
+@@ -761,6 +761,14 @@ bool Tab::GetTooltipTextOrigin(const gfx::Point& p, gfx::Point* origin) const {
+ }
+ 
+ bool Tab::OnMousePressed(const ui::MouseEvent& event) {
++  
++  #ifndef NO_BAIHACKER_MODIFY
++    if (event.native_event().message == WM_LBUTTONDBLCLK) {
++      controller_->CloseTab(this, CLOSE_TAB_FROM_MOUSE);
++      return true;
++    }
++  #endif
++
+   controller_->OnMouseEventInTab(this, event);
+ 
+   // Allow a right click from touch to drag, which corresponds to a long click.
+diff --git a/device/vr/features/features.gni b/device/vr/features/features.gni
+index 905d9e799df0..3a8b5c6f4edd 100644
+--- a/device/vr/features/features.gni
++++ b/device/vr/features/features.gni
+@@ -16,7 +16,7 @@ declare_args() {
+   # To build with Oculus support, the Oculus SDK for Windows will need to be
+   # installed in third_party/libovr/src.  See
+   # third_party/libovr/README.chromium for details.
+-  enable_oculus_vr = checkout_oculus_sdk && is_chrome_branded && is_win
++  enable_oculus_vr = false && is_chrome_branded && is_win
+ }
+ 
+ declare_args() {
+diff --git a/net/proxy_resolution/pac_file_decider.cc b/net/proxy_resolution/pac_file_decider.cc
+index 29e8413a3e20..9c7191becd66 100644
+--- a/net/proxy_resolution/pac_file_decider.cc
++++ b/net/proxy_resolution/pac_file_decider.cc
+@@ -54,7 +54,11 @@ bool LooksLikePacScript(const base::string16& script) {
+ // For more details, also check out this comment:
+ // http://code.google.com/p/chromium/issues/detail?id=18575#c20
+ namespace {
+-const char kWpadUrl[] = "http://wpad/wpad.dat";
++#ifndef NO_BAIHACKER_MODIFY
++  const char kWpadUrl[] = "";
++#else
++  const char kWpadUrl[] = "http://wpad/wpad.dat";
++#endif
+ const int kQuickCheckDelayMs = 1000;
+ };  // namespace
+ 
+diff --git a/net/proxy_resolution/polling_proxy_config_service.cc b/net/proxy_resolution/polling_proxy_config_service.cc
+index f54dd4de1d60..8fa1b96ec397 100644
+--- a/net/proxy_resolution/polling_proxy_config_service.cc
++++ b/net/proxy_resolution/polling_proxy_config_service.cc
+@@ -103,6 +103,10 @@ class PollingProxyConfigService::Core
+   void PollAsync(GetConfigFunction func) {
+     ProxyConfig config;
+     func(&config);
++    
++    #ifndef NO_BAIHACKER_MODIFY
++      config.set_auto_detect(false);
++    #endif
+ 
+     base::AutoLock lock(lock_);
+     if (origin_task_runner_.get()) {
