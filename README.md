@@ -9,8 +9,8 @@ My Blogs
 =======
 
 [GitHub Blog](http://baihacker.github.io/main/)
-  * Project Euler badge, topcoder, soj profile.
-  * Solution to GCJ 2014 and GCJ 2015.
+  * Project Euler badge, topcoder provile, soj profile
+  * Solution to GCJ 2014 and GCJ 2015
   * Not updated now
   
 [CSDN Blog(Chinese)](http://blog.csdn.net/baihacker)
