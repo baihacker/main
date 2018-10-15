@@ -20,5 +20,5 @@
  * 准备必要的文件
    * 新建chromium目录
    * 在该目录下解压好[depot_tools bundle](https://storage.googleapis.com/chrome-infra/depot_tools.zip) 即chromium\depot_tools\gclient.py为一个合法路径
-   * 在chromium下建立[build脚本](https://github.com/baihacker/main/blob/master/chromium/build_66.0.3359.181.bat)
+   * 在chromium下建立[build脚本](https://github.com/baihacker/main/blob/master/chromium/build_69.0.3497.100.bat)
  * 检查build脚本根据脚本注释作出必要的修改后执行脚本

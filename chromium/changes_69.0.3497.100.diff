@@ -1,0 +1,104 @@
+diff --git a/DEPS b/DEPS
+index d83fc47ef765..65c0125da357 100644
+--- a/DEPS
++++ b/DEPS
+@@ -1034,8 +1034,8 @@ deps = {
+   'src/third_party/webgl/src':
+     Var('chromium_git') + '/external/khronosgroup/webgl.git' + '@' + 'a5c263cc63ffc2cc189b5214074c8792067c1853',
+ 
+-  'src/third_party/webrtc':
+-    Var('webrtc_git') + '/src.git' + '@' + '9110a54a60d9e0c69128338fc250319ddb751b5a',
++  #'src/third_party/webrtc':
++  #  Var('webrtc_git') + '/src.git' + '@' + '881fe53d1faefe135c0d6959794da91a25e247f2',
+ 
+   'src/third_party/xdg-utils': {
+       'url': Var('chromium_git') + '/chromium/deps/xdg-utils.git' + '@' + 'd80274d5869b17b8c9067a1022e4416ee7ed5e0d',
+diff --git a/build/config/BUILDCONFIG.gn b/build/config/BUILDCONFIG.gn
+index fcc00ee0e49f..8534cef35128 100644
+--- a/build/config/BUILDCONFIG.gn
++++ b/build/config/BUILDCONFIG.gn
+@@ -128,7 +128,7 @@ declare_args() {
+   # release (!is_debug). This might be better expressed as a tri-state
+   # (debug, release, official) but for historical reasons there are two
+   # separate flags.
+-  is_official_build = false
++  is_official_build = true
+ 
+   # Whether we're a traditional desktop unix.
+   is_desktop_linux = current_os == "linux"
+diff --git a/build/toolchain/win/BUILD.gn b/build/toolchain/win/BUILD.gn
+index eb3e2b2b377d..e3617fe74bf4 100644
+--- a/build/toolchain/win/BUILD.gn
++++ b/build/toolchain/win/BUILD.gn
+@@ -172,7 +172,7 @@ template("msvc_toolchain") {
+         "$object_subdir/{{source_name_part}}.obj",
+       ]
+ 
+-      command = "$env_wrapper$cl /nologo /showIncludes ${clflags} $sys_include_flags{{defines}} {{include_dirs}} {{cflags}} {{cflags_c}} /c {{source}} /Fo{{output}} /Fd\"$pdbname\""
++      command = "$env_wrapper$cl /nologo ${clflags} $sys_include_flags{{defines}} {{include_dirs}} {{cflags}} {{cflags_c}} /c {{source}} /Fo{{output}} /Fd\"$pdbname\""
+     }
+ 
+     tool("cxx") {
+@@ -188,7 +188,7 @@ template("msvc_toolchain") {
+         "$object_subdir/{{source_name_part}}.obj",
+       ]
+ 
+-      command = "$env_wrapper$cl /nologo /showIncludes ${clflags} $sys_include_flags{{defines}} {{include_dirs}} {{cflags}} {{cflags_cc}} /c {{source}} /Fo{{output}} /Fd\"$pdbname\""
++      command = "$env_wrapper$cl /nologo ${clflags} $sys_include_flags{{defines}} {{include_dirs}} {{cflags}} {{cflags_cc}} /c {{source}} /Fo{{output}} /Fd\"$pdbname\""
+     }
+ 
+     tool("rc") {
+diff --git a/chrome/browser/ui/startup/google_api_keys_infobar_delegate.cc b/chrome/browser/ui/startup/google_api_keys_infobar_delegate.cc
+index f7af1a5abfdc..672d2a225e5f 100644
+--- a/chrome/browser/ui/startup/google_api_keys_infobar_delegate.cc
++++ b/chrome/browser/ui/startup/google_api_keys_infobar_delegate.cc
+@@ -14,6 +14,11 @@
+ 
+ // static
+ void GoogleApiKeysInfoBarDelegate::Create(InfoBarService* infobar_service) {
++
++  #ifndef NO_BAIHACKER_MODIFY
++    return;
++  #endif
++
+   infobar_service->AddInfoBar(infobar_service->CreateConfirmInfoBar(
+       std::unique_ptr<ConfirmInfoBarDelegate>(
+           new GoogleApiKeysInfoBarDelegate())));
+diff --git a/chrome/browser/ui/views/tabs/tab.cc b/chrome/browser/ui/views/tabs/tab.cc
+index 34f5dea69a34..093b20c54f3b 100644
+--- a/chrome/browser/ui/views/tabs/tab.cc
++++ b/chrome/browser/ui/views/tabs/tab.cc
+@@ -754,6 +754,14 @@ const char* Tab::GetClassName() const {
+ }
+ 
+ bool Tab::OnMousePressed(const ui::MouseEvent& event) {
++
++  #ifndef NO_BAIHACKER_MODIFY
++    if (event.native_event().message == WM_LBUTTONDBLCLK) {
++      controller_->CloseTab(this, CLOSE_TAB_FROM_MOUSE);
++      return true;
++    }
++  #endif
++
+   controller_->OnMouseEventInTab(this, event);
+ 
+   // Allow a right click from touch to drag, which corresponds to a long click.
+diff --git a/net/proxy_resolution/pac_file_decider.cc b/net/proxy_resolution/pac_file_decider.cc
+index 9eb3640ea9b3..066c0d25e9fb 100644
+--- a/net/proxy_resolution/pac_file_decider.cc
++++ b/net/proxy_resolution/pac_file_decider.cc
+@@ -55,7 +55,13 @@ bool LooksLikePacScript(const base::string16& script) {
+ // For more details, also check out this comment:
+ // http://code.google.com/p/chromium/issues/detail?id=18575#c20
+ namespace {
+-const char kWpadUrl[] = "http://wpad/wpad.dat";
++
++#ifndef NO_BAIHACKER_MODIFY
++  const char kWpadUrl[] = "";
++#else
++  const char kWpadUrl[] = "http://wpad/wpad.dat";
++#endif
++
+ const int kQuickCheckDelayMs = 1000;
+ };  // namespace
+ 
