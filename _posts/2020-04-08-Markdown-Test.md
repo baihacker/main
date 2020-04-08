@@ -28,7 +28,7 @@ mathjax: true
 
 [文字内容](链接)
 
-​```cpp
+​```c++
 using int64 = long long;
 ​```
 
