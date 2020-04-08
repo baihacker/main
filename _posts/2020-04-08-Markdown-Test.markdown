@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Solution To GCJ2015 R1A
+title: Markdown test
 ---
 
 <h1>{{ page.title }}</h1>
