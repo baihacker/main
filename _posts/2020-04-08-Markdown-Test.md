@@ -28,8 +28,12 @@ mathjax: true
 
 [文字内容](链接)
 
-{% highlight c++ linenos%}
+{% highlight c++ %}
 using int64 = long long;
+int main() {
+  cout << "hello world" << endl;
+  return 0;
+}
 {% endhighlight %}
 
 $$
