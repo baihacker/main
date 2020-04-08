@@ -14,16 +14,28 @@ mathjax: true
 
 - bullet_name
 
+- ~~被划掉的文字~~
+- ~~被划掉的文字~~
+
 1. number1
 2. number2
 
 - [x] 选中了的框
 - [ ] 未选中的框
 
+> 文字
+> 文字
+
+[文字内容](链接)
+
+​```cpp
+using int64 = long long;
+​```
+
 $$
-a+b<c
+a+b\le c
 $$
 
-$a+b<c$
+$\int x^2 dx$
 
 {% include mathjax.html %}
