@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Markdown test
+mathjax: true
 ---
 
 <h1>{{ page.title }}</h1>
@@ -24,3 +25,5 @@ a+b<c
 $$
 
 $a+b<c$
+
+{% include mathjax.html %}
