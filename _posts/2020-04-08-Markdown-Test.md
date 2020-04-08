@@ -28,9 +28,9 @@ mathjax: true
 
 [文字内容](链接)
 
-​```c++
+{% highlight cpp linenos%}
 using int64 = long long;
-​```
+{% endhighlight %}
 
 $$
 a+b\le c
