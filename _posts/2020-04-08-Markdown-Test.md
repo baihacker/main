@@ -28,7 +28,7 @@ mathjax: true
 
 [文字内容](链接)
 
-{% highlight cpp linenos%}
+{% highlight c++ linenos%}
 using int64 = long long;
 {% endhighlight %}
 
