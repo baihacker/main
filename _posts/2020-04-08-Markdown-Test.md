@@ -28,7 +28,7 @@ mathjax: true
 
 [文字内容](链接)
 
-​```cpp
+```cpp
 using int64 = long long;
 int main() {
   cout << "hello world" << endl;
