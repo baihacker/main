@@ -28,13 +28,13 @@ mathjax: true
 
 [文字内容](链接)
 
-{% highlight c++ %}
+​```cpp
 using int64 = long long;
 int main() {
   cout << "hello world" << endl;
   return 0;
 }
-{% endhighlight %}
+```
 
 $$
 a+b\le c
