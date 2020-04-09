@@ -31,14 +31,14 @@ int64 cal(int64 i, int64 n) {
 }
 ```
 
-* The definition of $$f$$ and $$g$$ will be discussed in a later section.
+* The definition of $$g$$ and $$h$$ will be discussed in a later section.
 * $$sg$$ is the prefix-sum of $$g$$.
 * plist[i] is the $$i_{th}$$ prime (index starts from 0).
 
 This method can be viewed as $$\sum_{p \text{ is powerful or 1}}h(p)sg(\frac{n}{p})$$ and that’s why we call it powerful number sieving.
 
-# Find f and g
-To find multiplicative function $$h,g$$, consider their definitions on $$p^k$$ ($$p$$ is prime) we have $$f(p^k) = \sum_{i=0}^{k}h(p^i)g(p^{k-i})$$. 
+# Find g and h
+To find multiplicative function $$g,h$$, consider their definitions on $$p^k$$ ($$p$$ is prime) we have $$f(p^k) = \sum_{i=0}^{k}h(p^i)g(p^{k-i})$$. 
 Then, we have the way to
 * Find $$g$$ 
   * We can start from $$f(p) = g(p)$$.
@@ -56,7 +56,7 @@ So, if we want to make use of this method, another constraint on $$g$$ is that w
 *Note: we assume that $$h(p^k)$$ can be computed in a reasonable complexity.*
 
 # Further thoughts
-## Reach n^(⅓) 
+## Reach n^(1/3) 
 If we have $$h(p)=h(p^2)=0$$, we may have an algorithm of complexity around $$n^{\frac{1}{3}}$$. But meanwhile, another constraint is added on $$g$$, $$f(p^2)=g(p^2)$$. The challenges are
 * Can we find it?
 * Can we compute $$sg$$ with a reasonable complexity.
