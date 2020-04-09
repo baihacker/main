@@ -1,12 +1,10 @@
-Welcome to baihacker's Github Homepage
-======================================
+# Welcome to baihacker's Github Homepage
 
 [baihacker.me](http://baihacker.me/)
 
 [contact me](https://github.com/baihacker/main/issues/1)
 
-My Blogs
-=======
+# My Blogs
 
 **[GitHub Blog](http://baihacker.github.io/main/)**
   * Project Euler badge, topcoder provile, soj profile
@@ -22,8 +20,7 @@ My Blogs
   * My articles from 2005 to 2014
   * This link is not available now since baidu didn't provide the service  from 2015
 
-BBIC (baihacker's birthday invitation contest)
-====
+## BBIC (baihacker's birthday invitation contest)
 
 [bbic 2009](http://acm.scu.edu.cn/soj/contest/contest.action?cid=202)
 
@@ -33,6 +30,5 @@ BBIC (baihacker's birthday invitation contest)
 
 [bbic 2014](http://acm.scu.edu.cn/soj/contest/contest.action?cid=346)
 
-Others
-======
+## Others
 [How to build chromium (chinese)](https://github.com/baihacker/main/tree/master/chromium)
