@@ -7,7 +7,7 @@ mathjax: true
 <h1>{{ page.title }}</h1>
 {: style="text-align: center;"}
 
-[baihacker](https://github.com/baihacker)
+[baihacker](https://github.com/baihacker){:target="_blank"}
 {: style="text-align: center;"}
 
 2020.04.07
@@ -90,10 +90,10 @@ We have already had an example which is aligned to this approach: mobius inversi
 Overall speaking, the method in this article and mobius inversion are unified in this sense.
 
 # References
-1. fjzzq2002, 2018.11.01,[Use powerful numbers to compute the prefix sum of multiplicative functions](https://www.cnblogs.com/zzqsblog/p/9904271.html) (chinese content)
-2. Min_25, 2018.02.04, solution for [Counting modulo pairs](https://www.rosecode.net/problem-478-Counting-modulo-pairs-askyear-2018) (problem authored by baihacker, Min_25’s solution link is not provided intentionally)
-3. abcwuhang, 2018.10.24, posts on [Summing a multiplicative function](https://projecteuler.net/problem=639) (problem authored by abcwuhang)
-4. asaelr, fakesson, 2020.03.28, posts on [Twos are all you need](https://projecteuler.net/problem=708) (problem authored by abcwuhang)
-5. baihacker, 2018.03.18, [Thinking on the generalized mobius inversion](https://blog.csdn.net/baihacker/article/details/79597472) (chinese content)
+1. fjzzq2002, 2018.11.01,[Use powerful numbers to compute the prefix sum of multiplicative functions](https://www.cnblogs.com/zzqsblog/p/9904271.html){:target="_blank"} (chinese content)
+2. Min_25, 2018.02.04, solution for [Counting modulo pairs](https://www.rosecode.net/problem-478-Counting-modulo-pairs-askyear-2018){:target="_blank"} (problem authored by baihacker, Min_25’s solution link is not provided intentionally)
+3. abcwuhang, 2018.10.24, posts on [Summing a multiplicative function](https://projecteuler.net/problem=639){:target="_blank"} (problem authored by abcwuhang)
+4. asaelr, fakesson, 2020.03.28, posts on [Twos are all you need](https://projecteuler.net/problem=708){:target="_blank"} (problem authored by abcwuhang)
+5. baihacker, 2018.03.18, [Thinking on the generalized mobius inversion](https://blog.csdn.net/baihacker/article/details/79597472){:target="_blank"} (chinese content)
 
 {% include mathjax.html %}
