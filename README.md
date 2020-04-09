@@ -12,7 +12,9 @@ My Blogs
   * Project Euler badge, topcoder provile, soj profile
   * Solution to GCJ 2014 and GCJ 2015
   * My latest articles.
-  
+
+<iframe src="http://baihacker.github.io/main/"></iframe>
+
 [CSDN Blog(Chinese)](http://blog.csdn.net/baihacker)
   * Algorithm
   * C++
