@@ -8,10 +8,10 @@ Welcome to baihacker's Github Homepage
 My Blogs
 =======
 
-[GitHub Blog](http://baihacker.github.io/main/)
+**[GitHub Blog](http://baihacker.github.io/main/)**
   * Project Euler badge, topcoder provile, soj profile
   * Solution to GCJ 2014 and GCJ 2015
-  * Stop updating now
+  * My latest articles.
   
 [CSDN Blog(Chinese)](http://blog.csdn.net/baihacker)
   * Algorithm
