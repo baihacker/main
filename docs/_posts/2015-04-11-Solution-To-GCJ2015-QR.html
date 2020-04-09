@@ -1,0 +1,44 @@
+---
+layout: default
+title: Solution To GCJ2015 QR
+---
+
+<h1>{{ page.title }}</h1>
+
+<hr>
+<h2>Standing Ovation</h2>
+<p>Use a variable s to store the number of people who will stand up now.<br/>
+Iterate i from 0 to n, if i is greater than 0 and s is less than i, we add i - s to<br/>
+the answer and increase s to i. And then, we add s_i to s.
+</p>
+
+<hr>
+<h2>Infinite House of Pancakes</h2>
+<p>
+Enumerate the maximum number of pancake a plate contains after the adjustment.<br/>
+If a plate contains more pancake, we can compute the minimum number of adjustment for this plate.<br/>
+We sum up all the necessary number of adjustment and obtain an possible answer, then, find the<br/>
+smallest one.
+</p>
+
+<hr>
+<h2>Dijkstra</h2>
+<p>
+First, we need to check whether the value of the input expression is -1.<br/>
+Second, notice that D^0, D^1, D^2, D^3 will be cyclic. If the answer exist, there must exist<br/>
+a tuple (u, v) such that D^u*D[1..u] = i, where u is not very large. There exists a tuple (s, t)<br/>
+such that D[t..L]*D^s. We can enumerate u and v, and find the minimum v and the maximum t and<br/>
+compute the character used to obtain i and k. If it's no more than L*X, then we have a solution.
+</p>
+
+<hr>
+<h2>Ominous Omino</h2>
+<p>
+It's obvious that if n is greater than 6, Richard can always win, because he can choose a<br/>
+shape with a hole. When n is less than 3, it's very easy to solve. Then we should consider<br/>
+the left situations: n is in the range of [3, 6]. The key point of checking whether a shape<br/>
+is a win for Richard is to check whether all the connected component is divisible by n after<br/>
+placing the shape. If min(r, c) is greater or equal to n, Richard will lose. If there exist<br/>
+a shape which can not be placed in the grid, Richard will win. Enumerate all the shape (including<br/>
+rotation of one shape) and enumerate all the cases it can be placed in the grid and check.
+</p>
