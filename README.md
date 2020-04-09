@@ -1,4 +1,4 @@
-# Welcome to baihacker's Github Homepage
+# Blog list
 * [GitHub Blog](http://baihacker.github.io/main/)
   * Project Euler badge, topcoder provile, soj profile
   * Solution to GCJ 2014 and GCJ 2015
