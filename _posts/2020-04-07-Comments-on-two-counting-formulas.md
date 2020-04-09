@@ -23,11 +23,11 @@ In generatingfunctionology [1] [p.81,p.93], we have two counting formulas
 
 $$\mathcal{H}(x,y) = e^{y\mathcal{D}(x)}$$
 
-In detail, the number of hands of weight n and k cards is
+In detail, the number of hands of weight $$n$$ and $$k$$ cards is
 
 $$\text{h}(n,k) = \left [\frac{x^n}{n!} \right ] \left \{ \frac{\mathcal{D}(x)^k}{k!} \right \}$$
 
-**Theorem 3.14.1.** In a prefab P whose hand enumerator is H(x,y) we have
+**Theorem 3.14.1.** In a prefab $$P$$ whose hand enumerator is $$\mathcal{H}(x,y)$$ we have
 
 $$\mathcal{H}(x,y)=\prod_{n=1}^{\infty}\frac{1}{(1-yx^n)^{d_n}}$$
 
@@ -36,7 +36,7 @@ where $$d_n$$ is the number of cards in the $$n_{th}$$ deck ($$n \ge 1$$).
 The **deck** can be viewed as standard **structure pattern** and **hand** can be viewed as the **target with structure pattern**. These two theorems tell us how to compute the hand if the deck enumerator is known. Moreover, inside the target, 3.4.1 is for the target whose element has labels while 3.14.1 is for the target whose element doesn’t have labels.
 
 ## Labeled ball unlabeled box 
-Based on theorem 3.4.1, the generating function is
+Based on **theorem 3.4.1.**, the generating function is
 
 $$\mathcal{H}(x,y)=e^{y(\sum_{i=1}^{\infty}\frac{x^i}{i!})}=e^{y(e^x-1)}$$
 
@@ -47,7 +47,7 @@ $$\left [ \frac{x^n}{n!}y^m\right ]\left \{ \mathcal{H}(x,y) \right \}=S(n,m)$$
 See [Stirling_numbers_of_the_second_kind](https://en.wikipedia.org/wiki/Stirling_numbers_of_the_second_kind#Generating_functions){:target="_blank"}.
 
 ## Unlabeled ball unlabeled box 
-Based on theorem 3.14.1, the generating function is
+Based on **theorem 3.14.1.**, the generating function is
 
 $$\mathcal{H}(x,y)=\prod_{i=1}^{\infty}\frac{1}{1-yx^i}$$
 
@@ -65,13 +65,13 @@ Actually, the two formulas are applied to the problems where the box is not labe
 
 $$\mathcal{H}(x,y) = \sum_{i=0}^{\infty}(y\mathcal{D}(x))^i$$
 
-*H,D are exponential generating function*
+*$$\mathcal{H},\mathcal{D}$$ are exponential generating function*
 
 So, for the problem we have
 
  $$\mathcal{H}(x,y) = \sum_{i=0}^{\infty}(y\sum_{j=0}^{\infty}\frac{x^j}{j!})^{i}=\sum_{i=0}^{\infty}e^{ix}y^i$$
  
-And if there are n balls m boxes, the answer is 
+And if there are $$n$$ balls $$m$$ boxes, the answer is 
 
 $$\left [ \frac{x^n}{n!}y^m\right ]\left \{ \mathcal{H}(x,y) \right \}=m^n$$
 
@@ -80,13 +80,13 @@ $$\left [ \frac{x^n}{n!}y^m\right ]\left \{ \mathcal{H}(x,y) \right \}=m^n$$
 
 $$\mathcal{H}(x,y) = \sum_{i=0}^{\infty}(y\mathcal{D}(x))^i$$
 
-*H,D are normal generating function*
+*$$\mathcal{H},\mathcal{D}$$ are normal generating function*
 
 So, for this problem we have 
 
 $$\mathcal{H}(x,y) = \sum_{i=0}^{\infty}(y\sum_{j=0}^{\infty}x^j)^{i}=\sum_{i=0}^{\infty}(\frac{y}{1-x})^{i}$$
 
-And if there are n balls m boxes, the answer is
+And if there are $$n$$ balls $$m$$ boxes, the answer is
 
 $$\left [ x^ny^m\right ]\left \{ \mathcal{H}(x,y) \right \}=\left [ x^n\right ]\left \{ \frac{1}{(1-x)^m} \right \}=\binom{m+n-1}{n}$$
 
@@ -99,9 +99,9 @@ $$\log(F(x))=\sum g(k)\log(\frac{1}{1-x^k})=\sum g(k)\sum\frac{x^{km}}{m}=\sum\f
 
 then
 
- $$F(x)=\exp^{\sum\frac{1}{k}G(x^k)}$$
+$$F(x)=\exp^{\sum\frac{1}{k}G(x^k)}$$
 
-It gives a way to compute $$F(x)$$ fast if G is known. (based on generatingfunctionology [1], [pp.93-94]).
+It gives a way to compute $$F(x)$$ fast if $$G$$ is known. (based on generatingfunctionology [1], [pp.93-94]).
 
 # Another trick of both theorems
 Let $$y=1$$ (we don’t care the number of used patterns), and use $$x \text{D} \log$$ trick, we can get the relationship between $$\mathcal{H}$$ and $$\mathcal{D}$$。If $$\mathcal{H},\mathcal{D}$$ are the same, maybe they are off by $$x$$ (usually off by $$x$$), we can get the formula which can be used to compute $$\mathcal{H}$$. It happens when the problem itself has an off by one structure, e.g. forest and tree. (generatingfunctionology [1], [p87,pp.89-90,pp.93-94,pp.102-103]).
