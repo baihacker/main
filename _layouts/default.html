@@ -11,20 +11,18 @@
 <style type="text/css">
 body {
    font-family: "Trebuchet MS", sans-serif;
+   line-height: 1.7em;
+   font-size: 20px;
+}
+.content-container {
+  display: flex;
+  justify-content: center;
+}
+.content-container .content {
+  max-width: 1024px;
+  min-width: 1024px;
 }
 </style>
-
-<script type="text/x-mathjax-config">
-   MathJax.Hub.Config({
-      jax: ["input/TeX", "output/HTML-CSS"],
-      tex2jax: {
-         inlineMath: [ ["$","$"], ["\\(","\\)"] ],
-         displayMath: [ ["$$","$$"], ["\\[","\\]"] ],
-         processEscapes: true
-      },
-      "HTML-CSS": { availableFonts: ["TeX"] }
-   });
-</script>
 
 <title>{{ page.title }}</title>
 
@@ -32,11 +30,15 @@ body {
 
 <body>
 
+<div class="content-container">
+<div class="content">
 {{ content }}
+<div>
+</div>
 
-<div style="display:none">
+
+<div style="display:none" class="stats">
 <script language="javascript" type="text/javascript" src="http://js.users.51.la/17547890.js"></script>
-
 </div>
 
 </body>
