@@ -2,6 +2,7 @@
 layout: default
 title: Comments on two counting formulas
 mathjax: true
+categories: [math]
 ---
 
 <h1>{{ page.title }}</h1>

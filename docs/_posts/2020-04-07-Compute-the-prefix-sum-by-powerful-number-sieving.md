@@ -2,6 +2,7 @@
 layout: default
 title: Compute the prefix-sum by powerful number sieving
 mathjax: true
+categories: [math]
 ---
 
 <h1>{{ page.title }}</h1>
