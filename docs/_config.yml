@@ -1,3 +1,4 @@
 baseurl: /main
 highlighter: rouge
+permalink: /:year/:title:output_ext
 #markdown: CommonMarkGhPages
