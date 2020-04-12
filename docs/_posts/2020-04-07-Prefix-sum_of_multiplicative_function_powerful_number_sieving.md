@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Compute the prefix-sum by powerful number sieving
+title: "Prefix-sum of multiplicative function: powerful number sieving"
 mathjax: true
 categories: [math]
 ---
