@@ -57,11 +57,11 @@ So, the guides to this implementation are
 Use these two codes to calculate $sf$ and $sg$ respectively
 
 ```cpp
-// Returns sf
+// Returns sf(n)
 int64 cal(int64 n) {
   int64 ret = 0;
   int64 last = 0;
-  for (int i = 1; i <= n;) {
+  for (int64 i = 1; i <= n;) {
     const int64 val = n / i, maxi = n / val;
     const int64 each = sg(val), curr = sh(maxi);
     ret += each * (curr - last);
@@ -73,11 +73,11 @@ int64 cal(int64 n) {
 ```
 
 ```cpp
-// Returns sg. Need to memorize the result.
+// Returns sg(n). Need to memorize the result.
 int64 cal(int64 n) {
   int64 ret = sf(n);
   int64 last = 1; // h(1) = sh(1) = 1
-  for (int i = 2; i <= n;) {
+  for (int64 i = 2; i <= n;) {
     const int64 val = n / i, maxi = n / val;
     const int64 each = cal(val), curr = sh(maxi);
     ret -= each * (curr - last);
@@ -88,7 +88,16 @@ int64 cal(int64 n) {
 }
 ```
 
-For **case M.** We only need the value of $$sg(i), sh(i), sg(\frac{n}{i}), sh(\frac{n}{i}), i \le n^{1/2}$$. Let $$O(n^{\frac{a}{b}})=\max(O(sh), O(sg))$$ (usually, we have $$0\le a<b$$). So, based on $$\int _1^nx^{\frac{a}{b}}+(\frac{n}{x})^{\frac{a}{b}}dx$$, the complexity is $$O(n^{\frac{a+b}{2b}})$$. For example $$a=1,b=2$$, the complexity is $$O(n^{\frac{3}{4}})$$. When $$a=0$$, the lower bound is $$\Omega (n^{\frac{1}{2}})$$. This lower bound is consistent with our intuition, i.e. we need to iterate $$O(n^{\frac{1}{2}})$$ function values.
+For **case M.** We only need the value of $$sg(i), sh(i), sg(\frac{n}{i}), sh(\frac{n}{i}), i \le n^{1/2}$$. Let $$O(n^{\frac{a}{b}})=\max(O(sh), O(sg))$$. Based on $$\int _1^{n^{\frac{1}{2}}}x^{\frac{a}{b}}+(\frac{n}{x})^{\frac{a}{b}}dx$$, the complexity is 
+
+$$\begin{cases}
+n^{\frac{a+b}{2b}} & 0\le a < b\\
+n \log{n} & 0 < a = b \\
+n^{\frac{a}{b}} & 0 < b < a \\
+\end{cases}
+$$
+
+For example $$a=1,b=2$$, the complexity is $$O(n^{\frac{3}{4}})$$. When $$a=0$$, the lower bound is $$\Omega (n^{\frac{1}{2}})$$. This lower bound is consistent with our intuition, i.e. we need to iterate $$O(n^{\frac{1}{2}})$$ function values.
 
 # References
 1. baihacker, 2018.03.18, [**Thinking on the generalized mobius inversion**](https://blog.csdn.net/baihacker/article/details/79597472){:target="_blank"} (chinese content)
