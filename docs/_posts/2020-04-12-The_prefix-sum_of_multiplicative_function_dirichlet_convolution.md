@@ -106,7 +106,7 @@ For **case I.**, it is the $a=1,b=2$ case in the complexity of helper functions 
 
 Note: values of $sf(\frac{n}{i}), i \ge 2$ are not computed in **case M.**, and that's why it has a better complexity than **case I.**
 
-The overall complexity is $\max(\text{Complexity of helper functions}, \text{Complexity of target functions})$.
+The overall complexity is detemined by the larger complexity of target function part and helper function part.
 
 # References
 1. baihacker, 2018.03.18, [**Thinking on the generalized mobius inversion**](https://blog.csdn.net/baihacker/article/details/79597472){:target="_blank"} (chinese content)
