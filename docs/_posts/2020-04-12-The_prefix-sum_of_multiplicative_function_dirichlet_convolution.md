@@ -44,11 +44,11 @@ sg(n) &=& sf(n) - \sum_{i=2}^{n} sg(\frac{n}{i}) h(i)
 \end{array}
 $$
 
-This implementation requires to iterate all the item of $h$. So the optimization direction is to reduce the number of items in $H$. 
+This implementation requires iterating all the item of $h$. So the optimization direction is to reduce the number of visited items in $H$. 
 
 For example, consider $H = \prod_p(1 + \frac{h(p^s)}{p^s} + \frac{h_(p^{2s})}{p^{2s}}$+...). If $h(p)$ is $0$, we have the powerful number sieving method (see another article). Moreover, If $h(p^k) = 0$ for $k \ge 1$, we have other similar sieving methods.
 
-So, the guides to this implementation are
+So, the guides of this implementation are
 * the prefix-sum of one helper function is easy to calculate.
 * many coefficients of the other helper function are zero.
   * One way (not the only way) to achieve this goal is $h(p^k) = 0$ for $1 \le k \le c$.
