@@ -74,21 +74,21 @@ $$\max\{cf-cg | \text{complexity of } f=O(n^{cf}), \text{complexity of } g=O(n^{
 
 where f is given and the similarity rank of f and g is k.
 
-## If h(p) != 0
-$$\sum_{p \text{ is powerful or 1}}h(p)sg(\frac{n}{p})$$becomes$$\sum_{p}h(p)sg(\frac{n}{p})$$, we only need the value of $$sg(i), sh(i), sg(\frac{n}{i}), sh(\frac{n}{i}), i \le n^{1/2}$$. Let $$O(n^{\frac{a}{b}})=\max(O(sh), O(sg))$$ (usually, we have $$0\le a<b$$). So, based on $$\int _1^nx^{\frac{a}{b}}+(\frac{n}{x})^{\frac{a}{b}}dx$$, the complexity is $$O(n^{\frac{a+b}{2b}})$$. For example $$a=1,b=2$$, the complexity is $$O(n^{\frac{3}{4}})$$. When $$a=0$$, the lower bound is $$\Omega (n^{\frac{1}{2}})$$. This lower bound is consistent with our intuition, i.e. we need to iterate $$O(n^{\frac{1}{2}})$$ function values.
+## ~~If h(p) != 0~~
+~~$$\sum_{p \text{ is powerful or 1}}h(p)sg(\frac{n}{p})$$becomes$$\sum_{p}h(p)sg(\frac{n}{p})$$, we only need the value of $$sg(i), sh(i), sg(\frac{n}{i}), sh(\frac{n}{i}), i \le n^{1/2}$$. Let $$O(n^{\frac{a}{b}})=\max(O(sh), O(sg))$$ (usually, we have $$0\le a<b$$). So, based on $$\int _1^nx^{\frac{a}{b}}+(\frac{n}{x})^{\frac{a}{b}}dx$$, the complexity is $$O(n^{\frac{a+b}{2b}})$$. For example $$a=1,b=2$$, the complexity is $$O(n^{\frac{3}{4}})$$. When $$a=0$$, the lower bound is $$\Omega (n^{\frac{1}{2}})$$. This lower bound is consistent with our intuition, i.e. we need to iterate $$O(n^{\frac{1}{2}})$$ function values.~~
 
-This analysis also works for $$h(p)=0$$, in which we only iterate on powerful numbers, so the complexity or the complexity constant will be smaller.
+~~This analysis also works for $$h(p)=0$$, in which we only iterate on powerful numbers, so the complexity or the complexity constant will be smaller.~~
 
-Compared to the analysis of powerful number sieving, $$h(p) \ne 0$$ requires that both $$sg,sh$$ have a good complexity while the powerful number sieving depends on the value of $$sg$$ on $$O (n^{\frac{1}{2}})$$ inputs and the value of $$h$$ on  $$O (n^{\frac{1}{2}})$$ inputs. Since $$h$$ is considered to have a better complexity than $$sh$$, the powerful number sieving has a better performance.
+~~Compared to the analysis of powerful number sieving, $$h(p) \ne 0$$ requires that both $$sg,sh$$ have a good complexity while the powerful number sieving depends on the value of $$sg$$ on $$O (n^{\frac{1}{2}})$$ inputs and the value of $$h$$ on  $$O (n^{\frac{1}{2}})$$ inputs. Since $$h$$ is considered to have a better complexity than $$sh$$, the powerful number sieving has a better performance.~~
 
-Another view is that we shift the complexity of $$sh$$ to $$h$$’s definition on square free numbers (excluding 1), i.e. 0.
+~~Another view is that we shift the complexity of $$sh$$ to $$h$$’s definition on square free numbers (excluding 1), i.e. 0.~~
 
-## More general approach
-As mentioned by fjzzq2002 [1], $$f(p^k) = \sum_{i=0}^{k}h(p^i)g(p^{k-i})$$ can be viewed as the Dirichlet convolution of g and h. So, we can have a general approach to reduce complexity of compute the prefix-sum of a multiplicative function to represent it as the Dirichlet convolution of two other functions and consider how to compute based on the convolution format.
+## ~~More general approach~~
+~~As mentioned by fjzzq2002 [1], $$f(p^k) = \sum_{i=0}^{k}h(p^i)g(p^{k-i})$$ can be viewed as the Dirichlet convolution of g and h. So, we can have a general approach to reduce complexity of compute the prefix-sum of a multiplicative function to represent it as the Dirichlet convolution of two other functions and consider how to compute based on the convolution format.~~
 
-We have already had an example which is aligned to this approach: mobius inversion. I have another article [5] written in chinese which tries to generalize mobius inversion. It also considers finding the convolution representation, and discussing some ideas/guidance about how to use the convolution to reduce the complexity.
+~~We have already had an example which is aligned to this approach: mobius inversion. I have another article [5] written in chinese which tries to generalize mobius inversion. It also considers finding the convolution representation, and discussing some ideas/guidance about how to use the convolution to reduce the complexity.~~
 
-Overall speaking, the method in this article and mobius inversion are unified in this sense.
+~~Overall speaking, the method in this article and mobius inversion are unified in this sense.~~
 
 # References
 1. fjzzq2002, 2018.11.01,[Use powerful numbers to compute the prefix sum of multiplicative functions](https://www.cnblogs.com/zzqsblog/p/9904271.html){:target="_blank"} (chinese content)
