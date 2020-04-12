@@ -14,7 +14,7 @@ categories: [math]
 2020.04.12
 {: style="text-align: center;"}
 
-This article is a continuation of **The prefix-sum of multiplicative function: powerful number sieving**. And this article views "powerful number sieving" at a higher level. And "powerful number sieving" can be treated as one of the optimiazation way of the methods described in this article. This article is also a generalized version of **Thinking on the generalized mobius inversion** [1].
+This article is a continuation of **The prefix-sum of multiplicative function: powerful number sieving** [2]. And this article views "powerful number sieving" at a higher level. And "powerful number sieving" can be treated as one of the optimiazation way of the methods described in this article. This article is also a generalized version of **Thinking on the generalized mobius inversion** [1].
 
 # Notation
 Use $f,g,h,...$ to denote multiplicative function and $sf,sg,sh,...$ are their prefix-sum function. $F,G,H,...$ are their Dirichlet generating function. $G*H$ means the Dirichlet convolution of two Dirichlet generating functions.
