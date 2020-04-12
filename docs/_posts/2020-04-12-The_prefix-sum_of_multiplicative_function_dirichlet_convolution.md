@@ -100,9 +100,11 @@ n^{\frac{a}{b}} & 0 < b < a \\
 $$
 
 ### Complexity of target function
-For **case M.** , the complexity $O(n^{\frac{1}{2}})$.
+For **case M.**, the complexity $O(n^{\frac{1}{2}})$.
 
 For **case I.**, it is the $a=1,b=2$ case in the complexity of helper functions section, i.e. $O(n^{\frac{3}{4}})$.
+
+Note: values of $sf(\frac{n}{i}), i \ge 2$ are not computed in **case M.**, and that's why it has a better complexity than **case I.**
 
 The overall complexity is $\max(\text{Complexity of helper functions}, \text{Complexity of target functions})$.
 
