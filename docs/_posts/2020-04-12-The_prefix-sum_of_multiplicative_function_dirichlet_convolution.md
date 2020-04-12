@@ -25,7 +25,7 @@ In order to compute $sf(n)$, we can write $F$ in the format of $\frac{H1 * H2 * 
 # Implementations
 In the implementation section, we only consider two helper functions:
 * **case M.** find $sf(n)$ when $F=G*H$ ($G$, $H$ are known), or
-* **case I.** find $sg(n)$ when $G=F/H$ ($H$, $F$ are known). We can rewrite it as $G*H=F$.
+* **case I.** find $sg(n)$ when $G=F/H$ ($F$, $H$ are known). We can rewrite it as $G*H=F$.
 
 The orignal version (more than two helper functions) can be solved by applying these implementations more than one times.
 
