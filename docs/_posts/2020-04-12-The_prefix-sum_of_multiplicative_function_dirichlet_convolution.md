@@ -88,16 +88,23 @@ int64 cal(int64 n) {
 }
 ```
 
-For **case M.** We only need the value of $$sg(i), sh(i), sg(\frac{n}{i}), sh(\frac{n}{i}), i \le n^{1/2}$$. Let $$O(n^{\frac{a}{b}})=\max(O(sh), O(sg))$$. Based on $$\int _1^{n^{\frac{1}{2}}}x^{\frac{a}{b}}+(\frac{n}{x})^{\frac{a}{b}}dx$$, the complexity is 
+### Complexity of helper functions
+We need to compute the values of $$sg(i), sh(i), sg(\frac{n}{i}), sh(\frac{n}{i}), i \le n^{1/2}$$. Let $$O(n^{\frac{a}{b}})=\max(O(sh), O(sg))$$. Based on $$\int _1^{n^{\frac{1}{2}}}x^{\frac{a}{b}}+(\frac{n}{x})^{\frac{a}{b}}dx$$, the complexity is 
 
-$$\begin{cases}
-n^{\frac{a+b}{2b}} & 0\le a < b\\
+$$
+\begin{cases}
+n^{\frac{a+b}{2b}} & 0 \le a < b \\
 n \log{n} & 0 < a = b \\
 n^{\frac{a}{b}} & 0 < b < a \\
 \end{cases}
 $$
 
-For example $$a=1,b=2$$, the complexity is $$O(n^{\frac{3}{4}})$$. When $$a=0$$, the lower bound is $$\Omega (n^{\frac{1}{2}})$$. This lower bound is consistent with our intuition, i.e. we need to iterate $$O(n^{\frac{1}{2}})$$ function values.
+### Complexity of target function
+For **case M.** , the complexity $O(n^{\frac{1}{2}})$.
+
+For **case I.**, it is the $a=1,b=2$ case in the complexity of helper functions section, i.e. $O(n^{\frac{3}{4}})$.
+
+The overall complexity is $\max(\text{Complexity of helper functions}, \text{Complexity of target functions})$.
 
 # References
 1. baihacker, 2018.03.18, [**Thinking on the generalized mobius inversion**](https://blog.csdn.net/baihacker/article/details/79597472){:target="_blank"} (chinese content)
