@@ -82,6 +82,8 @@ This case is easy, and we have the following analysis.
 
 We only need the value of $$sg(i), sh(i), sg(\frac{n}{i}), sh(\frac{n}{i}), i \le n^{1/2}$$. Let $$O(n^{\frac{a}{b}})=\max(O(sh), O(sg))$$ (usually, we have $$0\le a<b$$). So, based on $$\int _1^nx^{\frac{a}{b}}+(\frac{n}{x})^{\frac{a}{b}}dx$$, the complexity is $$O(n^{\frac{a+b}{2b}})$$. For example $$a=1,b=2$$, the complexity is $$O(n^{\frac{3}{4}})$$. When $$a=0$$, the lower bound is $$\Omega (n^{\frac{1}{2}})$$. This lower bound is consistent with our intuition, i.e. we need to iterate $$O(n^{\frac{1}{2}})$$ function values.
 
+*Note: The analysis of these $3$ implementations are based o two helper functions, but we can extend them to more than two helpper functions.*
+
 # References
 1. baihacker, 2018.03.18, [**Thinking on the generalized mobius inversion**](https://blog.csdn.net/baihacker/article/details/79597472){:target="_blank"} (chinese content)
 2. baihacker, 2020.04.07, [**The prefix-sum of multiplicative function: powerful number sieving**](http://baihacker.github.io/main/)
