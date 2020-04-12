@@ -29,12 +29,12 @@ In the implementation section, we only consider two helper functions:
 
 The orignal version (more than two helper functions) can be solved by applying these implementations more than one times.
 
-# **Raw** implementations
+## **Raw** implementations
 For **case M.**, a **raw** implementation is to compute the convolution of $G$ and $H$ directly.
 
 Since the formula is raw, we don't have enough information to optimize it. This also means we can use any idea to optimize it.
 
-# **Prefix-sum** implementation
+## **Prefix-sum** implementation
 For **case M.**, **case I.**, by iterating each item of $H=\sum\frac{h(i)}{i^s}$, there are two formulats:
 
 $$
@@ -50,10 +50,10 @@ For example, consider $H = \prod_p(1 + \frac{h(p^s)}{p^s} + \frac{h_(p^{2s})}{p^
 
 So, the guides to this implementation are
 * the prefix-sum of one helper function is easy to calculate.
-* many coefficients of the other helper function is zero.
+* many coefficients of the other helper function are zero.
   * One way (not the only way) to achieve this goal is $h(p^k) = 0$ for $1 \le k \le c$.
 
-# **Partitioned** implementation
+## **Partitioned** implementation
 Use these two codes to calculate $sf$ and $sg$ respectively
 
 ```cpp
