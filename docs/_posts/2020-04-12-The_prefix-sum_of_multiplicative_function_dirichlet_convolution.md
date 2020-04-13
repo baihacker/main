@@ -29,7 +29,7 @@ In the implementation section, we only consider two helper functions:
 * **case M.** find $sf(n)$ when $F=G*H$ ($G$, $H$ are known), or
 * **case I.** find $sg(n)$ when $G=F/H$ ($F$, $H$ are known). We can rewrite it as $G*H=F$.
 
-The orignal version (more than two helper functions) can be solved by applying these implementations more than one times.
+If there are more than two helper functions, apply these implementations more than one time.
 
 ## **Raw** implementations
 For **case M.**, a **raw** implementation is to compute the convolution of $G$ and $H$ directly.
