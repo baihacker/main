@@ -118,9 +118,6 @@ For **case I.**, it is the $a=1,b=2$ case in the complexity of helper functions 
 
 Note: values of $sf(\frac{n}{i}), i \ge 2$ are not computed in **case M.**, and that's why it has a better complexity than **case I.**
 
-
-The complexity becomes $O(n^{\frac{2}{3}})$.
-
 ### Overall complexity
 The larger complexity of target function part and helper function part.
 
