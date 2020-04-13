@@ -74,7 +74,7 @@ $$\max\{cf-cg | \text{complexity of } f=O(n^{cf}), \text{complexity of } g=O(n^{
 
 where f is given and the similarity rank of f and g is k.
 
-The following parts are **deprecated**, and they are rephased by [**The prefix-sum of multiplicative function: Dirichlet convolution**](http://baihacker.github.io/main/).
+The following parts are **deprecated**, and they are rephased by [**The prefix-sum of multiplicative function: Dirichlet convolution**](http://baihacker.github.io/main/){:target="_blank"}.
 
 ## ~~If h(p) != 0~~
 ~~$$\sum_{p \text{ is powerful or 1}}h(p)sg(\frac{n}{p})$$becomes$$\sum_{p}h(p)sg(\frac{n}{p})$$, we only need the value of $$sg(i), sh(i), sg(\frac{n}{i}), sh(\frac{n}{i}), i \le n^{1/2}$$. Let $$O(n^{\frac{a}{b}})=\max(O(sh), O(sg))$$ (usually, we have $$0\le a<b$$). So, based on $$\int _1^nx^{\frac{a}{b}}+(\frac{n}{x})^{\frac{a}{b}}dx$$, the complexity is $$O(n^{\frac{a+b}{2b}})$$. For example $$a=1,b=2$$, the complexity is $$O(n^{\frac{3}{4}})$$. When $$a=0$$, the lower bound is $$\Omega (n^{\frac{1}{2}})$$. This lower bound is consistent with our intuition, i.e. we need to iterate $$O(n^{\frac{1}{2}})$$ function values.~~
