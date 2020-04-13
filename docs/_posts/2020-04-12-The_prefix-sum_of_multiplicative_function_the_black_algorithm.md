@@ -31,7 +31,7 @@ After simplifying this [3],
 g_{p_k}(n)&=&\sum_{i \ge k, p_i^2 \le n}\sum_{c \ge 1, p_i^{c+1} \le n}(f(p_i^c)g_{p^{i+1}}(\frac{n}{p_i^c})+f(p_i^{c+1}))+h(n)-h(p_{k-1})
 \end{array}
 
-* $p_k$ is the $k_{th}$ prime and $h$ is the prefix-sum of $f$ defined on prime numbers*
+$p_k$ is the $k_{th}$ prime and $h$ is the prefix-sum of $f$ defined on prime numbers.
 
 If an implementation build the suffix-sum on k of $g$, the space and time complexity of **Min_25 sieve** is the same as that of **Zhouge sieve**. According to [4], an improved version reduces the time complexity to $O(n^{\frac{2}{3}})$
 
