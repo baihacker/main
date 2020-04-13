@@ -37,7 +37,7 @@ Another view of the Min_25 sieve are to divide the integers no more than $n$ int
 
 There is an article [TEES](https://www.spoj.com/problems/TEES/){:target="_blank"} in SPOJ, and it also described this algorithm. But the content is cleared due to unknown reason. And my following test is based on this version
 
-[2] and [6] mentioned that this algorithm has an amazing performance. So I call it **black algorithm**.
+[2] and [6] mentioned that this algorithm has an amazing performance. So I call it **the black algorithm**.
 
 ## Complexity
 [6] said, the number of $t$ is $O(n^{1-\epsilon})$. Here is the code to compute the number of $t$
