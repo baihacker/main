@@ -14,7 +14,7 @@ categories: [math]
 2020.04.12
 {: style="text-align: center;"}
 
-This article is a continuation of **The prefix-sum of multiplicative function: powerful number sieving** [2]. And this article views "powerful number sieving" at a higher level. And "powerful number sieving" can be treated as one of the optimiazation way of the methods described in this article. This article is also a generalized version of **Thinking on the generalized mobius inversion** [1].
+This article is a continuation of **The prefix-sum of multiplicative function: powerful number sieve** [2]. And this article views "powerful number sieve" at a higher level. And "powerful number sieve" can be treated as one of the optimiazation way of the methods described in this article. This article is also a generalized version of **Thinking on the generalized mobius inversion** [1].
 
 # Notation
 Use $f,g,h,...$ to denote multiplicative function and $sf,sg,sh,...$ are their prefix-sum function. $F,G,H,...$ are their Dirichlet generating function. $G*H$ means the Dirichlet convolution of two Dirichlet generating functions.
@@ -46,7 +46,7 @@ $$
 
 This implementation requires iterating all the item of $h$. So the optimization direction is to reduce the number of visited items in $H$. 
 
-For example, consider $H = \prod_p(1 + \frac{h(p^s)}{p^s} + \frac{h_(p^{2s})}{p^{2s}}$+...). If $h(p)$ is $0$, we have the powerful number sieving method (see another article). Moreover, If $h(p^k) = 0$ for $k \ge 1$, we have other similar sieving methods.
+For example, consider $H = \prod_p(1 + \frac{h(p^s)}{p^s} + \frac{h_(p^{2s})}{p^{2s}}$+...). If $h(p)$ is $0$, we have the powerful number sieve method (see another article). Moreover, If $h(p^k) = 0$ for $k \ge 1$, we have other similar sieve methods.
 
 So, the guides of this implementation are
 * the prefix-sum of one helper function is easy to calculate.
@@ -110,5 +110,5 @@ The overall complexity is detemined by the larger complexity of target function 
 
 # References
 1. baihacker, 2018.03.18, [**Thinking on the generalized mobius inversion**](https://blog.csdn.net/baihacker/article/details/79597472){:target="_blank"} (chinese content)
-2. baihacker, 2020.04.07, [**The prefix-sum of multiplicative function: powerful number sieving**](http://baihacker.github.io/main/)
+2. baihacker, 2020.04.07, [**The prefix-sum of multiplicative function: powerful number sieve**](http://baihacker.github.io/main/)
 {% include mathjax.html %}
