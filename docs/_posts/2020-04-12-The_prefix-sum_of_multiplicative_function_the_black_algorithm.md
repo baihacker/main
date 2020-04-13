@@ -103,7 +103,7 @@ The outputs are
 ```
 
 
-It means, if the complexity of $h$ is ignored, you can use this method to brute force an input of $10^{16}$ by multi-threads in several minuts.
+It means, if the complexity of $h$ is ignored, you can use this method to brute force an input of $10^{16}$ by multi-threads in several minutes.
 
 ## Build a code template and optimizate it
 In [pe_algo](https://github.com/baihacker/pe/blob/master/pe_algo){:target="_blank"}
