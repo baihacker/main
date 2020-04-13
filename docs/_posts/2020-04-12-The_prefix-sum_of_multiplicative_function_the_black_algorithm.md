@@ -28,12 +28,12 @@ h_n &=& \sum_{\text{prime p}} f(p) \\
 $$
 
 
-According to [1],[2], the definition of $g_{n,m}$ is similar to a part of Zhouge sieve.
+According to [1],[2], the definition of $g_{n,m}$ is similar to a part of Zhouge sieve (Also pointed by [3] in the complexity analysis part).
 
-The space and time complexity is the same as Zhouge sieve. But this method is easy to understand and implement, meanwhile the complexity constant is small. According to [4], an improved version reduces the time complexity to $O(n^{\frac{2}{3}})$
+The space and time complexity of **Min_25 sieve** (the dp-like version) is the same as that of **Zhouge sieve**. But this method is easy to understand and implement, meanwhile the complexity constant is small. According to [4], an improved version reduces the time complexity to $O(n^{\frac{2}{3}})$
 
 # The black algorithm
-Another view of the Min_25 sieve are to divide the integers no more than $n$ into classes: $\text{class}_{t} = \\{ x = t * p \text { | } p \text{ is prime and } p \ge \text{max prime factor}(t) \\} $. So, just iterate all possible $t$ and compute the contribution of each class. (Mentioned by [2])
+This is another version **Min_25 sieve**. We can divide the integers no more than $n$ into classes: $\text{class}_{t} = \\{ x = t * p \text { | } p \text{ is prime and } p \ge \text{max prime factor}(t) \\} $. Then just iterate all possible $t$ and compute the contribution of each class. (Mentioned by [2])
 
 There is an article [TEES](https://www.spoj.com/problems/TEES/){:target="_blank"} in SPOJ, and it also described this algorithm. But the content is cleared due to unknown reason. And my following test code is based on this version.
 
