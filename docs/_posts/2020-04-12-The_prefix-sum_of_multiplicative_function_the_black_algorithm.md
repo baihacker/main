@@ -35,7 +35,7 @@ The space and time complexity is the same as Zhouge sieve. But this method is ea
 # The black algorithm
 Another view of the Min_25 sieve are to divide the integers no more than $n$ into classes: $\text{class}_{t} = \\{ x = t * p \text { | } p \text{ is prime and } p \ge \text{max prime factor}(t) \\} $. So, just iterate all possible $t$ and compute the contribution of each class. (Mentioned by [2])
 
-There is an article [TEES](https://www.spoj.com/problems/TEES/) in SPOJ, and it also described this algorithm. But the content is cleared due to unknown reason. And my following test is based on this version
+There is an article [TEES](https://www.spoj.com/problems/TEES/){:target="_blank"} in SPOJ, and it also described this algorithm. But the content is cleared due to unknown reason. And my following test is based on this version
 
 [2] and [6] mentioned that this algorithm has an amazing performance. So I call it **black algorithm**.
 
