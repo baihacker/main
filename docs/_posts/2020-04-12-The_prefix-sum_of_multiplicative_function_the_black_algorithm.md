@@ -36,7 +36,7 @@ g_{p_k}(n)&=&\sum_{i \ge k, p_i^2 \le n}\sum_{c \ge 1, p_i^{c+1} \le n}(f(p_i^c)
 If an implementation build the suffix-sum on k of $g$, the space and time complexity of **Min_25 sieve** is the same as that of **Zhouge sieve**. According to [4], an improved version reduces the time complexity to $O(n^{\frac{2}{3}})$
 
 # The black algorithm
-There is another version **Min_25 sieve**. We can divide the integers no more than $n$ into classes: $\text{class}_{t} = \\{ x = t * p \text { | } p \text{ is prime and } p \ge \text{max prime factor}(t) \\}$. Then just iterate all possible $t$ and compute the contribution of each class. (Mentioned by [2]). We cant get ths kind of interpretion in such a way: treat $g_{p_k}(n)$ as internal nodes, treat $f(p_i^{c+1})$ and $h(n)-h(p_{k-1})$ as leaf node. Then $\text{class}_{t}$ corresponds to leaf node.
+There is another version **Min_25 sieve**. We can divide the integers no more than $n$ into classes: $\text{class}_{t} = \{ x = t * p \text { | } p \text{ is prime and } p \ge \text{max prime factor}(t) \}$. Then just iterate all possible $t$ and compute the contribution of each class. (Mentioned by [2]). We cant get ths kind of interpretion in such a way: treat $g_{p_k}(n)$ as internal nodes, treat $f(p_i^{c+1})$ and $h(n)-h(p_{k-1})$ as leaf node. Then $\text{class}_{t}$ corresponds to leaf node.
 
 There is an article [TEES](https://www.spoj.com/problems/TEES/){:target="_blank"} in SPOJ, and it also described this algorithm. But the content is cleared due to unknown reason. And my following test code is based on this version.
 
