@@ -35,7 +35,7 @@ For **case M.**, a **raw** implementation is to compute the convolution of $G$ a
 Since the formula is raw, we don't have enough information to optimize it. This also means we can use any idea to optimize it.
 
 ## **Prefix-sum** implementation
-For **case M.**, **case I.**, by iterating each item of $H=\sum\frac{h(i)}{i^s}$, there are two formulats:
+For **case M.**, **case I.**, by iterating each item of $H=\sum\frac{h(i)}{i^s}$, there are two formulas:
 
 $$
 \begin{array}{lcl}
@@ -43,6 +43,8 @@ sf(n) &=& \sum_{i=1}^{n} sg(\frac{n}{i}) h(i)\\
 sg(n) &=& sf(n) - \sum_{i=2}^{n} sg(\frac{n}{i}) h(i)
 \end{array}
 $$
+
+These two formulas are known as **Lorder Du sieve** [3].
 
 This implementation requires iterating all the item of $h$. So the optimization direction is to reduce the number of visited items in $H$. 
 
@@ -111,4 +113,5 @@ The overall complexity is detemined by the larger complexity of target function 
 # References
 1. baihacker, 2018.03.18, [**Thinking on the generalized mobius inversion**](https://blog.csdn.net/baihacker/article/details/79597472){:target="_blank"} (chinese content)
 2. baihacker, 2020.04.07, [**The prefix-sum of multiplicative function: powerful number sieve**](http://baihacker.github.io/main/)
+3. [Lorder Du sieve](https://oi-wiki.org/math/du/)
 {% include mathjax.html %}
