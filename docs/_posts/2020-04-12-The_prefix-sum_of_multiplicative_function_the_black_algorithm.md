@@ -35,12 +35,12 @@ The space and time complexity is the same as Zhouge sieve. But this method is ea
 # The black algorithm
 Another view of the Min_25 sieve are to divide the integers no more than $n$ into classes: $\text{class}_{t} = \\{ x = t * p \text { | } p \text{ is prime and } p \ge \text{max prime factor}(t) \\} $. So, just iterate all possible $t$ and compute the contribution of each class. (Mentioned by [2])
 
-There is an article [TEES](https://www.spoj.com/problems/TEES/){:target="_blank"} in SPOJ, and it also described this algorithm. But the content is cleared due to unknown reason. And my following test is based on this version
+There is an article [TEES](https://www.spoj.com/problems/TEES/){:target="_blank"} in SPOJ, and it also described this algorithm. But the content is cleared due to unknown reason. And my following test code is based on this version.
 
 [2] and [6] mentioned that this algorithm has an amazing performance. So I call it **the black algorithm**.
 
 ## Complexity
-[6] said, the number of $t$ is $O(n^{1-\epsilon})$. Here is the code to compute the number of $t$
+[6] said, the number of $t$ is $O(n^{1-\epsilon})$. Here is the code to compute the number of $t$:
 
 ```cpp
 #include <pe.hpp>
@@ -123,4 +123,5 @@ Use $h(p^k) = 1$ for example, in [pe_algo](https://github.com/baihacker/pe/blob/
 4. Min_25, 2018.11.11 [**Sum of Multiplicative Function**](https://min-25.hatenablog.com/entry/2018/11/11/172216)
 5. dengtesla, 2019, [**Detail explanning of the new Min_25 sieve $O(n^{\frac{2}{3}})$**](https://zhuanlan.zhihu.com/p/60378354){:target="_blank"} (chinese content)
 6. Bohang Zhang, 2018, [**A proof for a general algorithm of summing multiplicative function**](https://zhuanlan.zhihu.com/p/33544708){:target="_blank"} (chinese content)
+
 {% include mathjax.html %}
