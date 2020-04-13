@@ -112,6 +112,6 @@ The overall complexity is detemined by the larger complexity of target function 
 
 # References
 1. baihacker, 2018.03.18, [**Thinking on the generalized mobius inversion**](https://blog.csdn.net/baihacker/article/details/79597472){:target="_blank"} (chinese content)
-2. baihacker, 2020.04.07, [**The prefix-sum of multiplicative function: powerful number sieve**](http://baihacker.github.io/main/)
-3. [Lord Du sieve](https://oi-wiki.org/math/du/)
+2. baihacker, 2020.04.07, [**The prefix-sum of multiplicative function: powerful number sieve**](http://baihacker.github.io/main/){:target="_blank"}
+3. [**Lord Du sieve**](https://oi-wiki.org/math/du/){:target="_blank"} (chinese content)
 {% include mathjax.html %}
