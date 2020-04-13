@@ -44,7 +44,7 @@ sg(n) &=& sf(n) - \sum_{i=2}^{n} sg(\frac{n}{i}) h(i)
 \end{array}
 $$
 
-These two formulas are known as **Lorder Du sieve** [3].
+These two formulas are known as **Lord Du sieve** [3].
 
 This implementation requires iterating all the item of $h$. So the optimization direction is to reduce the number of visited items in $H$. 
 
@@ -113,5 +113,5 @@ The overall complexity is detemined by the larger complexity of target function 
 # References
 1. baihacker, 2018.03.18, [**Thinking on the generalized mobius inversion**](https://blog.csdn.net/baihacker/article/details/79597472){:target="_blank"} (chinese content)
 2. baihacker, 2020.04.07, [**The prefix-sum of multiplicative function: powerful number sieve**](http://baihacker.github.io/main/)
-3. [Lorder Du sieve](https://oi-wiki.org/math/du/)
+3. [Lord Du sieve](https://oi-wiki.org/math/du/)
 {% include mathjax.html %}
