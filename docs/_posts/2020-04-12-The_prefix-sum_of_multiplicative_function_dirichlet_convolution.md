@@ -22,6 +22,8 @@ Use $f,g,h,...$ to denote multiplicative function and $sf,sg,sh,...$ are their p
 # Method description
 In order to compute $sf(n)$, we can write $F$ in the format of $\frac{H1 * H2 * H3 * ...}{H4 * H5 * H6 * ...}$ and evaluate the right side efficiently. We call $f$ or $sf$ **target function** and call $h_i$ and $H_i$ **helper function**. In another word, **shift the complexity to helper functions**.
 
+This kind of approach is known as **Lord Du sieve** [3], which focuses on two helper functions.
+
 # Implementations
 In the implementation section, we only consider two helper functions:
 * **case M.** find $sf(n)$ when $F=G*H$ ($G$, $H$ are known), or
@@ -43,8 +45,6 @@ sf(n) &=& \sum_{i=1}^{n} sg(\frac{n}{i}) h(i)\\
 sg(n) &=& sf(n) - \sum_{i=2}^{n} sg(\frac{n}{i}) h(i)
 \end{array}
 $$
-
-These two formulas are known as **Lord Du sieve** [3].
 
 This implementation requires iterating all the item of $h$. So the optimization direction is to reduce the number of visited items in $H$. 
 
