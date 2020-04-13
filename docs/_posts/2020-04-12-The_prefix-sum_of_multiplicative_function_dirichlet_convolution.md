@@ -91,7 +91,7 @@ int64 cal(int64 n) {
 ```
 
 ### Complexity of helper functions
-We need to compute the values of $$sg(i), sh(i), sg(\frac{n}{i}), sh(\frac{n}{i}), i \le n^{1/2}$$. Let $$O(n^{\frac{a}{b}})=\max(O(sh), O(sg))$$. Based on $$\int _1^{n^{\frac{1}{2}}}x^{\frac{a}{b}}+(\frac{n}{x})^{\frac{a}{b}}dx$$, the complexity is 
+We need to compute the values of $$sg(i), sh(i), sg(\frac{n}{i}), sh(\frac{n}{i}), i \le n^{\frac{1}{2}}$$. Let $$O(n^{\frac{a}{b}})=\max(O(sh), O(sg))$$. Based on $$\int _1^{n^{\frac{1}{2}}}x^{\frac{a}{b}}+(\frac{n}{x})^{\frac{a}{b}}dx$$, the complexity is 
 
 $$
 \begin{cases}
@@ -101,14 +101,28 @@ n^{\frac{a}{b}} & 0 < b < a \\
 \end{cases}
 $$
 
+If $sg(i), sh(i)$ $i \le n^{\frac{2}{3}}$ can be calculated in $O(n^{\frac{2}{3}})$ time, $$\int _1^{n^{\frac{1}{2}}}x^{\frac{a}{b}}+(\frac{n}{x})^{\frac{a}{b}}dx$$ becomes $$n^{\frac{2}{3}} + \int _1^{n^{\frac{1}{3}}}(\frac{n}{x})^{\frac{a}{b}}dx$$, the complexity is
+
+$$
+\begin{cases}
+n^{\frac{2a+b}{3b}} & 0 \le a < b \\
+n \log{n} & 0 < a = b \\
+n^{\frac{a}{b}} & 0 < b < a \\
+\end{cases}
+$$
+
 ### Complexity of target function
 For **case M.**, the complexity $O(n^{\frac{1}{2}})$.
 
-For **case I.**, it is the $a=1,b=2$ case in the complexity of helper functions section, i.e. $O(n^{\frac{3}{4}})$.
+For **case I.**, it is the $a=1,b=2$ case in the complexity of helper functions section, i.e. $O(n^{\frac{3}{4}})$ or $O(n^{\frac{2}{3}})$.
 
 Note: values of $sf(\frac{n}{i}), i \ge 2$ are not computed in **case M.**, and that's why it has a better complexity than **case I.**
 
-The overall complexity is detemined by the larger complexity of target function part and helper function part.
+
+The complexity becomes $O(n^{\frac{2}{3}})$.
+
+### Overall complexity
+The larger complexity of target function part and helper function part.
 
 # References
 1. baihacker, 2018.03.18, [**Thinking on the generalized mobius inversion**](https://blog.csdn.net/baihacker/article/details/79597472){:target="_blank"} (chinese content)
