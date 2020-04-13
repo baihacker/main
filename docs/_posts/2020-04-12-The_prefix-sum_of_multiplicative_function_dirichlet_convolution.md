@@ -105,7 +105,7 @@ If $sg(i), sh(i)$ $i \le n^{\frac{2}{3}}$ can be calculated in $O(n^{\frac{2}{3}
 
 $$
 \begin{cases}
-n^{\frac{2a+b}{3b}} & 0 \le a < b \\
+n^{\frac{2}{3}} + n^{\frac{2a+b}{3b}} & 0 \le a < b \\
 n^{\frac{2}{3}} + n \log{n} & 0 < a = b \\
 n^{\frac{a}{b}} & 0 < b < a \\
 \end{cases}
