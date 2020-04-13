@@ -18,26 +18,31 @@ categories: [math]
 Use $sf(n)=\sum_{x \le n \\ \text{max prime factor of x} \le n^{\frac{1}{2}}} f(x) \left (1 + \sum_{n^{\frac{1}{2}} < \text{prime p} \le \frac{n}{x}} g(p)\right)$ and it results in an algorithm of space complexity $O(n^{\frac{1}{2}})$ time complexity $O(n^{\frac{3}{4}})$ ($\log{n}$ is ignored)
 
 # Min_25 sieve [3]
-It introduces
+According to [1],[2],[3], similar to one part of Zhouge sieve, it defines
 
 $$
 \begin{array}{lcl}
-g_{n,m} &=& \sum_{2 \le x \le n \text{ every prime factor of x} > m} f(x) \\
-h_n &=& \sum_{\text{prime p}} f(p) \\
+g_{p_k}(n) &=& \sum_{2 \le x \le n \text{ every prime factor of x} \ge p_k} f(x) \\
 \end{array}
 $$
 
+After simplifying this [3],
+\begin{array}{lcl}
+g_{p_k}(n)&=&\sum_{i \ge k, p_i^2 \le n}\sum_{c \ge 1, p_i^{c+1} \le n}(f(p_i^c)g_{p^{i+1}}(\frac{n}{p_i^c})+f(p_i^{c+1}))+h(n)-h(p_{k-1})
+\end{array}
 
-According to [1],[2], the definition of $g_{n,m}$ is similar to a part of Zhouge sieve (Also pointed by [3] in the complexity analysis part).
+* $p_k$ is the $k_{th}$ prime and $h$ is the prefix-sum of $f$ defined on prime numbers*
 
-The space and time complexity of **Min_25 sieve** (the dp-like version) is the same as that of **Zhouge sieve**. But this method is easy to understand and implement, meanwhile the complexity constant is small. According to [4], an improved version reduces the time complexity to $O(n^{\frac{2}{3}})$
+If an implementation build the suffix-sum on k of $g$, the space and time complexity of **Min_25 sieve** is the same as that of **Zhouge sieve**. According to [4], an improved version reduces the time complexity to $O(n^{\frac{2}{3}})$
 
 # The black algorithm
-This is another version **Min_25 sieve**. We can divide the integers no more than $n$ into classes: $\text{class}_{t} = \\{ x = t * p \text { | } p \text{ is prime and } p \ge \text{max prime factor}(t) \\} $. Then just iterate all possible $t$ and compute the contribution of each class. (Mentioned by [2])
+There is another version **Min_25 sieve**. We can divide the integers no more than $n$ into classes: $\text{class}_{t} = \\{ x = t * p \text { | } p \text{ is prime and } p \ge \text{max prime factor}(t) \\} $. Then just iterate all possible $t$ and compute the contribution of each class. (Mentioned by [2]). We cant get ths kind of interpretion in such a way: treat g_{p_k}(n) as internal nodes, treat $f(p_i^{c+1})$ and $h(n)-h(p_{k-1})$ as leaf node. Then $\text{class}_{t}$ corresponds to leaf node.
 
 There is an article [TEES](https://www.spoj.com/problems/TEES/){:target="_blank"} in SPOJ, and it also described this algorithm. But the content is cleared due to unknown reason. And my following test code is based on this version.
 
-[2] and [6] mentioned that this algorithm has an amazing performance. So I call it **the black algorithm**.
+[2] and [6] mentioned that this algorithm has an amazing performance. 
+
+I call it **the black algorithm** due the toe amazing performance and this method is easy to understand and implement, meanwhile the complexity constant is small. 
 
 ## Complexity
 [6] said, the number of $t$ is $O(n^{1-\epsilon})$. Here is the code to compute the number of $t$:
