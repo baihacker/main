@@ -18,7 +18,7 @@ categories: [math]
 Use $$sf(n)=\sum_{x \le n \\ \text{max prime factor of x} \le n^{\frac{1}{2}}} f(x) \left (1 + \sum_{n^{\frac{1}{2}} < \text{prime p} \le \frac{n}{x}} g(p)\right)$$ and it results in an algorithm of space complexity $O(n^{\frac{1}{2}})$ time complexity $O(n^{\frac{3}{4}})$ ($\log{n}$ is ignored)
 
 # Min_25 sieve [3]
-According to [1],[2],[3], similar to one part of Zhouge sieve, it defines
+Similar to [1] 6.5.4, mentioned by [2] 2.2, [3], this method defines
 
 $$
 \begin{array}{lcl}
@@ -26,29 +26,44 @@ g_{p_k}(n) &=& \sum_{2 \le x \le n \\ \text{ every prime factor of x} \ge p_k} f
 \end{array}
 $$
 
-After simplifying this [3],
+After simplification [3],
 
 $$
 \begin{array}{lcl}
-g_{p_k}(n)&=&h(n)-h(p_{k-1})+\sum_{i \ge k \\ p_i^2 \le n}\sum_{c \ge 1 \\ p_i^{c+1} \le n}f(p_i^c)g_{p^{i+1}}(\frac{n}{p_i^c})+f(p_i^{c+1})
+g_{p_k}(n)&=&h(n)-h(p_{k-1})+\sum_{i \ge k \\ p_i^2 \le n}\sum_{c \ge 1 \\ p_i^{c+1} \le n}f(p_i^c)g_{p_{i+1}}(\frac{n}{p_i^c})+f(p_i^{c+1})
 \end{array}
 $$
 
 $p_k$ is the $k_{th}$ prime and $h$ is the prefix-sum of $f$ defined on prime numbers.
 
-If an implementation build the suffix-sum on k of $g$, the space and time complexity of **Min_25 sieve** is the same as that of **Zhouge sieve**. According to [4], an improved version reduces the time complexity to $O(n^{\frac{2}{3}})$
+If an implementation remembers all used $g_{p_k}(n)$, i.e. just compute each value once, the space and time complexity of **Min_25 sieve** is the same as that of **Zhouge sieve**.
+
+## Proof
+Based on (similar to [1] 6.5.4)
+
+$$
+\begin{array}{lcl}
+g_{p_k}(n)&=&g_{p_{k+1}}(n) + h(n)-h(p_{k-1})+ \sum_{c \ge 1 \\ p_k^{c+1} \le n}f(p_k^c)g_{p_{k+1}}(\frac{n}{p_k^c})+f(p_k^{c+1})
+\end{array}
+$$
+
+The number of state is given by $\sum_{i\text{ is prime}}(\frac{n}{i})^{\frac{1}{2}}$, bounded by $O\left(\int_{i=1}^{n^{\frac{1}{2}}}(\frac{n}{x})^{\frac{1}{2}}dx\right) = O(n^{\frac{3}{4}})$.
+
+The number of state transition is given by $\sum_{i\text{ is prime}}(\frac{n}{i^j})^{\frac{1}{2}}=\sum_{i\text{ is prime}}\log_i(\frac{n}{i})(\frac{n}{i})^{\frac{1}{2}}$, bounded by $O\left(\int_{i=1}^{n^{\frac{1}{2}}}\log(\frac{n}{i})(\frac{n}{x})^{\frac{1}{2}}dx\right) = O(n^{\frac{3}{4}})$. ($\log(n)$ is ignored)
+
+The space complexity is $O(n^{\frac{1}{2}})$, we can either use two-buffer trick or update inplace while being care of the updating order.
+
+For all the values of $h(\frac{n}{i})$, it's up to $h$.
+
+According to [4], an improved version reduces the time complexity to $O(n^{\frac{2}{3}})$.
 
 # The black algorithm
 There is another version **Min_25 sieve**. We can divide the integers no more than $n$ into classes: $$\text{class}_{t} = \{ x = t * p \text { | } p \text{ is prime and } p \ge \text{max prime factor}(t) \}$$. Then just iterate all possible $t$ and compute the contribution of each class. (Mentioned by [2]). We cant get ths kind of interpretion in such a way: treat $g_{p_k}(n)$ as internal nodes, treat $f(p_i^{c+1})$ and $h(n)-h(p_{k-1})$ as leaf node. Then $\text{class}_{t}$ corresponds to leaf node.
 
 There is an article [TEES](https://www.spoj.com/problems/TEES/){:target="_blank"} in SPOJ, and it also described this algorithm. But the content is cleared due to unknown reason. And my following test code is based on this version.
 
-[2] and [6] mentioned that this algorithm has an amazing performance. 
-
-I call it **the black algorithm** due the toe amazing performance and this method is easy to understand and implement, meanwhile the complexity constant is small. 
-
 ## Complexity
-[6] said, the number of $t$ is $O(n^{1-\epsilon})$. Here is the code to compute the number of $t$:
+[2] 2.3 and [6] said that this black algorithm has an amazing performance. [6] said, the number of $t$ is $O(n^{1-\epsilon})$. Here is the code to compute the number of $t$:
 
 ```cpp
 #include <pe.hpp>
@@ -123,6 +138,16 @@ Use $h(p^k) = 1$ for example, in [pe_algo](https://github.com/baihacker/pe/blob/
 * **prime_s0** is the prime $\pi$ method, and the complexity is expected to be $O(n^{\frac{3}{4}})$
 * **prime_s0_ex** uses binary indexed tree to optimize it, and I guess the complexity is $O(n^{\frac{2}{3}})$
 * **prime_s0_parallel** uses multi-threads to optimize it, and we need to choose a proper thread number and find a strategy about when to parallize it.
+
+# Conclusion
+Why I call it **the black algorithm**?
+* Amazing performance.
+* Low complexity constant.
+* Easy to understand.
+* Easy to implement.
+* General usability: $f$ has a looser constraints. It only requires
+  * The prefix-sum of $f$ on primes can be computed efficiently.
+  * It is possible to combine $f(t)$ and $h(\frac{n}{t})$ to obtain $\sum_{\text{prime p } \le \frac{n}{t}} f(t*p)$. Sometimes we need more than one $h$ function, like $h_1, h_2, ...$.
 
 # References
 1. Zhizhou Ren, 2016, Some methods to compute the prefix-sum of multiplicative function
