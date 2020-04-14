@@ -60,7 +60,7 @@ The number of state transitions is given by $\sum_{i\text{ is prime}}(\frac{n}{i
 
 The space complexity is $O(n^{\frac{1}{2}})$, we can either use two-buffer trick or update inplace while taking care of the updating order.
 
-For all the values of $h(\frac{n}{i})$, it's up to $h$.
+For all the values of $h(\frac{n}{i})$, the complexity is up to $h$.
 
 # The black algorithm
 Just implement the **formula D** directly, we usualy use a dfs to achieve it.
