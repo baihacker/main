@@ -15,14 +15,18 @@ categories: [math]
 {: style="text-align: center;"}
 
 # Zhouge sieve [1]
-Use $$sf(n)=\sum_{x \le n \\ \text{max prime factor of x} \le n^{\frac{1}{2}}} f(x) \left (1 + \sum_{n^{\frac{1}{2}} < \text{prime p} \le \frac{n}{x}} g(p)\right)$$ and it results in an algorithm of space complexity $O(n^{\frac{1}{2}})$ time complexity $O(n^{\frac{3}{4}})$ ($\log{n}$ is ignored)
+Based
+
+$$sf(n)=\sum\limits_{\begin{array}{c}x \le n \\ \text{max prime factor of x} \le n^{\frac{1}{2}}\end{array}} f(x) \left (1 + \sum_{n^{\frac{1}{2}} < \text{prime p} \le \frac{n}{x}} g(p)\right)$$
+
+an algorithm of space complexity $O(n^{\frac{1}{2}})$ time complexity $O(n^{\frac{3}{4}})$ ($\log{n}$ is ignored) is developed.
 
 # Min_25 sieve [3]
 Similar to [1] 6.5.4, mentioned by [2] 2.2, [3], this method defines
 
 $$
 \begin{array}{lcl}
-g_{p_k}(n) &=& \sum_{2 \le x \le n \\ \text{ every prime factor of x} \ge p_k} f(x) \\
+g_{p_k}(n) &=& \sum\limits_{\begin{array}{c}2 \le x \le n \\ \text{ every prime factor of x} \ge p_k\end{array}} f(x) \\
 \end{array}
 $$
 
@@ -30,7 +34,7 @@ After simplification [3], we have the **formula D**,
 
 $$
 \begin{array}{lcl}
-g_{p_k}(n)&=&h(n)-h(p_{k-1})+\sum_{i \ge k \\ p_i^2 \le n}\sum_{c \ge 1 \\ p_i^{c+1} \le n}f(p_i^c)g_{p_{i+1}}(\frac{n}{p_i^c})+f(p_i^{c+1})
+g_{p_k}(n)&=&h(n)-h(p_{k-1})+\sum\limits_{\begin{array}{c}i \ge k \\ p_i^2 \le n\end{array}}\sum\limits_{\begin{array}{c}c \ge 1 \\ p_i^{c+1} \le n\end{array}}f(p_i^c)g_{p_{i+1}}(\frac{n}{p_i^c})+f(p_i^{c+1})
 \end{array}
 $$
 
@@ -43,7 +47,7 @@ If an implementation remembers all used $g_{p_k}(n)$, similar to [1] 6.5.4, we h
 
 $$
 \begin{array}{lcl}
-g_{p_k}(n)&=&g_{p_{k+1}}(n) + h(n)-h(p_{k-1})+ \sum_{c \ge 1 \\ p_k^{c+1} \le n}f(p_k^c)g_{p_{k+1}}(\frac{n}{p_k^c})+f(p_k^{c+1})
+g_{p_k}(n)&=&g_{p_{k+1}}(n) + h(n)-h(p_{k-1})+ \sum\limits_{\begin{array}{c}c \ge 1 \\ p_k^{c+1} \le n\end{array}}f(p_k^c)g_{p_{k+1}}(\frac{n}{p_k^c})+f(p_k^{c+1})
 \end{array}
 $$
 
