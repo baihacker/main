@@ -147,7 +147,7 @@ Use $h(p^k) = 1$ for example, in [pe_algo](https://github.com/baihacker/pe/blob/
 * **prime_s0_parallel** uses multi-threads to optimize it, and we need to choose a proper thread number and find a strategy about when to parallize it.
 
 # Conclusion
-Why I call it **the black algorithm**?
+Why do I call it **the black algorithm**?
 * Amazing performance.
 * Low complexity constant.
 * Easy to understand.
