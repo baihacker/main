@@ -61,7 +61,7 @@ For all the values of $h(\frac{n}{i})$, it's up to $h$.
 # The black algorithm
 Just implement the **formula D** directly, we usualy use a dfs to achieve it.
 
-An interpretation to help use uderstanding. We can divide the integers no more than $n$ into classes as $$\text{class}_{t} = \{ x = t * p \ \vert \ p \text{ is prime and } p \ge \text{max prime factor}(t) \}$$. Then just iterate all possible $t$ and compute the contribution of each class. (Mentioned by [2]).
+An interpretation to help use uderstanding is: we can divide the integers no more than $n$ into classes as $$\text{class}_{t} = \{ x = t * p \ \vert \ p \text{ is prime and } p \ge \text{max prime factor}(t) \}$$. Then just iterate all possible $t$ and compute the contribution of each class. (Mentioned by [2]).
 
 There is an article [TEES](https://www.spoj.com/problems/TEES/){:target="_blank"} in SPOJ, and it also described this algorithm. But the content is cleared due to unknown reason. And my following test code is based on this version.
 
