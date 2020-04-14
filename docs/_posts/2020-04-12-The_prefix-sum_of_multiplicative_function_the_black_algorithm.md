@@ -36,10 +36,8 @@ $$
 
 $p_k$ is the $k_{th}$ prime and $h$ is the prefix-sum of $f$ defined on prime numbers.
 
-If an implementation remembers all used $g_{p_k}(n)$, i.e. just compute each value once, the space and time complexity of **Min_25 sieve** is the same as that of **Zhouge sieve**.
-
-## Proof
-Similar to [1] 6.5.4,
+# The memorized implementation
+If an implementation remembers all used $g_{p_k}(n)$, similar to [1] 6.5.4, we have
 
 $$
 \begin{array}{lcl}
@@ -47,6 +45,9 @@ g_{p_k}(n)&=&g_{p_{k+1}}(n) + h(n)-h(p_{k-1})+ \sum_{c \ge 1 \\ p_k^{c+1} \le n}
 \end{array}
 $$
 
+We can also call it dp-like implementation. The space and time complexity of **Min_25 sieve** is the same as that of **Zhouge sieve**.
+
+## Proof
 The number of state is given by $\sum_{i\text{ is prime}}(\frac{n}{i})^{\frac{1}{2}}$. Based on integration, $O\left(\int_{1}^{n^{\frac{1}{2}}}(\frac{n}{x})^{\frac{1}{2}}dx\right) = O(n^{\frac{3}{4}})$.
 
 The number of state transition is given by $\sum_{i\text{ is prime}}(\frac{n}{i^j})^{\frac{1}{2}}$ and bounded by$\sum_{i\text{ is prime}}\log_i(\frac{n}{i})(\frac{n}{i})^{\frac{1}{2}}$. Based on integration, $O\left(\int_{1}^{n^{\frac{1}{2}}}\log(\frac{n}{x})(\frac{n}{x})^{\frac{1}{2}}dx\right) = O(n^{\frac{3}{4}})$. ($\log(n)$ is ignored)
@@ -58,7 +59,9 @@ For all the values of $h(\frac{n}{i})$, it's up to $h$.
 According to [4], an improved version reduces the time complexity to $O(n^{\frac{2}{3}})$.
 
 # The black algorithm
-There is another version **Min_25 sieve**. We can divide the integers no more than $n$ into classes: $$\text{class}_{t} = \{ x = t * p \text { | } p \text{ is prime and } p \ge \text{max prime factor}(t) \}$$. Then just iterate all possible $t$ and compute the contribution of each class. (Mentioned by [2]). We cant get ths kind of interpretion in such a way: treat $g_{p_k}(n)$ as internal nodes, treat $f(p_i^{c+1})$ and $h(n)-h(p_{k-1})$ as leaf node. Then $\text{class}_{t}$ corresponds to leaf node.
+Just implement the original formula (not the formula of memorized implementation) directly. 
+
+An interpretation to help use uderstand is: we can divide the integers no more than $n$ into classes: $$\text{class}_{t} = \{ x = t * p \text { | } p \text{ is prime and } p \ge \text{max prime factor}(t) \}$$. Then just iterate all possible $t$ and compute the contribution of each class. (Mentioned by [2]).
 
 There is an article [TEES](https://www.spoj.com/problems/TEES/){:target="_blank"} in SPOJ, and it also described this algorithm. But the content is cleared due to unknown reason. And my following test code is based on this version.
 
