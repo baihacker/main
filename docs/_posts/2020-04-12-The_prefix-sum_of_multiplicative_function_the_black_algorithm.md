@@ -15,21 +15,24 @@ categories: [math]
 {: style="text-align: center;"}
 
 # Zhouge sieve [1]
-Use $sf(n)=\sum_{x \le n \\ \text{max prime factor of x} \le n^{\frac{1}{2}}} f(x) \left (1 + \sum_{n^{\frac{1}{2}} < \text{prime p} \le \frac{n}{x}} g(p)\right)$ and it results in an algorithm of space complexity $O(n^{\frac{1}{2}})$ time complexity $O(n^{\frac{3}{4}})$ ($\log{n}$ is ignored)
+Use $$sf(n)=\sum_{x \le n \\ \text{max prime factor of x} \le n^{\frac{1}{2}}} f(x) \left (1 + \sum_{n^{\frac{1}{2}} < \text{prime p} \le \frac{n}{x}} g(p)\right)$$ and it results in an algorithm of space complexity $O(n^{\frac{1}{2}})$ time complexity $O(n^{\frac{3}{4}})$ ($\log{n}$ is ignored)
 
 # Min_25 sieve [3]
 According to [1],[2],[3], similar to one part of Zhouge sieve, it defines
 
 $$
 \begin{array}{lcl}
-g_{p_k}(n) &=& \sum_{2 \le x \le n \text{ every prime factor of x} \ge p_k} f(x) \\
+g_{p_k}(n) &=& \sum_{2 \le x \le n \\ \text{ every prime factor of x} \ge p_k} f(x) \\
 \end{array}
 $$
 
 After simplifying this [3],
+
+$$
 \begin{array}{lcl}
-g_{p_k}(n)&=&\sum_{i \ge k, p_i^2 \le n}\sum_{c \ge 1, p_i^{c+1} \le n}(f(p_i^c)g_{p^{i+1}}(\frac{n}{p_i^c})+f(p_i^{c+1}))+h(n)-h(p_{k-1})
+g_{p_k}(n)&=&h(n)-h(p_{k-1})+\sum_{i \ge k \\ p_i^2 \le n}\sum_{c \ge 1 \\ p_i^{c+1} \le n}f(p_i^c)g_{p^{i+1}}(\frac{n}{p_i^c})+f(p_i^{c+1})
 \end{array}
+$$
 
 $p_k$ is the $k_{th}$ prime and $h$ is the prefix-sum of $f$ defined on prime numbers.
 
