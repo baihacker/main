@@ -26,7 +26,7 @@ g_{p_k}(n) &=& \sum_{2 \le x \le n \\ \text{ every prime factor of x} \ge p_k} f
 \end{array}
 $$
 
-After simplification [3],
+After simplification [3], we have the **formula D**,
 
 $$
 \begin{array}{lcl}
@@ -36,8 +36,10 @@ $$
 
 $p_k$ is the $k_{th}$ prime and $h$ is the prefix-sum of $f$ defined on prime numbers.
 
+According to [4], an improved version reduces the time complexity to $O(n^{\frac{2}{3}})$.
+
 # The memorized implementation
-If an implementation remembers all used $g_{p_k}(n)$, similar to [1] 6.5.4, we have
+If an implementation remembers all used $g_{p_k}(n)$, similar to [1] 6.5.4, we have **formula M**,
 
 $$
 \begin{array}{lcl}
@@ -45,7 +47,7 @@ g_{p_k}(n)&=&g_{p_{k+1}}(n) + h(n)-h(p_{k-1})+ \sum_{c \ge 1 \\ p_k^{c+1} \le n}
 \end{array}
 $$
 
-We can also call it dp-like implementation. The space and time complexity of **Min_25 sieve** is the same as that of **Zhouge sieve**.
+We can also call it dp-like implementation. The space and time complexity is the same as that of **Zhouge sieve**'s.
 
 ## Proof
 The number of state is given by $\sum_{i\text{ is prime}}(\frac{n}{i})^{\frac{1}{2}}$. Based on integration, $O\left(\int_{1}^{n^{\frac{1}{2}}}(\frac{n}{x})^{\frac{1}{2}}dx\right) = O(n^{\frac{3}{4}})$.
@@ -56,12 +58,10 @@ The space complexity is $O(n^{\frac{1}{2}})$, we can either use two-buffer trick
 
 For all the values of $h(\frac{n}{i})$, it's up to $h$.
 
-According to [4], an improved version reduces the time complexity to $O(n^{\frac{2}{3}})$.
-
 # The black algorithm
-Just implement the original formula (not the formula of memorized implementation) directly. 
+Just implement the **formula D** directly, we usualy use a dfs to achieve it.
 
-An interpretation to help use uderstand is: we can divide the integers no more than $n$ into classes: $$\text{class}_{t} = \{ x = t * p \text { | } p \text{ is prime and } p \ge \text{max prime factor}(t) \}$$. Then just iterate all possible $t$ and compute the contribution of each class. (Mentioned by [2]).
+An interpretation to help use uderstanding. We can divide the integers no more than $n$ into classes as $$\text{class}_{t} = \{ x = t * p \ \vert \ p \text{ is prime and } p \ge \text{max prime factor}(t) \}$$. Then just iterate all possible $t$ and compute the contribution of each class. (Mentioned by [2]).
 
 There is an article [TEES](https://www.spoj.com/problems/TEES/){:target="_blank"} in SPOJ, and it also described this algorithm. But the content is cleared due to unknown reason. And my following test code is based on this version.
 
