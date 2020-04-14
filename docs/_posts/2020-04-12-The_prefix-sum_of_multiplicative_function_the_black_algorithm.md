@@ -141,7 +141,7 @@ In [pe_algo](https://github.com/baihacker/pe/blob/master/pe_algo){:target="_blan
 * **MValueBaseTP** is an example to parallelize this algorithm.
 
 ## Optimize $h$ part
-Use $h(p^k) = 1$ for example, in [pe_algo](https://github.com/baihacker/pe/blob/master/pe_algo){:target="_blank"}
+Use $h(p^k) = [k = 1]$ for example, in [pe_algo](https://github.com/baihacker/pe/blob/master/pe_algo){:target="_blank"}
 * **prime_s0** is the prime $\pi$ method, and the complexity is expected to be $O(n^{\frac{3}{4}})$
 * **prime_s0_ex** uses binary indexed tree to optimize it, and I guess the complexity is $O(n^{\frac{2}{3}})$
 * **prime_s0_parallel** uses multi-threads to optimize it, and we need to choose a proper thread number and find a strategy about when to parallize it.
