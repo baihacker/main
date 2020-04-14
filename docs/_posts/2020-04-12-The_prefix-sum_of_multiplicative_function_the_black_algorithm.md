@@ -39,7 +39,7 @@ $p_k$ is the $k_{th}$ prime and $h$ is the prefix-sum of $f$ defined on prime nu
 If an implementation remembers all used $g_{p_k}(n)$, i.e. just compute each value once, the space and time complexity of **Min_25 sieve** is the same as that of **Zhouge sieve**.
 
 ## Proof
-Based on (similar to [1] 6.5.4)
+Similar to [1] 6.5.4,
 
 $$
 \begin{array}{lcl}
