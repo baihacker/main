@@ -50,9 +50,9 @@ $$
 We can also call it dp-like implementation. The space and time complexity is the same as that of **Zhouge sieve**'s.
 
 ## Proof
-The number of state is given by $\sum_{i\text{ is prime}}(\frac{n}{i})^{\frac{1}{2}}$. Based on integration, $O\left(\int_{1}^{n^{\frac{1}{2}}}(\frac{n}{x})^{\frac{1}{2}}dx\right) = O(n^{\frac{3}{4}})$.
+The number of states is given by $\sum_{i\text{ is prime}}(\frac{n}{i})^{\frac{1}{2}}$. Based on integration, $O\left(\int_{1}^{n^{\frac{1}{2}}}(\frac{n}{x})^{\frac{1}{2}}dx\right) = O(n^{\frac{3}{4}})$.
 
-The number of state transition is given by $\sum_{i\text{ is prime}}(\frac{n}{i^j})^{\frac{1}{2}}$ and bounded by$\sum_{i\text{ is prime}}\log_i(\frac{n}{i})(\frac{n}{i})^{\frac{1}{2}}$. Based on integration, $O\left(\int_{1}^{n^{\frac{1}{2}}}\log(\frac{n}{x})(\frac{n}{x})^{\frac{1}{2}}dx\right) = O(n^{\frac{3}{4}})$. ($\log(n)$ is ignored)
+The number of state transitions is given by $\sum_{i\text{ is prime}}(\frac{n}{i^j})^{\frac{1}{2}}$ and bounded by$\sum_{i\text{ is prime}}\log_i(\frac{n}{i})(\frac{n}{i})^{\frac{1}{2}}$. Based on integration, $O\left(\int_{1}^{n^{\frac{1}{2}}}\log(\frac{n}{x})(\frac{n}{x})^{\frac{1}{2}}dx\right) = O(n^{\frac{3}{4}})$. ($\log(n)$ is ignored)
 
 The space complexity is $O(n^{\frac{1}{2}})$, we can either use two-buffer trick or update inplace while taking care of the updating order.
 
