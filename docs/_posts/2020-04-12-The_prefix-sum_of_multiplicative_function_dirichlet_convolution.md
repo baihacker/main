@@ -91,7 +91,7 @@ int64 cal(int64 n) {
 ```
 
 ### Complexity of helper functions
-We need to compute the values of $$sg(i), sh(i), sg(\frac{n}{i}), sh(\frac{n}{i}), i \le n^{\frac{1}{2}}$$. Let $$O(n^{\frac{a}{b}})=\max(O(sh), O(sg))$$. Based on $$\int _1^{n^{\frac{1}{2}}}x^{\frac{a}{b}}+(\frac{n}{x})^{\frac{a}{b}}dx$$, the complexity is 
+We need to compute the values of $sg(i), sh(i), sg(\frac{n}{i}), sh(\frac{n}{i}), i \le n^{\frac{1}{2}}$. Let $O(n^{\frac{a}{b}})=\max(O(sh), O(sg))$. Based on $\int _1^{n^{\frac{1}{2}}}x^{\frac{a}{b}}+(\frac{n}{x})^{\frac{a}{b}}dx$, the complexity is 
 
 $$
 \begin{cases}
@@ -101,7 +101,7 @@ n^{\frac{a}{b}} & 0 < b < a \\
 \end{cases}
 $$
 
-If $sg(i), sh(i)$ $i \le n^{\frac{2}{3}}$ can be calculated in $O(n^{\frac{2}{3}})$ time, $$\int _1^{n^{\frac{1}{2}}}x^{\frac{a}{b}}+(\frac{n}{x})^{\frac{a}{b}}dx$$ becomes $$n^{\frac{2}{3}} + \int _1^{n^{\frac{1}{3}}}(\frac{n}{x})^{\frac{a}{b}}dx$$, the complexity is
+If $sg(i), sh(i)$ $i \le n^{\frac{2}{3}}$ can be calculated in $O(n^{\frac{2}{3}})$ time, $\int _1^{n^{\frac{1}{2}}}x^{\frac{a}{b}}+(\frac{n}{x})^{\frac{a}{b}}dx$ becomes $n^{\frac{2}{3}} + \int _1^{n^{\frac{1}{3}}}(\frac{n}{x})^{\frac{a}{b}}dx$, the complexity is
 
 $$
 \begin{cases}
