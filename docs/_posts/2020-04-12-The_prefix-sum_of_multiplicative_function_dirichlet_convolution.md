@@ -41,14 +41,14 @@ For **case M.**, **case I.**, by iterating each item of $H=\sum\frac{h(i)}{i^s}$
 
 $$
 \begin{array}{lcl}
-sf(n) &=& \sum_{i=1}^{n} sg(\frac{n}{i}) h(i)\\
-sg(n) &=& sf(n) - \sum_{i=2}^{n} sg(\frac{n}{i}) h(i)
+sf(n) &=& \sum\limits_{i=1}^{n} sg(\frac{n}{i}) h(i)\\
+sg(n) &=& sf(n) - \sum\limits_{i=2}^{n} sg(\frac{n}{i}) h(i)
 \end{array}
 $$
 
 This implementation requires iterating all the item of $h$. So the optimization direction is to reduce the number of visited items in $H$. 
 
-For example, consider $H = \prod_p(1 + \frac{h(p^s)}{p^s} + \frac{h_(p^{2s})}{p^{2s}}$+...). If $h(p)$ is $0$, we have the powerful number sieve method (see another article). Moreover, If $h(p^k) = 0$ for $k \ge 1$, we have other similar sieve methods.
+For example, consider $H = \prod\limits_p(1 + \frac{h(p^s)}{p^s} + \frac{h_(p^{2s})}{p^{2s}}$+...). If $h(p)$ is $0$, we have the powerful number sieve method (see another article). Moreover, If $h(p^k) = 0$ for $k \ge 1$, we have other similar sieve methods.
 
 So, the guides of this implementation are
 * the prefix-sum of one helper function is easy to calculate.
