@@ -73,7 +73,7 @@ $$
 See [Partition_function_(number_theory)](https://en.wikipedia.org/wiki/Partition_function_(number_theory)){:target="_blank"}.
 
 # Consider labeled boxes
-Actually, the two formulas are applied to the problems where the box is not labeled. (Each structure in the target has a label). So what’s the formula? The answer is simpler.
+Actually, the two formulas are applied to the problems where the boxes are not labeled. In another word, the sub-structures of the target don't have labels. So what’s the formula? The answer is simpler.
 
 ## Labeled ball labeled box 
 **Theorem 3.4.1’.**
