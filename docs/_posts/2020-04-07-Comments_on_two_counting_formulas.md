@@ -67,7 +67,7 @@ $$
 And if there are $n$ balls $m$ boxes, the answer is
 
 $$
-\left [ \frac{x^n}{n!}y^m\right ]\left \{ \mathcal{H}(x,y) \right \}
+\left [ x^ny^m\right ]\left \{ \mathcal{H}(x,y) \right \}
 $$
 
 See [Partition_function_(number_theory)](https://en.wikipedia.org/wiki/Partition_function_(number_theory)){:target="_blank"}.
