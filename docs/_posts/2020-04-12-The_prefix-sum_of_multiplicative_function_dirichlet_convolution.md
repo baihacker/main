@@ -17,22 +17,22 @@ categories: [math]
 This article is a continuation of **The prefix-sum of multiplicative function: powerful number sieve** [2]. And this article views "powerful number sieve" at a higher level. And "powerful number sieve" can be treated as one of the optimiazation way of the methods described in this article. This article is also a generalized version of **Thinking on the generalized mobius inversion** [1].
 
 # Notation
-Use $f,g,h,...$ to denote multiplicative function and $sf,sg,sh,...$ are their prefix-sum function. $F,G,H,...$ are their Dirichlet generating function. $G*H$ means the Dirichlet convolution of two Dirichlet generating functions.
+Use $f,g,h,...$ to denote arithmetic function and $sf,sg,sh,...$ are their prefix-sum function. $F,G,H,...$ are their Dirichlet generating function. $g*h$ means the Dirichlet convolution.
 
 # Method description
-In order to compute $sf(n)$, we can write $F$ in the format of $\frac{H1 * H2 * H3 * ...}{H4 * H5 * H6 * ...}$ and evaluate the right side efficiently. We call $f$ or $sf$ **target function** and call $h_i$ and $H_i$ **helper function**. In another word, **shift the complexity to helper functions**.
+In order to compute $sf(n)$, we can write $f$ in the format of $\frac{h_1 * h_2 * h_3 * ...}{h_4 * h_5 * h_6 * ...}$ and sum the right side efficiently. We call $f$ or $sf$ **target function** and call $h_i$ **helper function**. In another word, we **shift the complexity to helper functions**.
 
 This kind of approach is known as **Lord Du sieve** [3], which focuses on two helper functions.
 
 # Implementations
 In the implementation section, we only consider two helper functions:
-* **case M.** find $sf(n)$ when $F=G*H$ ($G$, $H$ are known), or
-* **case I.** find $sg(n)$ when $G=F/H$ ($F$, $H$ are known). We can rewrite it as $G*H=F$.
+* **case M.** find $sf(n)$ when $f=g*h$ ($g$, $h$ are known), or
+* **case I.** find $sg(n)$ when $g=f/h$ ($f$, $h$ are known). We can rewrite it as $g*h=f$.
 
 If there are more than two helper functions, apply these implementations more than one time.
 
 ## **Raw** implementations
-For **case M.**, a **raw** implementation is to compute the convolution of $G$ and $H$ directly.
+For **case M.**, a **raw** implementation is to evaluate $G*H$ based on $G$ and $H$ directly.
 
 Since the formula is raw, we don't have enough information to optimize it. This also means we can use any idea to optimize it.
 
@@ -42,7 +42,7 @@ For **case M.**, **case I.**, by iterating each item of $H=\sum\frac{h(i)}{i^s}$
 $$
 \begin{array}{lcl}
 sf(n) &=& \sum\limits_{i=1}^{n} sg(\frac{n}{i}) h(i)\\
-sg(n) &=& sf(n) - \sum\limits_{i=2}^{n} sg(\frac{n}{i}) h(i)
+sg(n) &=& h(1) sf(n) - \sum\limits_{i=2}^{n} sg(\frac{n}{i}) h(i)
 \end{array}
 $$
 
@@ -51,12 +51,12 @@ This implementation requires iterating all the item of $h$. So the optimization 
 For example, consider $H = \prod\limits_p(1 + \frac{h(p^s)}{p^s} + \frac{h_(p^{2s})}{p^{2s}}$+...). If $h(p)$ is $0$, we have the powerful number sieve method (see another article). Moreover, If $h(p^k) = 0$ for $k \ge 1$, we have other similar sieve methods.
 
 So, the guides of this implementation are
-* the prefix-sum of one helper function is easy to calculate.
-* many coefficients of the other helper function are zero.
+* the prefix-sum of one helper function is easy to calculate. ($sg$ in the above example)
+* many coefficients of the other helper function are zero. ($h$ in the above example)
   * One way (not the only way) to achieve this goal is $h(p^k) = 0$ for $1 \le k \le c$.
 
 ## **Partitioned** implementation
-Use these two codes to calculate $sf$ and $sg$ respectively
+If $sg$ is easy to calculate, we have the following codes to calculate $sf$ and $sg$ respectively
 
 ```cpp
 // Returns sf(n)
@@ -77,8 +77,8 @@ int64 cal(int64 n) {
 ```cpp
 // Returns sg(n). Need to memorize the result.
 int64 cal(int64 n) {
-  int64 ret = sf(n);
-  int64 last = 1; // h(1) = sh(1) = 1
+  int64 ret = h(1) * sf(n);
+  int64 last = h(1);
   for (int64 i = 2; i <= n;) {
     const int64 val = n / i, maxi = n / val;
     const int64 each = cal(val), curr = sh(maxi);
