@@ -106,7 +106,7 @@ n^{\frac{a}{b}} & 0 < b < a \\
 \end{cases}
 $$
 
-If $sg(i), sh(i)$ $i \le n^{\frac{2}{3}}$ can be calculated in $O(n^{\frac{2}{3}})$ time, $\int _1^{n^{\frac{1}{2}}}x^{\frac{a}{b}}+(\frac{n}{x})^{\frac{a}{b}}dx$ becomes $n^{\frac{2}{3}} + \int _1^{n^{\frac{1}{3}}}(\frac{n}{x})^{\frac{a}{b}}dx$, the complexity is
+If $sg(i), sh(i)$ for $i \le n^{\frac{2}{3}}$ can be calculated in $O(n^{\frac{2}{3}})$ time, $\int _1^{n^{\frac{1}{2}}}x^{\frac{a}{b}}+(\frac{n}{x})^{\frac{a}{b}}dx$ becomes $n^{\frac{2}{3}} + \int _1^{n^{\frac{1}{3}}}(\frac{n}{x})^{\frac{a}{b}}dx$, the complexity is
 
 $$
 \begin{cases}
