@@ -37,23 +37,28 @@ For **case M.**, a **raw** implementation is to evaluate $G*H$ based on $G$ and 
 Since the formula is raw, we don't have enough information to optimize it. This also means we can use any idea to optimize it.
 
 ## **Prefix-sum** implementation
-For **case M.**, **case I.**, by iterating each item of $H=\sum\frac{h(i)}{i^s}$, there are two formulas:
+For **case M.**, **case I.**, by iterating each coefficient of $H=\sum\frac{h(i)}{i^s}$, there are two formulas:
 
 $$
 \begin{array}{lcl}
 sf(n) &=& \sum\limits_{i=1}^{n} sg(\frac{n}{i}) h(i)\\
-sg(n) &=& h(1) sf(n) - \sum\limits_{i=2}^{n} sg(\frac{n}{i}) h(i)
+h(1) sg(n) &=& sf(n) - \sum\limits_{i=2}^{n} sg(\frac{n}{i}) h(i)
 \end{array}
 $$
 
-This implementation requires iterating all the item of $h$. So the optimization direction is to reduce the number of visited items in $H$. 
+### Optimize $h(i)$ part
+Consider $h(i)$ in these two formulas, on direction of optimization is to reduce the number of visited $h(i)$.
 
 For example, consider $H = \prod\limits_p(1 + \frac{h(p^s)}{p^s} + \frac{h_(p^{2s})}{p^{2s}}$+...). If $h(p)$ is $0$, we have the powerful number sieve method (see another article). Moreover, If $h(p^k) = 0$ for $k \ge 1$, we have other similar sieve methods.
 
-So, the guides of this implementation are
-* the prefix-sum of one helper function is easy to calculate. ($sg$ in the above example)
-* many coefficients of the other helper function are zero. ($h$ in the above example)
-  * One way (not the only way) to achieve this goal is $h(p^k) = 0$ for $1 \le k \le c$.
+### Requirement of the remaining parts
+
+In the first formula
+ * the values of $sg$ for all $\frac{n}{i}$ are expected to be calculated in a reasonable complexity.
+
+In the second formula: 
+ * the values of $sg$ for all $\frac{n}{i} (i > 1)$ are expected to be calculated in a reasonable complexity. Note $sg(n)$ itself is the target result.
+ * the values of $sf$ for all $\frac{n}{i}$ are expected to be calculated in a reasonable complexity. Note $sg(n)$ depends on $\frac{n}{i} (i > 1)$ we not only calculate $sf(n)$
 
 ## **Partitioned** implementation
 If $sg$ is easy to calculate, we have the following codes to calculate $sf$ and $sg$ respectively
@@ -77,7 +82,7 @@ int64 cal(int64 n) {
 ```cpp
 // Returns sg(n). Need to memorize the result.
 int64 cal(int64 n) {
-  int64 ret = h(1) * sf(n);
+  int64 ret = sf(n);
   int64 last = h(1);
   for (int64 i = 2; i <= n;) {
     const int64 val = n / i, maxi = n / val;
@@ -86,7 +91,7 @@ int64 cal(int64 n) {
     last = curr;
     i = maxi + 1;
   }
-  return ret;
+  return ret / h(1);
 }
 ```
 
