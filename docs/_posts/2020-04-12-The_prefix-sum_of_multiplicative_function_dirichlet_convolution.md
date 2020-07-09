@@ -61,7 +61,7 @@ In the second formula:
  * the values of $sf$ for all $\frac{n}{i}$ are expected to be calculated in a reasonable complexity. Note $sg(n)$ depends on $\frac{n}{i} (i > 1)$ we not only calculate $sf(n)$
 
 ## **Partitioned** implementation
-If $sg$ is easy to calculate, we have the following codes to calculate $sf$ and $sg$ respectively
+If the values of $sh$ for all $\frac{n}{i}$ can be calculated in a reasonable complexity, we have the following codes to calculate $sf$ and $sg$ respectively
 
 ```cpp
 // Returns sf(n)
