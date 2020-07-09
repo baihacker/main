@@ -51,6 +51,8 @@ Consider $h(i)$ in these two formulas, on direction of optimization is to reduce
 
 For example, consider $H = \prod\limits_p(1 + \frac{h(p^s)}{p^s} + \frac{h_(p^{2s})}{p^{2s}}$+...). If $h(p)$ is $0$, we have the powerful number sieve method (see another article). Moreover, If $h(p^k) = 0$ for $k \ge 1$, we have other similar sieve methods.
 
+*Note: it is required that $h(1)$ is not $0$ in the second formula. In another word, the inverse of $h$ exists.*
+
 ### Requirement of the remaining parts
 
 In the first formula
@@ -125,6 +127,10 @@ Note: values of $sf(\frac{n}{i}), i \ge 2$ are not computed in **case M.**, and 
 
 ### Overall complexity
 The larger complexity of target function part and helper function part.
+
+# Comment
+* It is not required that $h, g, h$ are multiplicative functions.
+* The method which uses mobius inversion to compute the prefix-sum is just a special case where the helper functions are $\mu$ and $1$.
 
 # References
 1. baihacker, 2018.03.18, [**Thinking on the generalized mobius inversion**](https://blog.csdn.net/baihacker/article/details/79597472){:target="_blank"} (chinese content)
