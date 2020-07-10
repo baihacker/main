@@ -22,9 +22,11 @@ This article is a continuation of **The prefix-sum of multiplicative function: p
  * $F,G,H,...$ are the corresponding Dirichlet generating function. 
 
 # Method description
-In order to compute $sf(n)$, we can write $f$ in the format of $\frac{h_1 * h_2 * h_3 * ...}{h_4 * h_5 * h_6 * ...}$ and sum the right side efficiently. We call $f$ or $sf$ **target function** and call $h_i$ **helper function**. In another word, we **shift the complexity to helper functions**.
+In order to compute $sf(n)$, we can write $f$ in the form of $\frac{h_1 * h_2 * h_3 * ...}{h_4 * h_5 * h_6 * ...}$ to help compute $sf(n)$.
 
-This kind of approach is known as **Lord Du sieve** [3], which focuses on two helper functions.
+Let's call $f$ or $sf$ **target function** and call $h_i$ **helper function**. The motivation of the method is straightforward: **shift the complexity to helper functions**.
+
+This kind of approach is also known as **Lord Du sieve** [3], which focuses on two helper functions.
 
 # Implementations
 In the implementation section, we only consider two helper functions:
