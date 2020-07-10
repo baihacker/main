@@ -14,10 +14,12 @@ categories: [math]
 2020.04.12
 {: style="text-align: center;"}
 
-This article is a continuation of **The prefix-sum of multiplicative function: powerful number sieve** [2]. And this article views "powerful number sieve" at a higher level. And "powerful number sieve" can be treated as one of the optimiazation way of the methods described in this article. This article is also a generalized version of **Thinking on the generalized mobius inversion** [1].
+This article is a continuation of **The prefix-sum of multiplicative function: powerful number sieve** [2]. And this article gives a higher level view of "powerful number sieve". And "powerful number sieve" can be treated as one of the optimiazation way of the methods described in this article. This article is also a generalized version of **Thinking on the generalized mobius inversion** [1].
 
 # Notation
-Use $f,g,h,...$ to denote arithmetic function and $sf,sg,sh,...$ are their prefix-sum function. $F,G,H,...$ are their Dirichlet generating function. $g*h$ means the Dirichlet convolution.
+ * Use $f,g,h,...$ to denote arithmetic function and $sf,sg,sh,...$ are their prefix-sum function.
+ * $g*h$ means the Dirichlet convolution.
+ * $F,G,H,...$ are the corresponding Dirichlet generating function. 
 
 # Method description
 In order to compute $sf(n)$, we can write $f$ in the format of $\frac{h_1 * h_2 * h_3 * ...}{h_4 * h_5 * h_6 * ...}$ and sum the right side efficiently. We call $f$ or $sf$ **target function** and call $h_i$ **helper function**. In another word, we **shift the complexity to helper functions**.
