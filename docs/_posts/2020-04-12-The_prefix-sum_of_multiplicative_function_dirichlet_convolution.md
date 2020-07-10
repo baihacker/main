@@ -20,7 +20,7 @@ This article is a continuation of **The prefix-sum of multiplicative function: p
  * $f,g,h,...$ are used to denote arithmetic function and $sf,sg,sh,...$ are their prefix-sum function.
  * $g*h$ means the Dirichlet convolution.
  * $F,G,H,...$ are the corresponding Dirichlet generating function.
- * $G*H$ means multiplication.
+ * $G*H$ means normal multiplication.
 
 # Method description
 In order to compute $sf(n)$, we can write $f$ in the form of $\frac{h_1 * h_2 * h_3 * ...}{h_4 * h_5 * h_6 * ...}$ to help compute $sf(n)$.
@@ -134,7 +134,7 @@ Note: values of $sf(\frac{n}{i}), i \ge 2$ are not computed in **case M.**, and 
 The larger complexity of target function part and helper function part.
 
 # Comment
-* It is not required that $h, g, h$ are multiplicative functions.
+* It is not required that $f, g, h$ are multiplicative functions.
 * The method which uses mobius inversion to compute the prefix-sum is just a special case where the helper functions are $\mu$ and $1$.
 
 # References
