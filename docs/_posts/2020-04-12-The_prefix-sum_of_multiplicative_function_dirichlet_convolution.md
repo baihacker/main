@@ -17,9 +17,10 @@ categories: [math]
 This article is a continuation of **The prefix-sum of multiplicative function: powerful number sieve** [2]. And this article gives a higher level view of "powerful number sieve". And "powerful number sieve" can be treated as one of the optimiazation way of the methods described in this article. This article is also a generalized version of **Thinking on the generalized mobius inversion** [1].
 
 # Notation
- * Use $f,g,h,...$ to denote arithmetic function and $sf,sg,sh,...$ are their prefix-sum function.
+ * $f,g,h,...$ are used to denote arithmetic function and $sf,sg,sh,...$ are their prefix-sum function.
  * $g*h$ means the Dirichlet convolution.
- * $F,G,H,...$ are the corresponding Dirichlet generating function. 
+ * $F,G,H,...$ are the corresponding Dirichlet generating function.
+ * $G*H$ means multiplication.
 
 # Method description
 In order to compute $sf(n)$, we can write $f$ in the form of $\frac{h_1 * h_2 * h_3 * ...}{h_4 * h_5 * h_6 * ...}$ to help compute $sf(n)$.
@@ -29,16 +30,16 @@ Let's call $f$ or $sf$ **target function** and call $h_i$ **helper function**. T
 This kind of approach is also known as **Lord Du sieve** [3], which focuses on two helper functions.
 
 # Implementations
-In the implementation section, we only consider two helper functions:
+In the implementation section, we only consider two helper functions and try to solve the two problems:
 * **case M.** find $sf(n)$ when $f=g*h$ ($g$, $h$ are known), or
 * **case I.** find $sg(n)$ when $g=f/h$ ($f$, $h$ are known). We can rewrite it as $g*h=f$.
 
 If there are more than two helper functions, apply these implementations more than one time.
 
 ## **Raw** implementations
-For **case M.**, a **raw** implementation is to evaluate $G*H$ based on $G$ and $H$ directly.
+For **case M.**, the **raw** implementation means to evaluate $G*H$ directly.
 
-Since the formula is raw, we don't have enough information to optimize it. This also means we can use any idea to optimize it.
+Since this is a raw expression, we don't have enough information to optimize it. This also means we can use any idea to optimize it.
 
 ## **Prefix-sum** implementation
 For **case M.**, **case I.**, by iterating each coefficient of $H=\sum\frac{h(i)}{i^s}$, there are two formulas:
@@ -50,12 +51,12 @@ h(1) sg(n) &=& sf(n) - \sum\limits_{i=2}^{n} sg(\frac{n}{i}) h(i)
 \end{array}
 $$
 
+*Note: it is required that $h(1)$ is not $0$ in the second formula. In another word, the inverse of $h$ exists.*
+
 ### Optimize $h(i)$ part
-Consider $h(i)$ in these two formulas, on direction of optimization is to reduce the number of visited $h(i)$.
+Consider $h(i)$ in the two formulas, one optimization way is to reduce the number of visited $h(i)$.
 
 For example, consider $H = \prod\limits_p(1 + \frac{h(p^s)}{p^s} + \frac{h_(p^{2s})}{p^{2s}}$+...). If $h(p)$ is $0$, we have the powerful number sieve method (see another article). Moreover, If $h(p^k) = 0$ for $k \ge 1$, we have other similar sieve methods.
-
-*Note: it is required that $h(1)$ is not $0$ in the second formula. In another word, the inverse of $h$ exists.*
 
 ### Requirement of the remaining parts
 
