@@ -152,6 +152,55 @@ Why do I call it **the black algorithm**?
   * The prefix-sum of $f$ on primes can be computed efficiently.
   * It is possible to combine $f(t)$ and $h(\frac{n}{t})$ to obtain $\sum_{\text{prime p } \le \frac{n}{t}} f(t*p)$. Sometimes we need more than one $h$ function, like $h_1, h_2, ...$.
 
+# A variant
+The existing algorithm is able to compute $\sum_{i=1}^n f(i)$  assuming $\sum_{p \le \frac{n}{j}} f(p) [p \text{ is prime}]$ is known. A modified version is able to compute $\sum_{i \le \frac{n}{j}} f(i)$. The idea is, for each $$\text{class}_{t} = \{ x = t * p \ \vert \ p \text{ is prime and } p \ge \text{max prime factor}(t) \}$$, we divide the $p$ into different segments according to the values of $\frac{n}{t p}$.
+
+```cpp
+#include <pe.hpp>
+
+struct Solver : public MValueBaseTP<Solver, int64, 8> {
+  int64 batch(int64 n, int64 val, int /*imp*/, int64 vmp, int /*emp*/,
+              int64 /*now*/) {
+    int64 t = 1;
+    const int64 m = n / val;
+    for (int64 i = vmp + 1; i <= m;) {
+      int64 v = m / i;
+      int64 maxi = m / v;
+      ++t;
+      // handle val * p where i <= p <= maxi
+      i = maxi + 1;
+    }
+    // handle val * vmp * vmp if vmp > 1
+    return t;
+  }
+  int64 each(int64 /*p*/, int /*e*/) { return 1; }
+};
+
+int main() {
+  pe().maxPrime(100000000).init();
+  for (int i = 5; i <= 12; ++i) {
+    TimeRecorder tr;
+    int64 cnt = Solver().solve(power(10LL, i));
+    printf("1e%d\t%.2e\t%16I64d\t%s\n", i, 1. * cnt, cnt,
+           tr.elapsed().format().c_str());
+  }
+  return 0;
+}
+```
+
+the outpus are
+
+```cpp
+1e5     2.15e+04                   21454        0:00:00:00.000
+1e6     1.25e+05                  125220        0:00:00:00.000
+1e7     7.28e+05                  727870        0:00:00:00.015
+1e8     4.25e+06                 4246101        0:00:00:00.000
+1e9     2.49e+07                24926095        0:00:00:00.062
+1e10    1.47e+08               147470529        0:00:00:00.359
+1e11    8.80e+08               879838265        0:00:00:02.091
+1e12    5.29e+09              5294311815        0:00:00:12.168
+```
+
 # References
 1. Zhizhou Ren, 2016, Some methods to compute the prefix-sum of multiplicative function
 2. Zhengting Zhu, 2018, Some special arithmetic function summation problems
