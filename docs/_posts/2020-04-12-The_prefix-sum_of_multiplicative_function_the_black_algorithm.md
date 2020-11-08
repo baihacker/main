@@ -90,22 +90,20 @@ int64 dfs(int limit, int64 n, int64 val, int imp, int64 vmp, int emp) {
   return ret;
 }
 
-// 8 threads version.
-struct Solver : public MValueBaseTP<Solver, int64, 8> {
-  int64 batch(int64 /*n*/, int64 /*val*/, int /*imp*/, int64 /*vmp*/,
-              int /*emp*/, int64 /*now*/) {
+using RT = int64;
+struct Solver : public MValueBaseEx<Solver, int64, 8> {
+  RT Batch(int64 n, int64 val, int imp, int64 vmp, int emp, RT now, RT now1) {
     return 1;
   }
-  int64 each(int64 /*p*/, int /*e*/) { return 1; }
 };
 
 int main() {
-  pe().maxPrime(100000000).init();
+  PE_INIT(maxp = 100000000);
   for (int i = 5; i <= 16; ++i) {
     TimeRecorder tr;
-    int64 cnt = Solver().solve(power(10LL, i));
+    int64 cnt = Solver().Cal(Power(10LL, i));
     printf("1e%d\t%.2e\t%16I64d\t%s\n", i, 1. * cnt, cnt,
-           tr.elapsed().format().c_str());
+           tr.Elapsed().Format().c_str());
   }
   return 0;
 }
@@ -114,18 +112,18 @@ int main() {
 The outputs are
 
 ```cpp
-1e5     1.89e+03                    1894        0:00:00:00.008
+1e5     1.89e+03                    1894        0:00:00:00.000
 1e6     9.11e+03                    9108        0:00:00:00.000
 1e7     4.49e+04                   44948        0:00:00:00.000
 1e8     2.28e+05                  228102        0:00:00:00.000
 1e9     1.19e+06                 1185818        0:00:00:00.000
-1e10    6.30e+06                 6298637        0:00:00:00.009
-1e11    3.41e+07                34113193        0:00:00:00.059
-1e12    1.88e+08               188014195        0:00:00:00.358
-1e13    1.05e+09              1052806860        0:00:00:01.978
-1e14    5.98e+09              5981038282        0:00:00:10.413
-1e15    3.44e+10             34430179518        0:00:01:00.115
-1e16    2.01e+11            200620098564        0:00:05:50.010
+1e10    6.30e+06                 6298637        0:00:00:00.015
+1e11    3.41e+07                34113193        0:00:00:00.046
+1e12    1.88e+08               188014195        0:00:00:00.330
+1e13    1.05e+09              1052806860        0:00:00:01.607
+1e14    5.98e+09              5981038282        0:00:00:08.949
+1e15    3.44e+10             34430179518        0:00:00:51.227
+1e16    2.01e+11            200620098564        0:00:04:59.919
 ```
 
 
