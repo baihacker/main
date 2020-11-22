@@ -156,9 +156,9 @@ The existing algorithm is able to compute $\sum_{i=1}^n f(i)$  assuming $\sum_{p
 ```cpp
 #include <pe.hpp>
 
-struct Solver : public MValueBaseTP<Solver, int64, 8> {
-  int64 batch(int64 n, int64 val, int /*imp*/, int64 vmp, int /*emp*/,
-              int64 /*now*/) {
+struct Solver : public MValueBaseEx<Solver, int64, 8> {
+  int64 Batch(int64 n, int64 val, int /*imp*/, int64 vmp, int /*emp*/,
+              int64 /*now*/, int64 /*now1*/) {
     int64 t = 1;
     const int64 m = n / val;
     for (int64 i = vmp + 1; i <= m;) {
@@ -171,16 +171,16 @@ struct Solver : public MValueBaseTP<Solver, int64, 8> {
     // handle val * vmp * vmp if vmp > 1
     return t;
   }
-  int64 each(int64 /*p*/, int /*e*/) { return 1; }
+  int64 F(int64 /*p*/, int /*e*/) { return 1; }
 };
 
 int main() {
-  pe().maxPrime(100000000).init();
+  PE_INIT(maxp=100000000);
   for (int i = 5; i <= 12; ++i) {
     TimeRecorder tr;
-    int64 cnt = Solver().solve(power(10LL, i));
+    int64 cnt = Solver().Cal(Power(10LL, i));
     printf("1e%d\t%.2e\t%16I64d\t%s\n", i, 1. * cnt, cnt,
-           tr.elapsed().format().c_str());
+           tr.Elapsed().Format().c_str());
   }
   return 0;
 }
@@ -194,9 +194,9 @@ the outpus are
 1e7     7.28e+05                  727870        0:00:00:00.015
 1e8     4.25e+06                 4246101        0:00:00:00.000
 1e9     2.49e+07                24926095        0:00:00:00.062
-1e10    1.47e+08               147470529        0:00:00:00.359
-1e11    8.80e+08               879838265        0:00:00:02.091
-1e12    5.29e+09              5294311815        0:00:00:12.168
+1e10    1.47e+08               147470529        0:00:00:00.350
+1e11    8.80e+08               879838265        0:00:00:02.071
+1e12    5.29e+09              5294311815        0:00:00:12.097
 ```
 
 # References
