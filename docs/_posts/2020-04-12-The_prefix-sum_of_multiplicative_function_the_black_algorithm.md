@@ -186,7 +186,7 @@ int main() {
 }
 ```
 
-the outpus are
+the outputs are
 
 ```cpp
 1e5     2.15e+04                   21454        0:00:00:00.000
