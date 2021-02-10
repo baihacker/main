@@ -32,38 +32,45 @@ categories: [math]
 
 **思路1** 适用于允许的子树个数不多的情况，可以枚举子树个数$\text{child_count}$，最后把每种情况的答案加起来，得到$v[\text{node_count}]$。给定子树的个数$\text{child_count}$，有两种算法解决该问题。
 
-**算法1.1** 考虑将$\text{child_count}$个子树划分（无标记元素的划分）为若干个部分，相同部分中子树同构，不同的部分间子树不同构。如果对单个的划分能够计算结果，那么直接枚举所有划分，把结果加起来即可。因为不同划分下的树，不可能同构。
+为表述方便，这里先定义一个一些记号
 
-不妨给每个部分一个标记$i$，用$\text{part}_i$指第$i$个部分，用$\|\text{part}_i\|$表示第$i$个部分的元素个数。那么我们用记号
+**有标记的元素的划分** 给定一个集合$S=\\{x_1,x_2,x_3...\\}$，我们称$p=\\{\text{part}_1,\text{part}_2,\text{part}_3,...\\}$是$S$的一个划分当且仅当：$\text{part}_i$是$S$的非空子集，$\text{part}_i$两两不相交，$\text{part}_i$的并是$S$。定义$Q_p(c) = \| \\{ \text{part}_i \text{ where } \|\text{part}_i\| =c \\} \|$。对划分的计数参考[http://oeis.org/A000110](http://oeis.org/A000110){:target="_blank"}。
 
-$$ \sum |\text{part}_i|x_i = \text{tree}_{\text{node_count} - 1} $$
+**无标记的元素的划分** 给定$n$个相同的元素，如果有$\sum \text{part}_i = n$且$\text{part}_i > 0$，我们称$p=\\{\text{part}_1,\text{part}_2,\text{part}_3,...\\}$是对无标记的$n$个元素的划分。定义$Q_p(c) = \| \\{ \text{part}_i \text{ where } \text{part}_i =c \\} \|$。对划分的计数参考[http://oeis.org/A000041](http://oeis.org/A000041){:target="_blank"}。
 
-表示$x_i$这棵树出现了$\|\text{part}_i\|$次，最终形成了具有$\text{node_count}-1$个树的森林。该记号简写为
+注意，在无标记的元素划分中$\text{part}_i$是一个数，我们只关心某个部分的大小。而在有标记的元素划分中，$\text{part}_i$是一个子集，我们关心把哪些元素放在一起。
 
-$$\sum |\text{part}_i|x_i = \text{node_count} - 1$$
+**算法1.1** 对于固定的$\text{child_count}$，考虑利用无标记的元素的划分，把有根树分为若干类：不同类之间的有根树不同构，而某个类内的有根树的数目可以有效算出。
+
+定义有根树到无标记的元素的划分的映射$\text{TP}$：对于一个有根树，把所有的相同的子树拿出来，放在一起，计算数量，作为划分的一个元素。重复这个过程直到把所有的子树拿完，这样我们得到一个划分。划分的原像集就是一类有根树。现在的问题是，给定划分$P$，求原像的个数，也就是$\|\text{TP}^{-1}(P)\|$。
+
+更形式化地描述这个问题，用
+
+$$ \sum \text{part}_i\text{ }x_i = \text{tree}_{\text{node_count}} $$
+
+表示$x_i$这棵子树出现了$\text{part}_i$次，加上一个根，最终形成了具有$\text{node_count}$个顶点的有根树。考虑移掉根，再简化符号
+
+$$\sum \text{part}_i\text{ }x_i = \text{node_count} - 1$$
+
+意思是$x_i$这棵树出现了$\text{part}_i$次，构成了有$\text{node_count}-1$个顶点的森林。
 
 对于本题，我们加上两条限制：
-* $x_i$各不相同
-* $\|x_i\|>0$，即子树$x_i$的大小大于0
+* $x_i$各不相同。
+* $\|x_i\|>0$，即子树$x_i$非空。
 
 如果满足这个等式以及这两条限制的$x_i$的取法数为s，那么
 
-$$ \frac{s}{\prod_i (大小为i的part数)!} $$
+$$ \frac{s}{\prod_t Q_p(t)!} $$
 
-就是该划分下的答案。除以分母的原因是：在上述方程中，如果 $\|\text{part}_i\|=\|\text{part}_j\|=\|\text{part}_k\|$ ，任意交换$x_i,x_j,x_k$后的解仍然被计数，但我们的目标是只计数一次。
+就是该划分下的答案。除以分母的原因是：在求上述方程的解数时，有重复计数。比如 $\text{part}_i=\text{part}_j=\text{part}_k$ ，任意交换$x_i,x_j,x_k$后的解仍然被计数，但我们的目标是只计数一次。
 
 **问题Q** 方程$\sum a_i x_i = n, x_i \ne x_j \text{ if } i \ne j$的解数。
  * 该方程可以是$a_i, x_i, n$都是整数，$a_i x_i$表示普通的整数乘法，一般还要加上$x_i\ge 0$的限制。
  * 该方程也可以是对应于上面提到的子树构成森林的方法数，同时有$\|x_i\|>0$的限制。
 
-问题Q可以用**集合划分mobius函数（容斥原理）**的方法解决。直观上对方法的理解是：如果去掉$x_i$各不相同的限制，问题容易求解。但是里面会有重复计数，比如$x_i$和$x_j$相同的也被计算进去了，所以要减去一些，然后减多了，又要加上一些。
+问题Q可以用**集合划分mobius函数（容斥原理）**的方法解决。直观上对方法的理解是：如果去掉$x_i$各不相同的限制，问题容易求解。但是里面会有重复计数，比如$x_i$和$x_j$相同的也被计算进去了，所以要减去一些，然后减多了，又要加上一些，如此往复。
 
-**步骤1** 直接枚举集合$\\{x_1,x_2,x_3,...\\}$所有的划分（注意：这里的划分是针对有标记的元素）
-
-[http://oeis.org/A000110](http://oeis.org/A000110){:target="_blank"}给出了元素个数和划分个数(Bell数)的值。
-
-每个划分对应于一个原问题的松驰问题
-
+**步骤1** 枚举集合$\\{x_1,x_2,x_3,...\\}$所有的划分，每个划分对应于一个原问题的松驰问题
 * 同一部分内的$x_i$相同
 * 不同部分的$x_i$没有限制
 
@@ -102,6 +109,8 @@ $$F(\text{PI})=\sum_{\text{partition} \le \text{PI}} E(\text{partition})$$
 
 $$E(\text{PI})=F(\text{PI})-\sum_{\text{partition} \le \text{PI} \text{ and } \text{partition} \ne \text{PI}}E(\text{partition})$$
 
+直接应用本算法比较慢，为了高效计算右边，我避免了重写后相同的方程的重复计算。
+
 问题Q的解法直接给出
 
 $$E(\text{PI})=\sum_{\text{partition} \le \text{PI}} \text{mobius}(\text{partition}, \text{PI}) F(\text{partition})$$
@@ -121,26 +130,26 @@ $$E(\text{PI})=\sum_{\text{partition} \le \text{PI}} \text{mobius}(\text{partiti
 
 根据Burnside引理，枚举$\text{child_count}!$个置换，计算在每个置换下不变的方法数，加起来后除以举$\text{child_count}!$。
 
-对于每个置换，只需要循环指标（cyclic index）就可以求该置换下不变的方法数。而不同的循环指标（也就是无标记划分），在不超过50个子树的情况下我们也可以枚举，参考[http://oeis.org/A000041](http://oeis.org/A000041){:target="_blank"}。而直接枚举置换需要$50!$的枚举量，大概是3.04e64。
+对于每个置换，只需要循环指标（cyclic index）就可以求该置换下不变的方法数。而不同的循环指标（也就是无标记划分），在不超过50个子树的情况下我们也可以不算太慢地枚举，参考[http://oeis.org/A000041](http://oeis.org/A000041){:target="_blank"}。而直接枚举所有置换需要$50!$的枚举量，大概是3.04e64。
 
 所以求解过程变成
 * 枚举循环指标
-* 对于每个循环指标求解，乘以对应的置换数
+* 对于每个循环指标求解后乘以对应的置换数
   * 和求问题Q步骤2中得到的的方程的解数一样。一个循环就是一个无标记划分中的一个部分。要求同一划分中的树同构和要求一个循环中的树同构是同一回事。
-  * 设循环指标是$\prod a_i^{b_i}$，也就是说长度为$a_i$的循环有$b_i$个，令$f(x)=\sum_{i < \text{child_count}}v[i] x^i$,  那么$\prod f(x_i^{a_i})^{b_i}$中$x^{\text{child_count}-1}$的系数表示结点数为$\text{child_count}-1$的森林的个数。
+  * 设循环指标是$\prod a_i^{b_i}$，也就是说长度为$a_i$的循环有$b_i$个，令$f(x)=\sum_{i < \text{node_count}}v[i] x^i$,  那么$\prod f(x_i^{a_i})^{b_i}$中$x^{\text{node_count}-1}$的系数表示在该循环指标对应的置换下不变，结点数为$\text{node_count}-1$，有$\text{child_count}$个子树的森林的个数。
 * 加起来除以$\text{child_count}!$。
 
 用$P_{t,i}$表示$t$个子树下的一个循环指标，令$g(P_{t,i}) = C(P_{t,i}) \prod f(x_i^{a_i})^{b_i}$，其中$C(P_{t,i}) = \frac{该循环指标对应的置换数}{t!}$。可以得到关于$f(x)$的方程
 
 $$f(x) = x + x \sum_{t,i} g(P_{t,i})$$
 
-其中求和前的$x$表示有根树和森林之间刚好相差一个点（参考：pe677 cz_xuyixuan的解法）。这个方程可以通过从小到大枚举$x$的指数求解。也就是说，将$f(x)=\sum_{i< \text{child_count}} v[i] x^i$，代入右边，取$x^{\text{child_count}}$的系数，得到$v[\text{child_count}]$。
+其中求和前的$x$表示有根树和森林之间刚好相差一个点。这个方程可以通过从小到大枚举$x$的指数求解。也就是说，将$f(x)=\sum_{i< \text{node_count}} v[i] x^i$，代入右边，取$x^{\text{node_count}}$的系数，得到$v[\text{node_count}]$。（参考：pe677 cz_xuyixuan的解法）
 
-而该方程右边可以利用FFT计算，单次计算一个$v[\text{child_count}]$的复杂度为$O(单次计算右边时多项式乘法的次数 * \text{child_count} * \log(\text{child_count}))$。用$\text{maxn}$表示需要计算的最大顶点数，$\text{child_count} < \text{maxn}$，由于方程只要前$O(\text{maxn})$项的值，所以整体复杂度是$O(单次计算右边时多项式乘法的次数 * \text{maxn}^2 * \log(\text{maxn}))$。
+而该方程右边可以利用FFT计算，单次计算一个$v[\text{node_count}]$的复杂度为$O(单次计算右边时多项式乘法的次数 * \text{node_count} * \log(\text{node_count}))$。用$\text{maxn}$表示需要计算的最大顶点数，$\text{node_count} \le \text{maxn}$，由于方程只要前$O(\text{maxn})$项的值，所以整体复杂度是$O(单次计算右边时多项式乘法的次数 * \text{maxn}^2 * \log(\text{maxn}))$。
 
-估计单次计算右边时多项式乘法的次数。对于固定的子树个数c，有$P(c)$个无标记划分，对于固定的划分，考虑$\prod f(x_i^{a_i})^{b_i}$，最多有$c^{\frac{1}{2}}$个i，每个$f(x_i^{a_i})^{b_i}$在求$b_i$次方时需要的乘法次数$\log(b_i) \le \log(c)$，所以上界为$P(c)(c^{\frac{1}{2}} + c^{\frac{1}{2}} \log(c))$。最后需要考虑$c$从$1$到$\text{maxc}$加起来，乘法的数量为$O(\text{maxc}^{\frac{3}{2}} P(\text{maxc}) \log(\text{maxc}))$。
+估计单次计算右边时多项式乘法的次数。对于固定的子树个数c，有$P(c)$个无标记划分。对于固定的划分，考虑$\prod f(x_i^{a_i})^{b_i}$，最多有$c^{\frac{1}{2}}$个i，每个$f(x_i^{a_i})^{b_i}$在求$b_i$次方时需要的乘法次数$\log(b_i) \le \log(c)$，所以上界为$P(c)(c^{\frac{1}{2}} + c^{\frac{1}{2}} \log(c))$。最后需要考虑$c$从$1$到$\text{maxc}$加起来，乘法的数量为$O(\text{maxc}^{\frac{3}{2}} P(\text{maxc}) \log(\text{maxc}))$。
 
-整体复杂度为$O(\text{maxc}^{\frac{3}{2}} P(\text{maxc}) \log(\text{maxc}) \text{maxn}^2 \log(\text{maxn}))$。考虑到maxc < maxn，
+整体复杂度为$O(\text{maxc}^{\frac{3}{2}} P(\text{maxc}) \log(\text{maxc}) \text{maxn}^2 \log(\text{maxn}))$。考虑到$\text{maxc} \le \text{maxn}$，
 得到$O(\text{maxn}^{\frac{7}{2}} P(\text{maxn}) \log^2(\text{maxn}))$。
 
 至此，基于思路1给出了两种算法。
@@ -165,7 +174,7 @@ $$f(x) = x + x \sum_{t,i} g(P_{t,i})$$
 
 * rc554 可以用思路1算法1.2，或思路2。
 * rc564 可以用思路2。
-* pe677 可以用思路1算法1.1，或思路1算法1.2，或思路2。
+* pe677 可以用思路1算法1.1，或思路1算法1.2，或思路2。我使用的是思路1算法1.1，其中手写了2到4个无标记元素的划分。
 
 
 **例子** 给定顶点个数，有多少不同的自由树，同构的自由树只计算一次。
