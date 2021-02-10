@@ -90,22 +90,20 @@ int64 dfs(int limit, int64 n, int64 val, int imp, int64 vmp, int emp) {
   return ret;
 }
 
-// 8 threads version.
-struct Solver : public MValueBaseTP<Solver, int64, 8> {
-  int64 batch(int64 /*n*/, int64 /*val*/, int /*imp*/, int64 /*vmp*/,
-              int /*emp*/, int64 /*now*/) {
+using RT = int64;
+struct Solver : public MValueBaseEx<Solver, int64, 8> {
+  RT Batch(int64 n, int64 val, int imp, int64 vmp, int emp, RT now, RT now1) {
     return 1;
   }
-  int64 each(int64 /*p*/, int /*e*/) { return 1; }
 };
 
 int main() {
-  pe().maxPrime(100000000).init();
+  PE_INIT(maxp = 100000000);
   for (int i = 5; i <= 16; ++i) {
     TimeRecorder tr;
-    int64 cnt = Solver().solve(power(10LL, i));
+    int64 cnt = Solver().Cal(Power(10LL, i));
     printf("1e%d\t%.2e\t%16I64d\t%s\n", i, 1. * cnt, cnt,
-           tr.elapsed().format().c_str());
+           tr.Elapsed().Format().c_str());
   }
   return 0;
 }
@@ -114,18 +112,18 @@ int main() {
 The outputs are
 
 ```cpp
-1e5     1.89e+03                    1894        0:00:00:00.008
+1e5     1.89e+03                    1894        0:00:00:00.000
 1e6     9.11e+03                    9108        0:00:00:00.000
 1e7     4.49e+04                   44948        0:00:00:00.000
 1e8     2.28e+05                  228102        0:00:00:00.000
 1e9     1.19e+06                 1185818        0:00:00:00.000
-1e10    6.30e+06                 6298637        0:00:00:00.009
-1e11    3.41e+07                34113193        0:00:00:00.059
-1e12    1.88e+08               188014195        0:00:00:00.358
-1e13    1.05e+09              1052806860        0:00:00:01.978
-1e14    5.98e+09              5981038282        0:00:00:10.413
-1e15    3.44e+10             34430179518        0:00:01:00.115
-1e16    2.01e+11            200620098564        0:00:05:50.010
+1e10    6.30e+06                 6298637        0:00:00:00.015
+1e11    3.41e+07                34113193        0:00:00:00.046
+1e12    1.88e+08               188014195        0:00:00:00.330
+1e13    1.05e+09              1052806860        0:00:00:01.607
+1e14    5.98e+09              5981038282        0:00:00:08.949
+1e15    3.44e+10             34430179518        0:00:00:51.227
+1e16    2.01e+11            200620098564        0:00:04:59.919
 ```
 
 
@@ -158,9 +156,9 @@ The existing algorithm is able to compute $\sum_{i=1}^n f(i)$  assuming $\sum_{p
 ```cpp
 #include <pe.hpp>
 
-struct Solver : public MValueBaseTP<Solver, int64, 8> {
-  int64 batch(int64 n, int64 val, int /*imp*/, int64 vmp, int /*emp*/,
-              int64 /*now*/) {
+struct Solver : public MValueBaseEx<Solver, int64, 8> {
+  int64 Batch(int64 n, int64 val, int /*imp*/, int64 vmp, int /*emp*/,
+              int64 /*now*/, int64 /*now1*/) {
     int64 t = 1;
     const int64 m = n / val;
     for (int64 i = vmp + 1; i <= m;) {
@@ -173,22 +171,22 @@ struct Solver : public MValueBaseTP<Solver, int64, 8> {
     // handle val * vmp * vmp if vmp > 1
     return t;
   }
-  int64 each(int64 /*p*/, int /*e*/) { return 1; }
+  int64 F(int64 /*p*/, int /*e*/) { return 1; }
 };
 
 int main() {
-  pe().maxPrime(100000000).init();
+  PE_INIT(maxp=100000000);
   for (int i = 5; i <= 12; ++i) {
     TimeRecorder tr;
-    int64 cnt = Solver().solve(power(10LL, i));
+    int64 cnt = Solver().Cal(Power(10LL, i));
     printf("1e%d\t%.2e\t%16I64d\t%s\n", i, 1. * cnt, cnt,
-           tr.elapsed().format().c_str());
+           tr.Elapsed().Format().c_str());
   }
   return 0;
 }
 ```
 
-the outpus are
+the outputs are
 
 ```cpp
 1e5     2.15e+04                   21454        0:00:00:00.000
@@ -196,9 +194,9 @@ the outpus are
 1e7     7.28e+05                  727870        0:00:00:00.015
 1e8     4.25e+06                 4246101        0:00:00:00.000
 1e9     2.49e+07                24926095        0:00:00:00.062
-1e10    1.47e+08               147470529        0:00:00:00.359
-1e11    8.80e+08               879838265        0:00:00:02.091
-1e12    5.29e+09              5294311815        0:00:00:12.168
+1e10    1.47e+08               147470529        0:00:00:00.350
+1e11    8.80e+08               879838265        0:00:00:02.071
+1e12    5.29e+09              5294311815        0:00:00:12.097
 ```
 
 # References
