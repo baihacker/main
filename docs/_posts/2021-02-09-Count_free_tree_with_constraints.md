@@ -28,9 +28,9 @@ categories: [math]
 于是问题转换为计算不同构的有根树的数目
 
 # 2. 计算不同构的有根树的数目
-令$v[i]$为大小为$i$时的不同构有根树的答案，那么$v[1] = 1$。通过已知的$i < \text{node_count}$时的$v[i]$，求$v[\text{node_count}]$。
+令$v[i]$为大小为$i$时的不同构有根树的数目，那么$v[1] = 1$。通过已知的$i < \text{node_count}$时的$v[i]$，求$v[\text{node_count}]$。
 
-**思路1** 适用于允许的子树个数不多的情况，可以枚举子树个数$\text{child_count}$，最后把每种情况的答案加起来，得到$v[\text{child_count}]$。给定子树的个数$\text{child_count}$，有两种算法解决该问题。
+**思路1** 适用于允许的子树个数不多的情况，可以枚举子树个数$\text{child_count}$，最后把每种情况的答案加起来，得到$v[\text{node_count}]$。给定子树的个数$\text{child_count}$，有两种算法解决该问题。
 
 **算法1.1** 考虑将$\text{child_count}$个子树划分（无标记元素的划分）为若干个部分，相同部分中子树同构，不同的部分间子树不同构。如果对单个的划分能够计算结果，那么直接枚举所有划分，把结果加起来即可。因为不同划分下的树，不可能同构。
 
@@ -174,20 +174,20 @@ $$f(x) = x + x \sum_{t,i} g(P_{t,i})$$
 
 ```cpp
 #include <pe.hpp>
- 
+
 // http://oeis.org/A000055
- 
+
 const int64 mod = 1000000007;
 const int maxn = 10000;
 using MT = NMod64<mod>;
- 
+
 const int64 inv2 = ModInv(2LL, mod);
- 
+
 MT dp[maxn + 1];
- 
+
 int64 invs[maxn + 1];
 MT pre[maxn + 1];
- 
+
 SL void update(int size, int n, MT val) {
   const int maxk = n / size;
   MT now = 1;
@@ -203,7 +203,7 @@ SL void update(int size, int n, MT val) {
       }
     }
 }
- 
+
 MT solve(int n) {
   memset(dp, 0, sizeof dp);
   dp[1] = 1;
@@ -216,7 +216,7 @@ MT solve(int n) {
   }
   return ans;
 }
- 
+
 int main() {
   InitInv(invs, maxn, mod);
   for (int i = 1; i <= 20; ++i) {
