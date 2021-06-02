@@ -61,14 +61,14 @@ For example, consider $H = \prod\limits_p(1 + \frac{h(p^s)}{p^s} + \frac{h_(p^{2
 ### Requirement of the remaining parts
 
 In the first formula
- * the values of $sg$ for all $\frac{n}{i}$ are expected to be calculated in a reasonable complexity.
+ * the values of $sg$ for all $\frac{n}{i}$ are expected to be calculated by a reasonable complexity.
 
 In the second formula: 
- * the values of $sg$ for all $\frac{n}{i} (i > 1)$ are expected to be calculated in a reasonable complexity. Note $sg(n)$ itself is the target result.
- * the values of $sf$ for all $\frac{n}{i}$ are expected to be calculated in a reasonable complexity. Note $sg(n)$ depends on $\frac{n}{i} (i > 1)$ we not only calculate $sf(n)$
+ * the values of $sg$ for all $\frac{n}{i} (i > 1)$ are expected to be calculated by a reasonable complexity. Note $sg(n)$ itself is the target result.
+ * the values of $sf$ for all $\frac{n}{i}$ are expected to be calculated by a reasonable complexity. Note $sg(n)$ depends on $\frac{n}{i} (i > 1)$ we not only calculate $sf(n)$
 
 ## **Partitioned** implementation
-If the values of $sh$ for all $\frac{n}{i}$ can be calculated in a reasonable complexity, we have the following codes to calculate $sf$ and $sg$ respectively
+If the values of $sh$ for all $\frac{n}{i}$ can be calculated by a reasonable complexity, we have the following codes to calculate $sf$ and $sg$ respectively
 
 ```cpp
 // Returns sf(n)
