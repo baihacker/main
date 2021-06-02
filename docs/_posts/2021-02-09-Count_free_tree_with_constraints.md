@@ -32,7 +32,7 @@ categories: [math]
 
 **思路1** 适用于允许的子树个数不多的情况，可以枚举子树个数$\text{child_count}$，最后把每种情况的答案加起来，得到$v[\text{node_count}]$。给定子树的个数$\text{child_count}$，有两种算法解决该问题。
 
-为表述方便，这里先定义一个一些记号
+为表述方便，这里先定义一些记号
 
 **有标记的元素的划分** 给定一个集合$S=\\{x_1,x_2,x_3...\\}$，我们称$p=\\{\text{part}_1,\text{part}_2,\text{part}_3,...\\}$是$S$的一个划分当且仅当：$\text{part}_i$是$S$的非空子集，$\text{part}_i$两两不相交，$\text{part}_i$的并是$S$。定义$Q_p(c) = \| \\{ \text{part}_i \text{ where } \|\text{part}_i\| =c \\} \|$。对划分的计数参考[http://oeis.org/A000110](http://oeis.org/A000110){:target="_blank"}。
 
