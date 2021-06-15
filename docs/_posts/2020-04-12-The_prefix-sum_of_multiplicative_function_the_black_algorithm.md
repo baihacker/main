@@ -21,7 +21,7 @@ $$
 sf(n)=\sum_{\begin{array}{c}x \le n \\ \text{max prime factor of x} \le n^{\frac{1}{2}}\end{array}} f(x) \left (1 + \sum_{n^{\frac{1}{2}} < \text{prime p} \le \frac{n}{x}} g(p)\right)
 $$
 
-an algorithm of space complexity $O(n^{\frac{1}{2}})$ time complexity $O(n^{\frac{3}{4}})$ ($\log{n}$ is ignored) is developed.
+an algorithm of space complexity $O(n^{\frac{1}{2}})$ time complexity $\tilde{\cal O}(n^{\frac{3}{4}})$ ($\log{n}$ is ignored) is developed.
 
 # Min_25 sieve [3]
 Similar to [1] 6.5.4, mentioned by [2] 2.2, [3], this method defines
@@ -38,7 +38,7 @@ $$
 
 $p_k$ is the $k_{th}$ prime and $h$ is the prefix-sum of $f$ defined on prime numbers.
 
-According to [4], an improved version reduces the time complexity to $O(n^{\frac{2}{3}})$.
+According to [4], an improved version reduces the time complexity to $\tilde{\cal O}(n^{\frac{2}{3}})$.
 
 # The memorized implementation
 If an implementation remembers all used $g_{p_k}(n)$, similar to [1] 6.5.4, we have **formula M**,
@@ -52,7 +52,7 @@ We can also call it dp-like implementation. The space and time complexity is the
 ## Proof
 The number of states is given by $\sum_{i\text{ is prime}}(\frac{n}{i})^{\frac{1}{2}}$. Based on integration, $O\left(\int_{1}^{n^{\frac{1}{2}}}(\frac{n}{x})^{\frac{1}{2}}dx\right) = O(n^{\frac{3}{4}})$.
 
-The number of state transitions is given by $\sum_{i\text{ is prime}}(\frac{n}{i^j})^{\frac{1}{2}}$ and bounded by$\sum_{i\text{ is prime}}\log_i(\frac{n}{i})(\frac{n}{i})^{\frac{1}{2}}$. Based on integration, $O\left(\int_{1}^{n^{\frac{1}{2}}}\log(\frac{n}{x})(\frac{n}{x})^{\frac{1}{2}}dx\right) = O(n^{\frac{3}{4}})$. ($\log(n)$ is ignored)
+The number of state transitions is given by $\sum_{i\text{ is prime}}(\frac{n}{i^j})^{\frac{1}{2}}$ and bounded by$\sum_{i\text{ is prime}}\log_i(\frac{n}{i})(\frac{n}{i})^{\frac{1}{2}}$. Based on integration, $O\left(\int_{1}^{n^{\frac{1}{2}}}\log(\frac{n}{x})(\frac{n}{x})^{\frac{1}{2}}dx\right) = \tilde{\cal O}(n^{\frac{3}{4}})$.
 
 The space complexity is $O(n^{\frac{1}{2}})$, we can either use two-buffer trick or update inplace while taking care of the updating order.
 
@@ -136,8 +136,8 @@ In [pe_algo](https://github.com/baihacker/pe/blob/master/pe_algo){:target="_blan
 
 ## Optimize $h$ part
 Let $h(n)$ be the number of primes no more than $n$, in [pe_algo](https://github.com/baihacker/pe/blob/master/pe_algo){:target="_blank"}
-* **prime_s0** is the basic implementation, and the complexity is expected to be $O(n^{\frac{3}{4}})$
-* **prime_s0_ex** uses binary indexed tree to optimize it, and I guess the complexity is $O(n^{\frac{2}{3}})$
+* **prime_s0** is the basic implementation, and the complexity is expected to be $\tilde{\cal O}(n^{\frac{3}{4}})$
+* **prime_s0_ex** uses binary indexed tree to optimize it, and I guess the complexity is $\tilde{\cal O}(n^{\frac{2}{3}})$
 * **prime_s0_parallel** uses multi-threads to optimize it, and we need to choose a proper thread number and find a strategy about when to parallelize it.
 
 # Conclusion
