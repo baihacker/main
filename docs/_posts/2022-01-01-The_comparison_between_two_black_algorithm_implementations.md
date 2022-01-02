@@ -17,8 +17,8 @@ categories: [math]
 *[prerequisites] The prefix-sum of multiplicative function: the black algorithm"*
 
 In order to enumerate $\text{class}_t$ where $t=\prod p_i^{r_i}$, we can build $t$ by iterating primes. There are two typical ways
-* **Descending** Iterate the primes by the descending order.
 * **Ascending** Iterate the primes by the ascending order.
+* **Descending** Iterate the primes by the descending order.
 
 The intuition is that these two implementation should have similar performance since both visit the same set of $\text{t}$. However, that's not true.
 
