@@ -297,4 +297,23 @@ OK, the **Ascending** implementation is still slow because of the number of 'div
 # Risk of optimization
 It matters to reduce the number of 'divide' operation here. But the caveat is the $p^2$ has potential overflow risk. In this example, let's say $n=p^2$ where $p=4294967291=2^{32}-5$ is the largest prime no more than $2^{32}$. Because $\frac{n}{p^2}=1$, when it checks the next prime $4294967311=2^{32}+15$, $p^2$ will result in overflow. Fortunately, the original version "n / p / p" which execute 'divide' operation twice doesn't have this issue.
 
+# Consider parallelization
+The [pe](https://github.com/baihacker/pe) has parallelization implementations. [This](https://github.com/baihacker/pe/blob/master/example/multiplicative_function_prefix_sum_mavlue_base_ex_perf.c) compares the performance of parallelization implementations. Here are a portion of the outputs.
+
+use "n / p / next_vmp" and "n / p / p"
+```
+n = 1000000000000
+0:00:00:00.606
+0:00:00:03.974
+```
+
+Use "n / (p * next_vmp)" and "n / (p * p)"
+```cpp
+n = 1000000000000
+0:00:00:00.488
+0:00:00:02.439
+```
+
+The time corresponds to the parallelized **Descending** and the second time corresponds the parallelized **Ascending**. The time ratio is about 5 to 6. It means, the **Ascending** implemenation is not friendly to parallelization.
+
 {% include mathjax.html %}
