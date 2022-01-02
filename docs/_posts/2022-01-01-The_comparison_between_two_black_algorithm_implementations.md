@@ -292,7 +292,7 @@ The outputs are
 
 OK, the **Ascending** implementation is still slow because of the number of 'divide' operations
 * $\frac{184400681}{98646232}\approx1.869313$
-* $\frac{2.217000}{1.146000}\approx1.928384$
+* $\frac{2.208000}{1.145000}\approx1.928384$
 
 # Risk of optimization
 It matters to reduce the number of 'divide' operation here. But the caveat is the $p^2$ has potential overflow risk. In this example, let's say $n=p^2$ where $p=4294967291=2^{32}-5$ is the largest prime no more than $2^{32}$. Because $\frac{n}{p^2}=1$, when it checks the next prime $4294967311=2^{32}+15$, $p^2$ will result in overflow. Fortunately, the original version "n / p / p" which execute 'divide' operation twice doesn't have this issue.
