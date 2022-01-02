@@ -39,9 +39,9 @@ int64 cal(int64 i, int64 n) {
 This method can be viewed as $\sum_{p \text{ is powerful or 1}}h(p)sg(\frac{n}{p})$ and that’s why we call it powerful number sieving.
 
 # Find f and g
-To find multiplicative function $h,g$, consider their definitions on $p^k$ (p is prime) we have $f(p^k) = \sum\limits_{i=0}^{k}h(p^i)g(p^{k-i})$. 
+To find multiplicative function $h,g$, consider their definitions on $p^k$ (p is prime) we have $f(p^k) = \sum\limits_{i=0}^{k}h(p^i)g(p^{k-i})$.
 Then, we have the way to
-* Find $g$ 
+* Find $g$
   * We can start from $f(p) = g(p)$.
 * Find $h$
   * In the method, we skip $p^2$, to make sure it is correct, we add a forced constraints $h(p)=0$.
@@ -59,7 +59,7 @@ So, if we want to make use of this method, another constraint on $g$ is that we 
 *Note: we assume that $h(p^k)$ can be computed in a reasonable complexity.*
 
 # Further thoughts
-## Reach n^(⅓) 
+## Reach n^(⅓)
 If we have $h(p)=h(p^2)=0$, we may have an algorithm of complexity around $n^{\frac{1}{3}}$. But meanwhile, another constraint is added on $g$, $f(p^2)=g(p^2)$. The challenges are
 * Can we find it?
 * Can we compute sg in a reasonable complexity.

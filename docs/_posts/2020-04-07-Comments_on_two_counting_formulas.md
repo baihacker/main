@@ -42,7 +42,7 @@ where $d_n$ is the number of cards in the $n_{th}$ deck ($n \ge 1$).
 
 The **deck** can be viewed as standard **structure pattern** and **hand** can be viewed as the **target with structure pattern**. These two theorems tell us how to compute the hand if the deck enumerator is known. Moreover, inside the target, 3.4.1 is for the target whose element has labels while 3.14.1 is for the target whose element doesn’t have labels.
 
-## Labeled ball unlabeled box 
+## Labeled ball unlabeled box
 Based on theorem 3.4.1, the generating function is
 
 $$
@@ -57,7 +57,7 @@ $$
 
 See [Stirling_numbers_of_the_second_kind](https://en.wikipedia.org/wiki/Stirling_numbers_of_the_second_kind#Generating_functions){:target="_blank"}.
 
-## Unlabeled ball unlabeled box 
+## Unlabeled ball unlabeled box
 Based on theorem 3.14.1, the generating function is
 
 $$
@@ -75,7 +75,7 @@ See [Partition_function_(number_theory)](https://en.wikipedia.org/wiki/Partition
 # Consider labeled boxes
 Actually, the two formulas are applied to the problems where the boxes are not labeled. In another word, the sub-structures of the target don't have labels. So what’s the formula? The answer is simpler.
 
-## Labeled ball labeled box 
+## Labeled ball labeled box
 **Theorem 3.4.1’.**
 
 $$
@@ -90,20 +90,20 @@ $$
 \mathcal{H}(x,y) = \sum_{i=0}^{\infty}(y\sum_{j=0}^{\infty}\frac{x^j}{j!})^{i}=\sum_{i=0}^{\infty}e^{ix}y^i
 $$
 
-And if there are n balls m boxes, the answer is 
+And if there are n balls m boxes, the answer is
 
 $$
 \left [ \frac{x^n}{n!}y^m\right ]\left \{ \mathcal{H}(x,y) \right \}=m^n
 $$
 
-## Unlabeled ball labeled box 
+## Unlabeled ball labeled box
 **Theorem 3.14.1’.**
 
 $\mathcal{H}(x,y) = \sum_{i=0}^{\infty}(y\mathcal{D}(x))^i$
 
 *H,D are normal generating function*
 
-So, for this problem we have 
+So, for this problem we have
 
 $$
 \mathcal{H}(x,y) = \sum_{i=0}^{\infty}(y\sum_{j=0}^{\infty}x^j)^{i}=\sum_{i=0}^{\infty}(\frac{y}{1-x})^{i}
