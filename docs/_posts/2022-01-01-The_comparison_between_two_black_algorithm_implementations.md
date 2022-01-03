@@ -294,7 +294,7 @@ OK, the **Ascending** implementation is still slow because of the number of 'div
 * $\frac{184400681}{98646232}\approx1.869313$
 * $\frac{2.208000}{1.145000}\approx1.928384$
 
-Meanwhile, these optimizations are also applied to the ntt implementation of [pe](https://github.com/baihacker/pe){:target="_blank"}. The test results can be found [here](https://github.com/baihacker/pe/blob/master/benchmarks/perf_test_result.txt) (before optimization: test_id = 0, after optimization: test_id = 1). The average time is reduced $30.85\%$ from 58.664s to 40.567s.
+Meanwhile, these optimizations are also applied to the ntt implementation of [pe](https://github.com/baihacker/pe){:target="_blank"}. The test results can be found [here](https://github.com/baihacker/pe/blob/master/benchmarks/perf_test_result.txt){:target="_blank"} (before optimization: test_id = 0, after optimization: test_id = 1). The average time is reduced $30.85\%$ from 58.664s to 40.567s.
 
 # Risk of optimization
 It matters to reduce the number of 'divide' operation here. But the caveat is the $p^2$ has potential overflow risk. In this example, let's say $n=p^2$ where $p=4294967291=2^{32}-5$ is the largest prime no more than $2^{32}$. Because $\frac{n}{p^2}=1$, when it checks the next prime $4294967311=2^{32}+15$, $p^2$ will result in overflow. Fortunately, the original version "n / p / p" which execute 'divide' operation twice doesn't have this issue.
