@@ -14,7 +14,7 @@ categories: [math]
 2022.01.01
 {: style="text-align: center;"}
 
-*[prerequisites] The prefix-sum of multiplicative function: the black algorithm"*
+*[prerequisites] The prefix-sum of multiplicative function: the black algorithm*
 
 In order to enumerate $\text{class}_t$ where $t=\prod p_i^{r_i}$, we can build $t$ by iterating primes. There are two typical ways
 * **Ascending** Iterate the primes by the ascending order.
