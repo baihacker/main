@@ -69,7 +69,7 @@ Note 1: $$m=xy$$ because $$x\mid m, y\mid m, \gcd(x,y)=1, m\mid xy$$.
 
 Note 2: The number of $$(x,y)$$ pairs can be reduced by applying the constraints $$\gcd(x,y)=1$$.
 
-Then, apply PIE 3 times to the above formula to find a possible solution but the complexity is still not reasonable.
+Then, apply PIE 3 times to the above formula to find a possible solution but the complexity is still not ideal.
 
 Another observation is $$\gcd(\frac{i}{x},y)=1$$ and $$\gcd(\frac{j}{y},x)=1$$ must be true if $$\gcd(i,j)=1$$, so we have **Formula 4**
 
