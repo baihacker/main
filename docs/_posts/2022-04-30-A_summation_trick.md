@@ -90,7 +90,7 @@ $$
 
 It looks as if we rewrite $$[m\mid\operatorname{lcm}(i,j)]$$ as $$[m\mid i\cdot j]$$ so they are equivalent. This is wrong: let $$m=20, i=2, j=10$$, then $$m \not\mid \operatorname{lcm}(i,j)=10$$ but $$m \mid i\cdot j=20$$.
 
-Verification
+Validation
 ==
 Let's choose $$f(i,j)=i^2j$$.
 
