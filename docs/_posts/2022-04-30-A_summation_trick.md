@@ -92,7 +92,7 @@ It looks as if we rewrite $$[m\mid\operatorname{lcm}(i,j)]$$ as $$[m\mid i\cdot 
 
 Validation
 ==
-Let's choose $$f(i,j)=i^2j$$.
+Let's choose $$f(i,j)=i^2j,f(i,j)=\lfloor\frac{i^2}{j}\rfloor,f(i,j)=i\bmod j$$.
 
 ```cpp
 #include <pe.hpp>
@@ -101,12 +101,14 @@ using namespace std;
 
 const int m = 24;
 
+std::function<int64(int64, int64)> F;
+
 int64 Formula0(int n) {
   int64 ret = 0;
   for (int i = 1; i <= n; ++i)
     for (int j = 1; j <= n; ++j)
       if (Lcm(i, j) % m == 0 && Gcd(i, j) == 1) {
-        ret += i * i * j;
+        ret += F(i, j);
       }
   return ret;
 }
@@ -120,7 +122,7 @@ int64 Formula1(int n) {
     for (int i = d; i <= n; i += d)
       for (int j = d; j <= n; j += d) {
         if (Lcm(i, j) % m == 0) {
-          tmp += i * i * j;
+          tmp += F(i, j);
         }
       }
     ret += c * tmp;
@@ -137,7 +139,7 @@ int64 Formula2(int n) {
     for (int i = d; i <= n; i += d)
       for (int j = d; j <= n; j += d) {
         if (i * j % m == 0) {
-          tmp += i * i * j;
+          tmp += F(i, j);
         }
       }
     ret += c * tmp;
@@ -150,6 +152,7 @@ int64 Formula3(int n) {
   for (int d = 1; d <= n; ++d) {
     int c = CalMu(d);
     if (c == 0) continue;
+    int64 tmp = 0;
     for (int x : GetFactors(m)) {
       int y = m / x;
       // The same result if the following check is enabled.
@@ -158,10 +161,11 @@ int64 Formula3(int n) {
       for (int i = d; i <= n; i += d)
         for (int j = d; j <= n; j += d) {
           if (i % x == 0 && Gcd(i, y) == 1 && j % y == 0 && Gcd(j, x) == 1) {
-            ret += c * i * i * j;
+            tmp += F(i, j);
           }
         }
     }
+    ret += c * tmp;
   }
   return ret;
 }
@@ -180,7 +184,7 @@ int64 Formula4(int n) {
       for (int i = d; i <= n; i += d)
         for (int j = d; j <= n; j += d) {
           if (i % x == 0 && j % y == 0) {
-            tmp += i * i * j;
+            tmp += F(i, j);
           }
         }
     }
@@ -191,12 +195,21 @@ int64 Formula4(int n) {
 
 int main() {
   PE_INIT(maxp = 100000, cal_mu = 1);
+  std::vector<std::function<int64(int64)>> formulas{
+      Formula0, Formula1, Formula2, Formula3, Formula4};
+  std::vector<std::function<int64(int64, int64)>> fs = {
+      [](int64 i, int64 j) { return i * i * j; },
+      [](int64 i, int64 j) { return i * i / j; },
+      [](int64 i, int64 j) { return i % j; },
+  };
+
   const int n = 300;
-  cout << Formula0(n) << endl;
-  cout << Formula1(n) << endl;
-  cout << Formula2(n) << endl;
-  cout << Formula3(n) << endl;
-  cout << Formula4(n) << endl;
+  for (auto f : fs) {
+    ::F = f;
+    for (auto formula : formulas) {
+      cout << formula(n) << endl;
+    }
+  }
   return 0;
 }
 ```
@@ -208,5 +221,15 @@ Outputs
 20666222352
 20666222352
 20666222352
+2520569
+2520569
+2520569
+2520569
+2520569
+311550
+311550
+311550
+311550
+311550
 ```
 {% include mathjax.html %}
