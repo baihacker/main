@@ -59,9 +59,9 @@ S
 &=&
 \sum\limits_{1\le i,j \le n}[\gcd(i,j)=1][\gcd(i,m)=x][\gcd(j,m)=y][m=xy]f(i,j)\\
 &=&
-\sum\limits_{1\le i,j \le n,m=xy}[\gcd(i,j)=1][\gcd(i,m)=x][\gcd(j,m)=y]f(i,j)\\
+\sum\limits_{1\le i,j \le n,xy=m}[\gcd(i,j)=1][\gcd(i,m)=x][\gcd(j,m)=y]f(i,j)\\
 &=&
-\sum\limits_{1\le i,j \le n,m=xy}[\gcd(i,j)=1][\gcd(\frac{i}{x},y)=1][\gcd(\frac{j}{y},x)=1]f(i,j)\\
+\sum\limits_{1\le i,j \le n,xy=m}[\gcd(i,j)=1][\gcd(\frac{i}{x},y)=1][\gcd(\frac{j}{y},x)=1]f(i,j)\\
 \end{array}
 $$
 
@@ -74,7 +74,7 @@ Then, apply PIE 3 times to the above formula to find a possible solution but the
 Another observation is $$\gcd(\frac{i}{x},y)=1$$ and $$\gcd(\frac{j}{y},x)=1$$ must be true if $$\gcd(i,j)=1$$, so we have **Formula 4**
 
 $$
-\sum\limits_{1\le i,j \le n,m=xy}[\gcd(i,j)=1][x\mid i][y\mid j]f(i,j)
+\sum\limits_{1\le i,j \le n,xy=m}[\gcd(i,j)=1][x\mid i][y\mid j]f(i,j)
 $$
 
 The illusion
