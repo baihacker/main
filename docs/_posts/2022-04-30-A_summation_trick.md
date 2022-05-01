@@ -157,7 +157,8 @@ int64 Formula3(int n) {
       int y = m / x;
       // The same result if the following check is enabled.
       // if (Gcd(x, y) != 1) continue;
-      // Note: the complexity can be reduced from O((n/d)^2) to O(n/d).
+      // Note: the complexity can be reduced from O((n/d)^2) to O(n/d) if
+      // F(i,j)=F1(i)*F2(j)
       for (int i = d; i <= n; i += d)
         for (int j = d; j <= n; j += d) {
           if (i % x == 0 && Gcd(i, y) == 1 && j % y == 0 && Gcd(j, x) == 1) {
@@ -180,7 +181,8 @@ int64 Formula4(int n) {
       int y = m / x;
       // The same result if the following check is enabled.
       // if (Gcd(x, y) != 1) continue;
-      // Note: the complexity can be reduced from O((n/d)^2) to O(n/d).
+      // Note: the complexity can be reduced from O((n/d)^2) to O(n/d) if
+      // F(i,j)=F1(i)*F2(j)
       for (int i = d; i <= n; i += d)
         for (int j = d; j <= n; j += d) {
           if (i % x == 0 && j % y == 0) {
