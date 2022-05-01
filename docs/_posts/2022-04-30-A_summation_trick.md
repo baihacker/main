@@ -35,7 +35,7 @@ S
 \end{array}
 $$
 
-This is not easy to solve because of $$[m\mid\operatorname{lcm}(i,j)]$$. The root cause is that the PIE is applied to an expression which can be further simplified. Let's transform the formula before applying PIE to it, then **Formula 2** is derived.
+This is not easy to solve because of $$[m\mid\operatorname{lcm}(i,j)]$$. The root cause is that the PIE is applied to an expression which can be further simplified. Let's transform the expression before applying PIE to it, then **Formula 2** is derived.
 
 $$
 \begin{array}{lll}
