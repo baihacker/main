@@ -47,7 +47,7 @@ S
 \end{array}
 $$
 
-The latest formula is still not easy to evaluate efficiently. Consider more transformation, **Formula 3** is derived
+The latest formula is still not easy to evaluate efficiently. Consider more transformations, **Formula 3** is derived
 
 $$
 \begin{array}{lll}
