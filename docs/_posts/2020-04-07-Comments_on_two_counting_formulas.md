@@ -118,13 +118,23 @@ $$
 See [Number_of_combinations_with_repetition](https://en.wikipedia.org/wiki/Combination#Number_of_combinations_with_repetition#Number_of_combinations_with_repetition){:target="_blank"}
 
 # A trick of theorem 3.14.1.
-Since $F(x)=\prod \frac{1}{(1-x^k)^{g(k)}}$, we have
+Since $F(x)=\prod \frac{1}{(1-h(k)x^k)^{g(k)}}$, we have
 
 $$
-\log(F(x))=\sum g(k)\log(\frac{1}{1-x^k})=\sum g(k)\sum\frac{x^{km}}{m}=\sum\frac{1}{m}G(x^m)
+\begin{alignat}{2}
+\log(F(x))&=\sum g(k)\log(\frac{1}{1-h(k)x^k})\\
+&=\sum g(k)\sum\frac{h^m(k)x^{km}}{m}\\
+&=\sum\frac{1}{m}\sum g(k)h^m(k)x^{km}\\
+\end{alignat}
 $$
 
-then
+If $h(k)=1$, we have
+
+$$
+\log(F(x))=\sum\frac{1}{m}G(x^m)
+$$
+
+which means
 
 $$
 F(x)=\exp^{\sum\frac{1}{k}G(x^k)}
