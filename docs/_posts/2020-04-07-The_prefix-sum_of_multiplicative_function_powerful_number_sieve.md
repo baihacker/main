@@ -24,28 +24,28 @@ int64 cal(int64 i, int64 n) {
   for (int j = 0; j < i; ++j) {
     int64 p = plist[j], m = n / p / p;
     if (m == 0) break;
-    for (int k = 2; m >= 1; ++k, m /= p) if (h(k) != 0) {
-      ret += h(k) * cal(j, m);
+    for (int e = 2; m >= 1; ++e, m /= p) {
+      ret += h(p, e) * cal(j, m);
     }
   }
   return ret;
 }
 ```
 
-* The definition of f and g will be discussed in a later section.
+* The definitions of f, g and h will be discussed in a later section.
 * sg is the prefix-sum of g.
 * plist[i] is the $i_{th}$ prime (index starts from 0).
 
 This method can be viewed as $\sum_{p \text{ is powerful or 1}}h(p)sg(\frac{n}{p})$ and that’s why we call it powerful number sieving.
 
-# Find f and g
-To find multiplicative function $h,g$, consider their definitions on $p^k$ (p is prime) we have $f(p^k) = \sum\limits_{i=0}^{k}h(p^i)g(p^{k-i})$.
+# Find g and h
+To find multiplicative function $h,g$, consider their definitions on $p^e$ (p is prime) we have $f(p^e) = \sum\limits_{i=0}^{e}h(p^i)g(p^{e-i})$.
 Then, we have the way to
 * Find $g$
   * We can start from $f(p) = g(p)$.
 * Find $h$
   * In the method, we skip $p^2$, to make sure it is correct, we add a forced constraints $h(p)=0$.
-  * For $k \ge 2$, we can get the value of $h(p^k)$ by solving an equation since $g$ is found and $h(p^i)$ is known for $i < k$.
+  * For $e \ge 2$, we can get the value of $h(p^e)$ by solving an equation since $g$ is found and $h(p^i)$ is known for $i < e$.
 
 # Complexity
 By the view of powerful number sieving, since a powerful number can be represented as $a^3b^2$, it is easy to see the complexity is $\iint_{x,y}O_{sg}(\frac{n}{x^3y^2})dx\,dy$, so the complexity is
