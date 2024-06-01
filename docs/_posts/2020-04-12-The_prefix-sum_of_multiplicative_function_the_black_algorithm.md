@@ -204,8 +204,8 @@ time usage: 0:00:00:15.813
 ```
 
 # References
-1. Zhizhou Ren, 2016, Some methods to compute the prefix-sum of multiplicative function
-2. Zhengting Zhu, 2018, Some special arithmetic function summation problems
+1. Zhizhou Ren, 2016, [Some methods to compute the prefix-sum of multiplicative function](https://github.com/enkerewpo/OI-Public-Library/blob/master/IOI%E4%B8%AD%E5%9B%BD%E5%9B%BD%E5%AE%B6%E5%80%99%E9%80%89%E9%98%9F%E8%AE%BA%E6%96%87/%E5%9B%BD%E5%AE%B6%E9%9B%86%E8%AE%AD%E9%98%9F2016%E8%AE%BA%E6%96%87%E9%9B%86.pdf){:target="_blank"} (chinese content), page 1 to page 16
+2. Zhengting Zhu, 2018, [Some special arithmetic function summation problems](https://github.com/enkerewpo/OI-Public-Library/blob/master/IOI%E4%B8%AD%E5%9B%BD%E5%9B%BD%E5%AE%B6%E5%80%99%E9%80%89%E9%98%9F%E8%AE%BA%E6%96%87/%E5%9B%BD%E5%AE%B6%E9%9B%86%E8%AE%AD%E9%98%9F2018%E8%AE%BA%E6%96%87%E9%9B%86.pdf){:target="_blank"} (chinese content), page 92 to page 112
 3. [**Min_25 sieve**](https://oi-wiki.org/math/min-25/){:target="_blank"} (chinese content)
 4. Min_25, 2018.11.11 [**Sum of Multiplicative Function**](https://min-25.hatenablog.com/entry/2018/11/11/172216)
 5. dengtesla, 2019, [**Detail explanning of the new Min_25 sieve $O(n^{\frac{2}{3}})$**](https://zhuanlan.zhihu.com/p/60378354){:target="_blank"} (chinese content)
