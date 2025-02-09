@@ -112,23 +112,28 @@ While redeclaring static members **outside the class is still possible**, it is 
 ```cpp
 // header file
 class A {
-    inline static const Type a = initial_value;
-    inline static constexpr Type b = initial_value;
-    inline static Type c = initial_value;
+  inline static const Type a = initial_value;
+  inline static constexpr Type b = initial_value;
+  inline static Type c = initial_value;
+  inline static Type d;
 };
 
 // cpp file (redundant but valid)
-const Type A::a = initial_value; // ✅ Allowed but redundant
-// const Type A::a = different_initial_value; // ❌ Error: different initial_value
-// const Type A::a; // ❌ Error: missing initializer
 
-constexpr Type A::b = initial_value; // ✅ Allowed but redundant
-// constexpr Type A::b = different_initial_value; // ❌ Error: different initial_value
-// constexpr Type A::b; // ❌ Error: missing initializer
+// const Type A::a = initial_value; // ❌ Error: duplicate initialization, redefinition
+// const Type A::a = different_initial_value; // ❌ Error: duplicate initialization, redefinition
+// const Type A::a; // ❌ Error: redefinition
 
-Type A::c = initial_value; // ✅ Allowed but redundant
-// Type A::c = different_initial_value; // ❌ Error: different initial_value
-// Type A::c; // ❌ Error: missing initializer
+// constexpr Type A::b = initial_value; // ❌ Error:duplicate initialization
+// constexpr Type A::b = different_initial_value; // ❌ Error:duplicate initialization
+constexpr Type A::b; // ✅ Allowed but redundant
+
+// Type A::c = initial_value; // ❌ Error: duplicate initialization, redefinition
+// Type A::c = different_initial_value; // ❌ Error: duplicate initialization, redefinition
+// Type A::c; // ❌ Error: redefinition
+
+// Type A::d;// ❌ Error: redefinition
+// Type A::d = 1; // ❌ Error: redefinition
 
 ```
 
