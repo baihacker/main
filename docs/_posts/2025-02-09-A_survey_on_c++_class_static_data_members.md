@@ -74,6 +74,7 @@ const IntegralType A::b = initial_value; // ❌ Not allowed in C++03
 - **Template parameters**
 
 ```cpp
+// header file
 class A {
   static const Type a = initial_value;
   static constexpr Type b = initial_value;
@@ -102,20 +103,6 @@ C++17 introduced **inline static variables**, which greatly simplify static data
 
 - **No longer required to be const integral types**.
 - **No longer need to worry about ODR-use** (One Definition Rule use).
-
-### **Example: Inline Static Variable in C++17**
-
-```cpp
-struct A {
-    inline static Type a = initial_value;  // Defined in the class
-    inline static const Type b = initial_value;  // Defined in the class
-    inline static constexpr Type c = initial_value;  // Defined in the class
-};
-```
-
-### **Optional External Redeclaration**
-
-This redeclaration without an initializer is permitted for constexpr, but it is deprecated.
 
 ```cpp
 // header file
