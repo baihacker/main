@@ -85,14 +85,14 @@ class A {
 
 // const Type A::a = initial_value; // ❌ Error: duplicate initialization
 // const Type A::a = different_initial_value; // ❌ Error: duplicate initialization
-const Type A::a;  // ✅
+const Type A::a;  // ✅ Reauired if ODR-used
 
 // constexpr Type A::b = initial_value; // ❌ Error: duplicate initialization
 // constexpr Type A::b = different_initial_value; // ❌ Error: duplicate initialization
-constexpr Type A::b;  // ✅
+constexpr Type A::b;  // ✅ Reauired if ODR-used
 
-Type A::d;      // ✅
-Type A::d = 1;  // ✅
+Type A::d;      // ✅ Required if used
+Type A::d = 1;  // ✅ Required if used
 ```
 
 ---
