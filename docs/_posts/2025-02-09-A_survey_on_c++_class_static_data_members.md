@@ -68,23 +68,33 @@ const IntegralType A::b = initial_value; // ❌ Not allowed in C++03
 
 ## **Changes in C++11**
 
-Starting from **C++11**, the above restriction was lifted, and the following code became valid:
-
-```cpp
-// header file
-class A {
-    static const IntegralType b = initial_value;
-};
-
-// cpp file
-// The two initial_value must be the same.
-const IntegralType A::b = initial_value; // ✅ Allowed in C++11
-```
-
-Additionally, **C++11 introduced `constexpr`**, which has stricter requirements on initialization. Unlike `const`, `constexpr` variables can be used in **constant expressions**, making them useful for:
+**C++11 introduced `constexpr`**, which has stricter requirements on initialization. Unlike `const`, `constexpr` variables can be used in **constant expressions**, making them useful for:
 - **Array sizes**
 - **`switch` conditions**
 - **Template parameters**
+
+```cpp
+constexpr int initial_value = 1;
+constexpr int different_initial_value = 2;
+class A {
+  static const Type a = initial_value;
+  static constexpr Type b = initial_value;
+  static Type d;
+};
+
+// cpp file
+
+// const Type A::a = initial_value; // ❌ Error: duplicate initialization
+// const Type A::a = different_initial_value; // ❌ Error: duplicate initialization
+const Type A::a;  // ✅
+
+// constexpr Type A::b = initial_value; // ❌ Error: duplicate initialization
+// constexpr Type A::b = different_initial_value; // ❌ Error: duplicate initialization
+constexpr Type A::b;  // ✅
+
+Type A::d;      // ✅
+Type A::d = 1;  // ✅
+```
 
 ---
 
