@@ -74,8 +74,6 @@ const IntegralType A::b = initial_value; // ❌ Not allowed in C++03
 - **Template parameters**
 
 ```cpp
-constexpr int initial_value = 1;
-constexpr int different_initial_value = 2;
 class A {
   static const Type a = initial_value;
   static constexpr Type b = initial_value;
