@@ -107,7 +107,7 @@ struct A {
 
 ### **Optional External Redeclaration**
 
-While redeclaring static members **outside the class is still possible**, it is **not required**. If you do redeclare it, the **initializer must match** the one in the class:
+This redeclaration without an initializer is permitted for constexpr, but it is deprecated.
 
 ```cpp
 // header file
@@ -132,7 +132,7 @@ constexpr Type A::b; // ✅ Allowed but redundant
 // Type A::c = different_initial_value; // ❌ Error: duplicate initialization, redefinition
 // Type A::c; // ❌ Error: redefinition
 
-// Type A::d;// ❌ Error: redefinition
+// Type A::d; // ❌ Error: redefinition
 // Type A::d = 1; // ❌ Error: redefinition
 
 ```
