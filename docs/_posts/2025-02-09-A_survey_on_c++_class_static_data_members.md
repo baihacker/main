@@ -79,13 +79,16 @@ Test for integral types.
 using IntegralType = int;
 constexpr int initial_integral_value = 1;
 constexpr int different_integral_value = 2;
-
 class A {
+public:
   static const IntegralType a = initial_integral_value;
-  // static const IntegralType a; // ❌ Error: uninitialized
-  static constexpr IntegralType b = different_integral_value;
-  // static constexpr IntegralType b; // ❌ Error: uninitialized
-  static IntegralType d;
+  static const IntegralType b; // ❌ Error: uninitialized
+
+  static constexpr IntegralType c = different_integral_value;
+  // static constexpr IntegralType d; // ❌ Error: uninitialized
+
+  // static IntegralType e = initial_integral_value; // ❌ Error:
+  static IntegralType f;
 };
 
 // cpp file
@@ -94,12 +97,15 @@ class A {
 // const IntegralType A::a = different_integral_value; // ❌ Error: duplicate initialization
 const IntegralType A::a;  // ✅ Reauired if ODR-used
 
-// constexpr IntegralType A::b = initial_integral_value; // ❌ Error: duplicate initialization
-// constexpr IntegralType A::b = different_integral_value; // ❌ Error: duplicate initialization
-constexpr IntegralType A::b;  // ✅ Reauired if ODR-used
+// constexpr IntegralType A::b = different_integral_value; // ✅ Required if used
+// constexpr IntegralType A::b;  // ❌ Error: uninitialized
 
-IntegralType A::d;      // ✅ Required if used
-IntegralType A::d = 1;  // ✅ Required if used
+// constexpr IntegralType A::c = initial_integral_value; // ❌ Error: duplicate initialization
+// constexpr IntegralType A::c = different_integral_value; // ❌ Error: duplicate initialization
+constexpr IntegralType A::c;  // ✅ Reauired if ODR-used
+
+IntegralType A::f;      // ✅ Required if used
+IntegralType A::f = 1;  // ✅ Required if used
 ```
 
 Test for class types.
