@@ -187,48 +187,45 @@ Test for class types.
 ```cpp
 // header file
 class Value {
- public:
-  constexpr Value(int v = 0) : v(v) {}
-  int v;
-};
-using ClassType = Value;
-constexpr Value initial_class_value(1);
-constexpr Value different_class_value(2);
+  public:
+   constexpr Value(int v = 0) : v(v) {}
+   int v;
+ };
+ using ClassType = Value;
+ constexpr Value initial_class_value(1);
+ constexpr Value different_class_value(2);
 
-class B {
- public:
-  inline static const ClassType a = initial_class_value;
-  inline static const ClassType b;
+ class B {
+  public:
+   inline static const ClassType a = initial_class_value;
+   inline static const ClassType b;
 
-  inline static constexpr ClassType c = initial_class_value;
-  inline static constexpr ClassType d;
+   inline static constexpr ClassType c = initial_class_value;
+   // inline static constexpr ClassType d; // ❌ Error: must have an initializer
 
-  inline static ClassType e = initial_class_value;
-  inline static ClassType f;
-};
+   inline static ClassType e = initial_class_value;
+   inline static ClassType f;
+ };
 
-// cpp file
+ // cpp file
 
-// const ClassType B::a = initial_class_value; // ❌ Error: duplicate initialization, redefinition
-// const ClassType B::a = different_class_value; // ❌ Error: duplicate initialization, redefinition
-// const ClassType B::a; // ❌ Error: edefinition
+ // const ClassType B::a = initial_class_value; // ❌ Error: duplicate initialization, redefinition
+ // const ClassType B::a = different_class_value; // ❌ Error: duplicate initialization, redefinition
+ // const ClassType B::a; // ❌ Error: redefinition
 
-// const ClassType B::b = different_class_value; // ❌ Error: redefinition
-// const ClassType B::b; // ❌ Error: redefinition
+ // const ClassType B::b = different_class_value; // ❌ Error: redefinition
+ // const ClassType B::b; // ❌ Error: redefinition
 
-// constexpr ClassType B::c = initial_class_value; // ❌ Error: duplicate initialization
-// constexpr ClassType B::c = different_class_value; // ❌ Error: duplicate initialization
-constexpr ClassType B::c; // ✅ Error: edefinition
+ // constexpr ClassType B::c = initial_class_value; // ❌ Error: duplicate initialization
+ // constexpr ClassType B::c = different_class_value; // ❌ Error: duplicate initialization
+ constexpr ClassType B::c; // ✅ Allowed but redundant
 
-// const ClassType B::d = different_class_value; // ❌ Error: redefinition
-// const ClassType B::d; // ❌ Error: redefinition
+ // ClassType B::e = initial_class_value; // ❌ Error: duplicate initialization, redefinition
+ // ClassType B::e = different_class_value; // ❌ Error: duplicate initialization, redefinition
+ // ClassType B::e; // ❌ Error: redefinition
 
-// ClassType B::e = initial_class_value; // ❌ Error: duplicate initialization, redefinition
-// ClassType B::e = different_class_value; // ❌ Error: duplicate initialization, redefinition
-// ClassType B::e; // ❌ Error: redefinition
-
-// ClassType B::f = different_class_value; // ❌ Error: redefinition
-// ClassType B::f; // ❌ Error: redefinition
+ // ClassType B::f = different_class_value; // ❌ Error: redefinition
+ // ClassType B::f; // ❌ Error: redefinition
 
 ```
 
