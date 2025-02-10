@@ -153,8 +153,7 @@ class Value {
 
 C++17 introduced **inline static variables**, which greatly simplify static data member handling:
 
-- **No longer required to be const integral types**.
-- **No longer need to worry about ODR-use** (One Definition Rule use).
+- **No longer need to worry about ODR-use**.
 
 Test for integral types.
 ```cpp
