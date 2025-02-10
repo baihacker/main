@@ -52,17 +52,7 @@ class A {
 const IntegralType A::b;
 ```
 
-However, **reinitializing the static member in the `.cpp` file is not allowed** in C++03:
-
-```cpp
-// header file
-class A {
-    static const IntegralType b = initial_value;
-};
-
-// cpp file
-const IntegralType A::b = initial_value; // ❌ Not allowed in C++03
-```
+More tests can be found in the C++11 section. The results not related to `constexpr` are also be applied to C++11.
 
 ---
 
@@ -238,7 +228,9 @@ class Value {
 
 ```
 
-Not that in **C++17** is that **`constexpr` static members are implicitly `inline`**.
+### Note that in **C++17** is that **`constexpr` static members are implicitly `inline`**.
+
+### Key Takeaways
 
 We can choose the first matching option to define static data member since **C++17**:
 
