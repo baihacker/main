@@ -73,26 +73,72 @@ const IntegralType A::b = initial_value; // ❌ Not allowed in C++03
 - **`switch` conditions**
 - **Template parameters**
 
+Test for integral types.
 ```cpp
 // header file
+using IntegralType = int;
+constexpr int initial_integral_value = 1;
+constexpr int different_integral_value = 2;
+
 class A {
-  static const Type a = initial_value;
-  static constexpr Type b = initial_value;
-  static Type d;
+  static const IntegralType a = initial_integral_value;
+  // static const IntegralType a; // ❌ Error: uninitialized
+  static constexpr IntegralType b = different_integral_value;
+  // static constexpr IntegralType b; // ❌ Error: uninitialized
+  static IntegralType d;
 };
 
 // cpp file
 
-// const Type A::a = initial_value; // ❌ Error: duplicate initialization
-// const Type A::a = different_initial_value; // ❌ Error: duplicate initialization
-const Type A::a;  // ✅ Reauired if ODR-used
+// const IntegralType A::a = initial_integral_value; // ❌ Error: duplicate initialization
+// const IntegralType A::a = different_integral_value; // ❌ Error: duplicate initialization
+const IntegralType A::a;  // ✅ Reauired if ODR-used
 
-// constexpr Type A::b = initial_value; // ❌ Error: duplicate initialization
-// constexpr Type A::b = different_initial_value; // ❌ Error: duplicate initialization
-constexpr Type A::b;  // ✅ Reauired if ODR-used
+// constexpr IntegralType A::b = initial_integral_value; // ❌ Error: duplicate initialization
+// constexpr IntegralType A::b = different_integral_value; // ❌ Error: duplicate initialization
+constexpr IntegralType A::b;  // ✅ Reauired if ODR-used
 
-Type A::d;      // ✅ Required if used
-Type A::d = 1;  // ✅ Required if used
+IntegralType A::d;      // ✅ Required if used
+IntegralType A::d = 1;  // ✅ Required if used
+```
+
+Test for class types.
+```cpp
+// header file
+class Value {
+  public:
+   constexpr Value(int v = 0) : v(v) {}
+   int v;
+ };
+
+ using ClassType = Value;
+ constexpr Value initial_class_value(1);
+ constexpr Value different_class_value(2);
+
+ class B {
+  public:
+   // static const ClassType a = initial_class_value; // ❌ Error
+   static const ClassType b;
+
+   static constexpr ClassType c = initial_class_value;
+   // static constexpr ClassType d; // ❌ Error: must have an initializer
+
+   // static ClassType e = initial_class_value; // ❌ Error
+   static ClassType f;
+ };
+
+ // cpp file
+
+ const ClassType B::b = different_class_value; // ✅ Required when used
+ const ClassType B::b; // ✅ Required when used
+
+ // constexpr ClassType B::c = initial_class_value; // ❌ Error: duplicate initialization
+ // constexpr ClassType B::c = different_class_value; // ❌ Error: duplicate initialization
+ constexpr ClassType B::c; // ✅ Required when ODR-used
+
+ ClassType B::f = different_class_value; // ✅ Required when used
+ ClassType B::f; // ✅ Required when used
+
 ```
 
 ---
@@ -139,6 +185,7 @@ constexpr IntegralType A::b; // ✅ Allowed but redundant
 
 Test for class types.
 ```cpp
+// header file
 class Value {
  public:
   constexpr Value(int v = 0) : v(v) {}
@@ -154,7 +201,7 @@ class B {
   inline static const ClassType b;
 
   inline static constexpr ClassType c = initial_class_value;
-  inline static const ClassType d;
+  inline static constexpr ClassType d;
 
   inline static ClassType e = initial_class_value;
   inline static ClassType f;
@@ -171,7 +218,7 @@ class B {
 
 // constexpr ClassType B::c = initial_class_value; // ❌ Error: duplicate initialization
 // constexpr ClassType B::c = different_class_value; // ❌ Error: duplicate initialization
-constexpr ClassType B::c; // ❌ Error: edefinition
+constexpr ClassType B::c; // ✅ Error: edefinition
 
 // const ClassType B::d = different_class_value; // ❌ Error: redefinition
 // const ClassType B::d; // ❌ Error: redefinition
