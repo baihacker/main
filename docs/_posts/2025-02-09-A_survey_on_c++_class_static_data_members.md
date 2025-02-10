@@ -104,8 +104,8 @@ const IntegralType A::b = different_integral_value; // ✅ Required if used
 // constexpr IntegralType A::c = different_integral_value; // ❌ Error: duplicate initialization
 constexpr IntegralType A::c;  // ✅ Reauired if ODR-used
 
-IntegralType A::f;      // ✅ Required if used
-IntegralType A::f = 1;  // ✅ Required if used
+IntegralType A::f = 1;      // ✅ Required if used
+IntegralType A::f;          // ✅ Required if used
 ```
 
 Test for class types.
@@ -187,8 +187,8 @@ constexpr IntegralType A::c; // ✅ Allowed but redundant
 // IntegralType A::e = different_integral_value; // ❌ Error: duplicate initialization, redefinition
 // IntegralType A::e; // ❌ Error: redefinition
 
-// IntegralType A::f; // ❌ Error: redefinition
 // IntegralType A::f = 1; // ❌ Error: redefinition
+// IntegralType A::f; // ❌ Error: redefinition
 
 ```
 
