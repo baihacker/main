@@ -82,7 +82,7 @@ constexpr int different_integral_value = 2;
 class A {
 public:
   static const IntegralType a = initial_integral_value;
-  static const IntegralType b; // ❌ Error: uninitialized
+  static const IntegralType b;
 
   static constexpr IntegralType c = different_integral_value;
   // static constexpr IntegralType d; // ❌ Error: uninitialized
@@ -97,7 +97,7 @@ public:
 // const IntegralType A::a = different_integral_value; // ❌ Error: duplicate initialization
 const IntegralType A::a;  // ✅ Reauired if ODR-used
 
-// constexpr IntegralType A::b = different_integral_value; // ✅ Required if used
+constexpr IntegralType A::b = different_integral_value; // ✅ Required if used
 // constexpr IntegralType A::b;  // ❌ Error: uninitialized
 
 // constexpr IntegralType A::c = initial_integral_value; // ❌ Error: duplicate initialization
