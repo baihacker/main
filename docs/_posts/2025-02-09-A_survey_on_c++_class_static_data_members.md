@@ -104,31 +104,84 @@ C++17 introduced **inline static variables**, which greatly simplify static data
 - **No longer required to be const integral types**.
 - **No longer need to worry about ODR-use** (One Definition Rule use).
 
+Test for integral types.
 ```cpp
 // header file
+using IntegralType = int;
+constexpr int initial_integral_value = 1;
+constexpr int different_integral_value = 2;
 class A {
-  inline static const Type a = initial_value;
-  inline static constexpr Type b = initial_value;
-  inline static Type c = initial_value;
-  inline static Type d;
+  inline static const IntegralType a = initial_integral_value;
+  inline static constexpr IntegralType b = initial_integral_value;
+  inline static IntegralType c = initial_integral_value;
+  inline static IntegralType d;
+  inline static const IntegralType e;
 };
 
-// cpp file (redundant but valid)
+// cpp file
 
-// const Type A::a = initial_value; // ❌ Error: duplicate initialization, redefinition
-// const Type A::a = different_initial_value; // ❌ Error: duplicate initialization, redefinition
+// const IntegralType A::a = initial_integral_value; // ❌ Error: duplicate initialization, redefinition
+// const IntegralType A::a = different_integral_value; // ❌ Error: duplicate initialization, redefinition
 // const Type A::a; // ❌ Error: redefinition
 
-// constexpr Type A::b = initial_value; // ❌ Error:duplicate initialization
-// constexpr Type A::b = different_initial_value; // ❌ Error:duplicate initialization
-constexpr Type A::b; // ✅ Allowed but redundant
+// constexpr IntegralType A::b = initial_integral_value; // ❌ Error:duplicate initialization
+// constexpr IntegralType A::b = different_integral_value; // ❌ Error:duplicate initialization
+constexpr IntegralType A::b; // ✅ Allowed but redundant
 
-// Type A::c = initial_value; // ❌ Error: duplicate initialization, redefinition
-// Type A::c = different_initial_value; // ❌ Error: duplicate initialization, redefinition
-// Type A::c; // ❌ Error: redefinition
+// IntegralType A::c = initial_integral_value; // ❌ Error: duplicate initialization, redefinition
+// IntegralType A::c = different_integral_value; // ❌ Error: duplicate initialization, redefinition
+// IntegralType A::c; // ❌ Error: redefinition
 
-// Type A::d; // ❌ Error: redefinition
-// Type A::d = 1; // ❌ Error: redefinition
+// IntegralType A::d; // ❌ Error: redefinition
+// IntegralType A::d = 1; // ❌ Error: redefinition
+
+```
+
+Test for class types.
+```cpp
+class Value {
+ public:
+  constexpr Value(int v = 0) : v(v) {}
+  int v;
+};
+using ClassType = Value;
+constexpr Value initial_class_value(1);
+constexpr Value different_class_value(2);
+
+class B {
+ public:
+  inline static const ClassType a = initial_class_value;
+  inline static const ClassType b;
+
+  inline static constexpr ClassType c = initial_class_value;
+  inline static const ClassType d;
+
+  inline static ClassType e = initial_class_value;
+  inline static ClassType f;
+};
+
+// cpp file
+
+// const ClassType B::a = initial_class_value; // ❌ Error: duplicate initialization, redefinition
+// const ClassType B::a = different_class_value; // ❌ Error: duplicate initialization, redefinition
+// const ClassType B::a; // ❌ Error: edefinition
+
+// const ClassType B::b = different_class_value; // ❌ Error: redefinition
+// const ClassType B::b; // ❌ Error: redefinition
+
+// constexpr ClassType B::c = initial_class_value; // ❌ Error: duplicate initialization
+// constexpr ClassType B::c = different_class_value; // ❌ Error: duplicate initialization
+constexpr ClassType B::c; // ❌ Error: edefinition
+
+// const ClassType B::d = different_class_value; // ❌ Error: redefinition
+// const ClassType B::d; // ❌ Error: redefinition
+
+// ClassType B::e = initial_class_value; // ❌ Error: duplicate initialization, redefinition
+// ClassType B::e = different_class_value; // ❌ Error: duplicate initialization, redefinition
+// ClassType B::e; // ❌ Error: redefinition
+
+// ClassType B::f = different_class_value; // ❌ Error: redefinition
+// ClassType B::f; // ❌ Error: redefinition
 
 ```
 
