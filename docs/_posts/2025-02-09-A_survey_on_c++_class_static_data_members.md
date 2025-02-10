@@ -157,29 +157,33 @@ using IntegralType = int;
 constexpr int initial_integral_value = 1;
 constexpr int different_integral_value = 2;
 class A {
+public:
   inline static const IntegralType a = initial_integral_value;
-  inline static constexpr IntegralType b = initial_integral_value;
-  inline static IntegralType c = initial_integral_value;
-  inline static IntegralType d;
-  inline static const IntegralType e;
+  // inline static const IntegralType b; // ❌ Error: uninitialized
+
+  inline static constexpr IntegralType c = initial_integral_value;
+  // inline static constexpr IntegralType d; // ❌ Error: must have an initializer
+
+  inline static IntegralType e = initial_integral_value;
+  inline static IntegralType f;
 };
 
 // cpp file
 
 // const IntegralType A::a = initial_integral_value; // ❌ Error: duplicate initialization, redefinition
 // const IntegralType A::a = different_integral_value; // ❌ Error: duplicate initialization, redefinition
-// const Type A::a; // ❌ Error: redefinition
+// const IntegralType A::a; // ❌ Error: redefinition
 
-// constexpr IntegralType A::b = initial_integral_value; // ❌ Error:duplicate initialization
-// constexpr IntegralType A::b = different_integral_value; // ❌ Error:duplicate initialization
-constexpr IntegralType A::b; // ✅ Allowed but redundant
+// constexpr IntegralType A::c = initial_integral_value; // ❌ Error: duplicate initialization
+// constexpr IntegralType A::c = different_integral_value; // ❌ Error: duplicate initialization
+constexpr IntegralType A::c; // ✅ Allowed but redundant
 
-// IntegralType A::c = initial_integral_value; // ❌ Error: duplicate initialization, redefinition
-// IntegralType A::c = different_integral_value; // ❌ Error: duplicate initialization, redefinition
-// IntegralType A::c; // ❌ Error: redefinition
+// IntegralType A::e = initial_integral_value; // ❌ Error: duplicate initialization, redefinition
+// IntegralType A::e = different_integral_value; // ❌ Error: duplicate initialization, redefinition
+// IntegralType A::e; // ❌ Error: redefinition
 
-// IntegralType A::d; // ❌ Error: redefinition
-// IntegralType A::d = 1; // ❌ Error: redefinition
+// IntegralType A::f; // ❌ Error: redefinition
+// IntegralType A::f = 1; // ❌ Error: redefinition
 
 ```
 
