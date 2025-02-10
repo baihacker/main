@@ -97,8 +97,8 @@ public:
 // const IntegralType A::a = different_integral_value; // ❌ Error: duplicate initialization
 const IntegralType A::a;  // ✅ Reauired if ODR-used
 
-constexpr IntegralType A::b = different_integral_value; // ✅ Required if used
-// constexpr IntegralType A::b;  // ❌ Error: uninitialized
+const IntegralType A::b = different_integral_value; // ✅ Required if used
+// const IntegralType A::b;  // ❌ Error: uninitialized
 
 // constexpr IntegralType A::c = initial_integral_value; // ❌ Error: duplicate initialization
 // constexpr IntegralType A::c = different_integral_value; // ❌ Error: duplicate initialization
