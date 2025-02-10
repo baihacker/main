@@ -135,15 +135,15 @@ class Value {
 
  // cpp file
 
- const ClassType B::b = different_class_value; // ✅ Required when used
- const ClassType B::b; // ✅ Required when used
+ const ClassType B::b = different_class_value; // ✅ Required if used
+ const ClassType B::b; // ✅ Required if used
 
  // constexpr ClassType B::c = initial_class_value; // ❌ Error: duplicate initialization
  // constexpr ClassType B::c = different_class_value; // ❌ Error: duplicate initialization
  constexpr ClassType B::c; // ✅ Required when ODR-used
 
- ClassType B::f = different_class_value; // ✅ Required when used
- ClassType B::f; // ✅ Required when used
+ ClassType B::f = different_class_value; // ✅ Required if used
+ ClassType B::f; // ✅ Required if used
 
 ```
 
