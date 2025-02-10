@@ -66,7 +66,7 @@ const IntegralType A::b = initial_value; // ❌ Not allowed in C++03
 
 ---
 
-## **Changes in C++11**
+## **Changes in C++11: constexpr**
 
 **C++11 introduced `constexpr`**, which has stricter requirements on initialization. Unlike `const`, `constexpr` variables can be used in **constant expressions**, making them useful for:
 - **Array sizes**
