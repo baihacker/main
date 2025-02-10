@@ -2,7 +2,7 @@
 layout: default
 title: "A Survey on C++ Class Static Data Members"
 mathjax: true
-categories: [math]
+categories: [C++]
 ---
 
 <h1>{{ page.title }}</h1>
