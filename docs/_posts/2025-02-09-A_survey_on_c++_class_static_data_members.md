@@ -238,17 +238,15 @@ class Value {
 
 ```
 
-### **`constexpr` Implies `inline` in C++17**
+Not that in **C++17** is that **`constexpr` static members are implicitly `inline`**.
 
-A key improvement in **C++17** is that **`constexpr` static members are implicitly `inline`**, meaning they **no longer require** a separate definition in a `.cpp` file.
+We can choose the first matching option to define static data member since **C++17**:
 
-Thus, we can define static members in different ways and pick the first matching option:
-
-1. `static constexpr Type a;`
-2. `static inline const Type a;`
-3. `static inline Type a;`
-
-For more details, see the **[cppreference article on static data members](https://en.cppreference.com/w/cpp/language/static#Static_data_members){:target="_blank"}**.
+1. `static constexpr Type a = initial_value;`
+2. `static inline const Type a = initial_value;`
+3. `static inline const Type a;`
+4. `static inline Type a = intialize_value;`
+5. `static inline Type a;`
 
 ---
 
