@@ -1,6 +1,6 @@
 # Blog list
 * [GitHub Blog](http://baihacker.github.io/main/)
-  * Project Euler badge, topcoder provile, soj profile
+  * Project Euler badge, topcoder profile, soj profile
   * Solution to GCJ 2014 and GCJ 2015
   * My latest articles.
 
