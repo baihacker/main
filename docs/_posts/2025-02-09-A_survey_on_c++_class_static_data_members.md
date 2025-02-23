@@ -2,7 +2,7 @@
 layout: default
 title: "A Survey on C++ Class Static Data Members"
 mathjax: true
-categories: [math]
+categories: [C++]
 ---
 
 <h1>{{ page.title }}</h1>
@@ -52,39 +52,90 @@ class A {
 const IntegralType A::b;
 ```
 
-However, **reinitializing the static member in the `.cpp` file is not allowed** in C++03:
-
-```cpp
-// header file
-class A {
-    static const IntegralType b = initial_value;
-};
-
-// cpp file
-const IntegralType A::b = initial_value; // ❌ Not allowed in C++03
-```
+More tests can be found in the C++11 section. The results not related to `constexpr` are also be applied to C++11.
 
 ---
 
-## **Changes in C++11**
+## **Changes in C++11: constexpr**
 
-Starting from **C++11**, the above restriction was lifted, and the following code became valid:
-
-```cpp
-// header file
-class A {
-    static const IntegralType b = initial_value;
-};
-
-// cpp file
-// The two initial_value must be the same.
-const IntegralType A::b = initial_value; // ✅ Allowed in C++11
-```
-
-Additionally, **C++11 introduced `constexpr`**, which has stricter requirements on initialization. Unlike `const`, `constexpr` variables can be used in **constant expressions**, making them useful for:
+**C++11 introduced `constexpr`**, which has stricter requirements on initialization. Unlike `const`, `constexpr` variables can be used in **constant expressions**, making them useful for:
 - **Array sizes**
 - **`switch` conditions**
 - **Template parameters**
+
+Test for integral types.
+```cpp
+// header file
+using IntegralType = int;
+constexpr int initial_integral_value = 1;
+constexpr int different_integral_value = 2;
+class A {
+public:
+  static const IntegralType a = initial_integral_value;
+  static const IntegralType b;
+
+  static constexpr IntegralType c = different_integral_value;
+  // static constexpr IntegralType d; // ❌ Error: uninitialized
+
+  // static IntegralType e = initial_integral_value; // ❌ Error:
+  static IntegralType f;
+};
+
+// cpp file
+
+// const IntegralType A::a = initial_integral_value; // ❌ Error: duplicate initialization
+// const IntegralType A::a = different_integral_value; // ❌ Error: duplicate initialization
+const IntegralType A::a;  // ✅ Reauired if ODR-used
+
+const IntegralType A::b = different_integral_value; // ✅ Required if used
+// const IntegralType A::b;  // ❌ Error: uninitialized
+
+// constexpr IntegralType A::c = initial_integral_value; // ❌ Error: duplicate initialization
+// constexpr IntegralType A::c = different_integral_value; // ❌ Error: duplicate initialization
+constexpr IntegralType A::c;  // ✅ Reauired if ODR-used
+
+IntegralType A::f = 1;      // ✅ Required if used
+IntegralType A::f;          // ✅ Required if used
+```
+
+Test for class types.
+```cpp
+// header file
+class Value {
+  public:
+   constexpr Value(int v = 0) : v(v) {}
+   int v;
+ };
+
+ using ClassType = Value;
+ constexpr Value initial_class_value(1);
+ constexpr Value different_class_value(2);
+
+ class B {
+  public:
+   // static const ClassType a = initial_class_value; // ❌ Error
+   static const ClassType b;
+
+   static constexpr ClassType c = initial_class_value;
+   // static constexpr ClassType d; // ❌ Error: must have an initializer
+
+   // static ClassType e = initial_class_value; // ❌ Error
+   static ClassType f;
+ };
+
+ // cpp file
+
+ const ClassType B::b = different_class_value; // ✅ Required if used
+ const ClassType B::b; // ✅ Required if used
+
+ // constexpr ClassType B::c = initial_class_value; // ❌ Error: duplicate initialization
+ // constexpr ClassType B::c = different_class_value; // ❌ Error: duplicate initialization
+ constexpr ClassType B::c; // ✅ Required when ODR-used
+
+ ClassType B::f = different_class_value; // ✅ Required if used
+ ClassType B::f; // ✅ Required if used
+
+```
 
 ---
 
@@ -92,57 +143,102 @@ Additionally, **C++11 introduced `constexpr`**, which has stricter requirements 
 
 C++17 introduced **inline static variables**, which greatly simplify static data member handling:
 
-- **No longer required to be const integral types**.
-- **No longer need to worry about ODR-use** (One Definition Rule use).
+- **No longer need to worry about ODR-use**.
 
-### **Example: Inline Static Variable in C++17**
-
-```cpp
-struct A {
-    inline static Type a = initial_value;  // Defined in the class
-    inline static const Type b = initial_value;  // Defined in the class
-    inline static constexpr Type c = initial_value;  // Defined in the class
-};
-```
-
-### **Optional External Redeclaration**
-
-While redeclaring static members **outside the class is still possible**, it is **not required**. If you do redeclare it, the **initializer must match** the one in the class:
-
+Test for integral types.
 ```cpp
 // header file
+using IntegralType = int;
+constexpr int initial_integral_value = 1;
+constexpr int different_integral_value = 2;
 class A {
-    inline static const Type a = initial_value;
-    inline static constexpr Type b = initial_value;
-    inline static Type c = initial_value;
+public:
+  inline static const IntegralType a = initial_integral_value;
+  // inline static const IntegralType b; // ❌ Error: uninitialized
+
+  inline static constexpr IntegralType c = initial_integral_value;
+  // inline static constexpr IntegralType d; // ❌ Error: must have an initializer
+
+  inline static IntegralType e = initial_integral_value;
+  inline static IntegralType f;
 };
 
-// cpp file (redundant but valid)
-const Type A::a = initial_value; // ✅ Allowed but redundant
-// const Type A::a = different_initial_value; // ❌ Error: different initial_value
-// const Type A::a; // ❌ Error: missing initializer
+// cpp file
 
-constexpr Type A::b = initial_value; // ✅ Allowed but redundant
-// constexpr Type A::b = different_initial_value; // ❌ Error: different initial_value
-// constexpr Type A::b; // ❌ Error: missing initializer
+// const IntegralType A::a = initial_integral_value; // ❌ Error: duplicate initialization, redefinition
+// const IntegralType A::a = different_integral_value; // ❌ Error: duplicate initialization, redefinition
+// const IntegralType A::a; // ❌ Error: redefinition
 
-Type A::c = initial_value; // ✅ Allowed but redundant
-// Type A::c = different_initial_value; // ❌ Error: different initial_value
-// Type A::c; // ❌ Error: missing initializer
+// constexpr IntegralType A::c = initial_integral_value; // ❌ Error: duplicate initialization
+// constexpr IntegralType A::c = different_integral_value; // ❌ Error: duplicate initialization
+constexpr IntegralType A::c; // ✅ Allowed but redundant
+
+// IntegralType A::e = initial_integral_value; // ❌ Error: duplicate initialization, redefinition
+// IntegralType A::e = different_integral_value; // ❌ Error: duplicate initialization, redefinition
+// IntegralType A::e; // ❌ Error: redefinition
+
+// IntegralType A::f = 1; // ❌ Error: redefinition
+// IntegralType A::f; // ❌ Error: redefinition
 
 ```
 
-### **`constexpr` Implies `inline` in C++17**
+Test for class types.
+```cpp
+// header file
+class Value {
+  public:
+   constexpr Value(int v = 0) : v(v) {}
+   int v;
+ };
+ using ClassType = Value;
+ constexpr Value initial_class_value(1);
+ constexpr Value different_class_value(2);
 
-A key improvement in **C++17** is that **`constexpr` static members are implicitly `inline`**, meaning they **no longer require** a separate definition in a `.cpp` file.
+ class B {
+  public:
+   inline static const ClassType a = initial_class_value;
+   inline static const ClassType b;
 
-Thus, we can define static members in different ways and pick the first matching option:
+   inline static constexpr ClassType c = initial_class_value;
+   // inline static constexpr ClassType d; // ❌ Error: must have an initializer
 
-1. `static constexpr Type a;`
-2. `static inline const Type a;`
-3. `static inline Type a;`
+   inline static ClassType e = initial_class_value;
+   inline static ClassType f;
+ };
 
-For more details, see the **[cppreference article on static data members](https://en.cppreference.com/w/cpp/language/static#Static_data_members){:target="_blank"}**.
+ // cpp file
+
+ // const ClassType B::a = initial_class_value; // ❌ Error: duplicate initialization, redefinition
+ // const ClassType B::a = different_class_value; // ❌ Error: duplicate initialization, redefinition
+ // const ClassType B::a; // ❌ Error: redefinition
+
+ // const ClassType B::b = different_class_value; // ❌ Error: redefinition
+ // const ClassType B::b; // ❌ Error: redefinition
+
+ // constexpr ClassType B::c = initial_class_value; // ❌ Error: duplicate initialization
+ // constexpr ClassType B::c = different_class_value; // ❌ Error: duplicate initialization
+ constexpr ClassType B::c; // ✅ Allowed but redundant
+
+ // ClassType B::e = initial_class_value; // ❌ Error: duplicate initialization, redefinition
+ // ClassType B::e = different_class_value; // ❌ Error: duplicate initialization, redefinition
+ // ClassType B::e; // ❌ Error: redefinition
+
+ // ClassType B::f = different_class_value; // ❌ Error: redefinition
+ // ClassType B::f; // ❌ Error: redefinition
+
+```
+
+### Note that in **C++17** is that **`constexpr` static members are implicitly `inline`**.
+
+### Key Takeaways
+
+We can choose the first matching option to define static data member since **C++17**:
+
+1. `static constexpr Type a = initial_value;`
+2. `static inline const Type a = initial_value;`
+3. `static inline const Type a;`
+4. `static inline Type a = intialize_value;`
+5. `static inline Type a;`
 
 ---
 
