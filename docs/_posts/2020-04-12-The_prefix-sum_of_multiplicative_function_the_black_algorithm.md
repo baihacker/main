@@ -90,10 +90,10 @@ int64 dfs(int limit, int64 n, int64 val, int imp, int64 vmp, int emp, int64 now,
     int64 remain = n / val;
 
     if (remain > vmp) {
-      // handle val * q where q > vmp
+      // handle f(val * q) where q > vmp
     }
     if (val > 1) {
-      // handle val * vmp
+      // handle f(val * vmp)
     } else {
       // handle f(1)
     }
@@ -108,7 +108,7 @@ int64 dfs(int limit, int64 n, int64 val, int imp, int64 vmp, int emp, int64 now,
     if (val > valLimit) break;
     int e = 1;
     for (int64 nextval = val * p;; ++e) {
-      int64 t = 1;  // F(p, e).
+      int64 t = 1;  // f(p, e).
       ret += dfs(i, n, nextval, nextimp, nextvmp, imp == -1 ? e : emp, now * t,
                  imp == -1 ? 1 : now1 * t);
       if (nextval > valLimit) break;
