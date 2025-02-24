@@ -14,6 +14,9 @@ categories: [math]
 2020.04.12
 {: style="text-align: center;"}
 
+Last Modified: 2025.02.23
+{: style="text-align: center;"}
+
 # Zhouge sieve [1]
 Based on
 
@@ -72,9 +75,31 @@ There is an article [TEES](https://www.spoj.com/problems/TEES/){:target="_blank"
 #include <pe.hpp>
 using namespace pe;
 
-// Unused code. Just demostrate how to implement this algorithm.
-int64 dfs(int limit, int64 n, int64 val, int imp, int64 vmp, int emp) {
-  int64 ret = 1;
+int64 dfs(int limit, int64 n, int64 val, int imp, int64 vmp, int emp, int64 now,
+          int64 now1) {
+  int64 ret = 0;
+  {
+    // Deal with t = val
+    // imp: index of the max prime factor of val. -1 if val = 1.
+    // vmp: value of the max prime factor of val. 1 if val = 1.
+    // emp: exponent of the max prime factor of val. 0 if val = 1.
+    // now: f(val)
+    // now1: f(val/vmp^emp)
+
+    // we have remain >= vmp
+    int64 remain = n / val;
+
+    if (remain > vmp) {
+      // handle val * q where q > vmp
+    }
+    if (val > 1) {
+      // handle val * vmp
+    } else {
+      // handle f(1)
+    }
+    // Record the number of classes.
+    ++ret;
+  }
   for (int i = 0; i < limit; ++i) {
     const int64 p = plist[i];
     const int nextimp = imp == -1 ? i : imp;
@@ -83,7 +108,9 @@ int64 dfs(int limit, int64 n, int64 val, int imp, int64 vmp, int emp) {
     if (val > valLimit) break;
     int e = 1;
     for (int64 nextval = val * p;; ++e) {
-      ret += dfs(i, n, nextval, nextimp, nextvmp, imp == -1 ? e : emp);
+      int64 t = 1;  // F(p, e).
+      ret += dfs(i, n, nextval, nextimp, nextvmp, imp == -1 ? e : emp, now * t,
+                 imp == -1 ? 1 : now1 * t);
       if (nextval > valLimit) break;
       nextval *= p;
     }
@@ -91,21 +118,36 @@ int64 dfs(int limit, int64 n, int64 val, int imp, int64 vmp, int emp) {
   return ret;
 }
 
+void TestWithDfs() {
+  for (int i = 5; i <= 14; ++i) {
+    TimeRecorder tr;
+    int64 cnt = dfs(pcnt, Power(10LL, i), 1, -1, 1, 0, 1, 1);
+    printf("1e%d\t%.2e\t%16I64d\t%s\n", i, 1. * cnt, cnt,
+           tr.Elapsed().Format().c_str());
+  }
+}
+
+// This implementation is based on baihacker's pe library.
 using RT = int64;
-struct Solver : public MValueBaseEx<Solver, int64, 8> {
+struct Solver : public MValueBase<Solver, int64, /**thread_number=*/8> {
   RT Batch(int64 n, int64 val, int imp, int64 vmp, int emp, RT now, RT now1) {
     return 1;
   }
 };
 
-int main() {
-  PE_INIT(maxp = 100000000);
+void TestWithPeLibrary() {
   for (int i = 5; i <= 16; ++i) {
     TimeRecorder tr;
     int64 cnt = Solver().Cal(Power(10LL, i));
     printf("1e%d\t%.2e\t%16I64d\t%s\n", i, 1. * cnt, cnt,
            tr.Elapsed().Format().c_str());
   }
+}
+
+int main() {
+  PE_INIT(maxp = 100000000);
+  TestWithDfs();
+  TestWithPeLibrary();
   return 0;
 }
 ```
@@ -113,19 +155,61 @@ int main() {
 The outputs are
 
 ```cpp
+// 9900k
+// Output for TestWithDfs
 1e5     1.89e+03                    1894        0:00:00:00.000
+1e6     9.11e+03                    9108        0:00:00:00.000
+1e7     4.49e+04                   44948        0:00:00:00.000
+1e8     2.28e+05                  228102        0:00:00:00.002
+1e9     1.19e+06                 1185818        0:00:00:00.012
+1e10    6.30e+06                 6298637        0:00:00:00.066
+1e11    3.41e+07                34113193        0:00:00:00.357
+1e12    1.88e+08               188014195        0:00:00:01.957
+1e13    1.05e+09              1052806860        0:00:00:11.068
+1e14    5.98e+09              5981038282        0:00:01:02.847
+time usage: 0:00:01:16.834
+// Output for TestWithDfs
+1e5     1.89e+03                    1894        0:00:00:00.001
 1e6     9.11e+03                    9108        0:00:00:00.000
 1e7     4.49e+04                   44948        0:00:00:00.000
 1e8     2.28e+05                  228102        0:00:00:00.000
 1e9     1.19e+06                 1185818        0:00:00:00.001
 1e10    6.30e+06                 6298637        0:00:00:00.006
-1e11    3.41e+07                34113193        0:00:00:00.036
-1e12    1.88e+08               188014195        0:00:00:00.222
-1e13    1.05e+09              1052806860        0:00:00:01.194
-1e14    5.98e+09              5981038282        0:00:00:06.885
-1e15    3.44e+10             34430179518        0:00:00:39.958
-1e16    2.01e+11            200620098564        0:00:03:52.337
-time usage: 0:00:04:41.111
+1e11    3.41e+07                34113193        0:00:00:00.032
+1e12    1.88e+08               188014195        0:00:00:00.184
+1e13    1.05e+09              1052806860        0:00:00:00.944
+1e14    5.98e+09              5981038282        0:00:00:05.355
+1e15    3.44e+10             34430179518        0:00:00:30.729
+1e16    2.01e+11            200620098564        0:00:03:02.692
+time usage: 0:00:03:40.477
+
+// 14900k
+// Output for TestWithDfs
+1e5     1.89e+03                    1894        0:00:00:00.000
+1e6     9.11e+03                    9108        0:00:00:00.000
+1e7     4.49e+04                   44948        0:00:00:00.000
+1e8     2.28e+05                  228102        0:00:00:00.000
+1e9     1.19e+06                 1185818        0:00:00:00.003
+1e10    6.30e+06                 6298637        0:00:00:00.019
+1e11    3.41e+07                34113193        0:00:00:00.100
+1e12    1.88e+08               188014195        0:00:00:00.546
+1e13    1.05e+09              1052806860        0:00:00:03.022
+1e14    5.98e+09              5981038282        0:00:00:17.187
+time usage: 0:00:00:21.234
+// Output for TestWithPeLibrary
+1e5     1.89e+03                    1894        0:00:00:00.000
+1e6     9.11e+03                    9108        0:00:00:00.000
+1e7     4.49e+04                   44948        0:00:00:00.000
+1e8     2.28e+05                  228102        0:00:00:00.000
+1e9     1.19e+06                 1185818        0:00:00:00.001
+1e10    6.30e+06                 6298637        0:00:00:00.005
+1e11    3.41e+07                34113193        0:00:00:00.009
+1e12    1.88e+08               188014195        0:00:00:00.046
+1e13    1.05e+09              1052806860        0:00:00:00.245
+1e14    5.98e+09              5981038282        0:00:00:01.373
+1e15    3.44e+10             34430179518        0:00:00:07.997
+1e16    2.01e+11            200620098564        0:00:00:46.394
+time usage: 0:00:00:56.418
 ```
 
 
@@ -133,11 +217,10 @@ It means, if the complexity of $h$ is ignored, you can use this method to brute 
 
 ## Build a code template and optimizate it
 In [pe_algo](https://github.com/baihacker/pe/blob/master/pe_algo){:target="_blank"}
-* **MValueBaseT** is an example to build a code template.
-* **MValueBaseTP** is an example to parallelize this algorithm.
+* **MValueBase** is an example to parallelize this algorithm.
 
 ## Optimize $h$ part
-Let $h(n)$ be the number of primes no more than $n$, in [pe_algo](https://github.com/baihacker/pe/blob/master/pe_algo){:target="_blank"}
+Let $h(n)$ be the number of primes no more than $n$, in [pe_ntf](https://github.com/baihacker/pe/blob/master/pe_ntf){:target="_blank"}
 * **prime_s0** is the basic implementation, and the complexity is expected to be $\tilde{\cal O}(n^{\frac{3}{4}})$
 * **prime_s0_ex** uses binary indexed tree to optimize it, and I guess the complexity is $\tilde{\cal O}(n^{\frac{2}{3}})$
 * **prime_s0_parallel** uses multi-threads to optimize it, and we need to choose a proper thread number and find a strategy about when to parallelize it.
