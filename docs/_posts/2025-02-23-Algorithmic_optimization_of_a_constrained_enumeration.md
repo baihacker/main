@@ -25,7 +25,7 @@ coe2_0 * i + coe2_1 * j + coe2_2 * k + coe2_3 + b = 0 \\
 \end{array}
 $$
 
-where  $$n, t, delta, coe1_{0..3}, coe2_{0..3}$$ are predetermined constants, $$\left \vert coe2_{0,1,2}\right \vert = 1$$, and $$coe1_i = 2\ coe2_i$$ for all possible $$a, b, i, j, k$$. Crucially, all variables represent integers.
+where  $$n, t, delta, coe1_{0..3}, coe2_{0..3}$$ are predetermined constants, $$\left \vert coe2_{0,1,2}\right \vert = 1$$, and $$coe1_i = 2\ coe2_i$$ for $$i = 0,1,2$$. Crucially, all variables represent integers.
 
 The initial approach involves nested loops to iterate through all possible values of  `a`, `b`, `i`, `j`, and `k`. The optimization progressively eliminates these loops, significantly improving efficiency.
 
@@ -46,7 +46,7 @@ This reveals two key insights:
 **2. Eliminating the `k` Loop**
 -
 
-Focusing on the second constraint equation: $$coe2_0 * i + coe2_1 * j + coe2_2 * k + coe2_3 + b = 0$$. When the parameters `i` and `b` are defined, the equation indicated `j` and `k` has a linear relationship. Therefore the loop of `k` is unnecessary.
+Focusing on the second constraint equation: $$coe2_0 * i + coe2_1 * j + coe2_2 * k + coe2_3 + b = 0$$. When the parameters `i` and `b` are defined, the equation indicated `j` and `k` has a linear relationship. Therefore the loop of `k` is unnecessary when `j` is determined.
 
 **3. Eliminating the `j` Loop**
 -
