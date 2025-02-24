@@ -215,7 +215,7 @@ time usage: 0:00:00:56.418
 
 It means, if the complexity of $h$ is ignored, you can use this method to brute force an input of $10^{16}$ by multi-threads in several minutes.
 
-## Build a code template and optimizate it
+## Build a code template and optimize it
 In [pe_algo](https://github.com/baihacker/pe/blob/master/pe_algo){:target="_blank"}
 * **MValueBase** is an example to parallelize this algorithm.
 
