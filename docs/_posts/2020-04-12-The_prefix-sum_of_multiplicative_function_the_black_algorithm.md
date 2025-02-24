@@ -221,9 +221,9 @@ In [pe_algo](https://github.com/baihacker/pe/blob/master/pe_algo){:target="_blan
 
 ## Optimize $h$ part
 Let $h(n)$ be the number of primes no more than $n$, in [pe_ntf](https://github.com/baihacker/pe/blob/master/pe_ntf){:target="_blank"}
-* **prime_s0** is the basic implementation, and the complexity is expected to be $\tilde{\cal O}(n^{\frac{3}{4}})$
-* **prime_s0_ex** uses binary indexed tree to optimize it, and I guess the complexity is $\tilde{\cal O}(n^{\frac{2}{3}})$
-* **prime_s0_parallel** uses multi-threads to optimize it, and we need to choose a proper thread number and find a strategy about when to parallelize it.
+* **PrimeS0** is the basic implementation, and the complexity is expected to be $\tilde{\cal O}(n^{\frac{3}{4}})$
+* **PrimeS0Ex** uses binary indexed tree to optimize it, and I guess the complexity is $\tilde{\cal O}(n^{\frac{2}{3}})$
+* **PrimeS0Parallel** uses multi-threads to optimize it, and we need to choose a proper thread number and find a strategy about when to parallelize it.
 
 # Conclusion
 Why do I call it **the black algorithm**?
