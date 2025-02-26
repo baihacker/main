@@ -52,7 +52,7 @@ class A {
 const IntegralType A::b;
 ```
 
-More tests can be found in the C++11 section. The results not related to `constexpr` are also be applied to C++11.
+More tests can be found in the C++11 section: the results not related to `constexpr` can be applied to C++03.
 
 ---
 
