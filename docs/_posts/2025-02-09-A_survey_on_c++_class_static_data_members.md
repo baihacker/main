@@ -8,7 +8,7 @@ categories: [C++]
 <h1>{{ page.title }}</h1>
 {: style="text-align: center;"}
 
-[baihacker](https://github.com/baihacker){:target="_blank"}
+[baihacker](https://baihacker.me/){:target="_blank"}
 [ChatGPT](https://chatgpt.com/){:target="_blank"}
 {: style="text-align: center;"}
 

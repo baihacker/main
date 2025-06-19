@@ -8,7 +8,7 @@ categories: [math]
 <h1>{{ page.title }}</h1>
 {: style="text-align: center;"}
 
-[baihacker](https://github.com/baihacker){:target="_blank"}
+[baihacker](https://baihacker.me/){:target="_blank"}
 {: style="text-align: center;"}
 
 2020.04.07

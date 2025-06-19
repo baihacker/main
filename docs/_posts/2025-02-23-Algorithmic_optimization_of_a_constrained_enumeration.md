@@ -8,7 +8,7 @@ categories: [math]
 <h1>{{ page.title }}</h1>
 {: style="text-align: center;"}
 
-[baihacker](https://github.com/baihacker){:target="_blank"}
+[baihacker](https://baihacker.me/){:target="_blank"}
 [Gemini](https://gemini.google.com/app){:target="_blank"}
 {: style="text-align: center;"}
 This article elucidates the optimization of an algorithm designed for a constrained counting problem, integral to a Project Euler solution. *This article is refined by gemini.*

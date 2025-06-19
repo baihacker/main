@@ -8,7 +8,7 @@ categories: [math]
 <h1>{{ page.title }}</h1>
 {: style="text-align: center;"}
 
-[baihacker](https://github.com/baihacker){:target="_blank"}
+[baihacker](https://baihacker.me/){:target="_blank"}
 [Gemini](https://gemini.google.com/app){:target="_blank"}
 {: style="text-align: center;"}
 This article refines methods for calculating the sum of a function over a set of k-tuples. The function's value is constant under permutations of a tuple's elements.
