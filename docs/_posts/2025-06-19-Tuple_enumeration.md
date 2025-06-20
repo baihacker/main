@@ -291,6 +291,6 @@ int main() {
 
 Memoization introduces challenges for parallelization due to potential data dependencies. If dependencies only exist on lexicographically smaller tuples ($t_2 < t_1$), we can process batches sequentially while parallelizing the computations *within* each batch. To avoid data races, each thread can maintain a local cache. Results from dependent computations are first checked in a shared, read-only cache of prior batches, and then in the thread's local cache. The local caches are then merged into the shared cache after the batch is complete.
 
-For more complex dependency patterns, threads can share a global cache. To manage concurrent writes, we can use an array of locks. When updating the value for $f(t_2)$, a thread acquires a lock based on its hash, for instance, $\text{hash}(t_2) \pmod P$, where $P$ is the number of locks and it is prime. It's assumed that the reading operation doesn't return partially update results.
+For more complex dependency patterns, threads can share a global cache. To manage concurrent writes, we can use an array of locks. When updating the value for $f(t_2)$, a thread acquires a lock based on its hash, for instance, $\text{hash}(t_2) \pmod P$, where $P$ is the number of locks and it is prime. A lock is not required for a read operation if the read is atomic and cannot return partially written data.
 
 {% include mathjax.html %}
