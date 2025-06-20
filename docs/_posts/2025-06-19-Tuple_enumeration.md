@@ -24,20 +24,20 @@ Finally, it discusses strategies for managing concurrent cache access in a paral
 This article addresses the problem of calculating $\sum f(t)$, where `t` is a k-tuple of integers from the range $[0, n)$. A key property of the function `f` is that its value is invariant under permutation of the tuple's elements, meaning $f(t_1) = f(t_2)$ if $t_1$ is a permutation of $t_2$.
 
 # Analysis
-A naive approach would be to iterate through all $n^k$ possible tuples. Since the function's value depends only on the multiset of elements in the tuple, not their order, we can significantly reduce the computation by considering only unique combinations with repetition. The number of such unique tuples is given by the [formula for combinations with repetition](https://en.wikipedia.org/wiki/Combination#Number_of_combinations_with_repetition){:target="_blank"}: $\binom{n+k-1}{k}$.
+A naive approach would be to iterate through all $n^k$ possible tuples. Since the function's value depends only on the multiset of elements in the tuple, not their order, we can significantly reduce the computation by considering only unique combinations with repetition. The number of such unique tuples is given by the [formula for combinations with repetition](https://en.wikipedia.org/wiki/Combination#Number_of_combinations_with_repetition){:target="_blank"}: $\binom{n+k-1}{k}$. Moreover, we have $\lim_{n \to \infty}\frac{\binom{n+k-1}{k}}{n^k}=\frac{1}{k!}$.
 
 The table below contrasts the two counts for various values of `n` and `k`.
 
 $$
 \begin{array}{|c|c|c|}
-n, k    & n^k      & \binom{n+k-1}{k}     & \frac{\binom{n+k-1}{k}}{n^k} \\
+n, k    & n^k      & \binom{n+k-1}{k}     & \frac{\binom{n+k-1}{k}}{n^k} & \frac{1}{k!} \\
 \hline
-50, 5   & 3.125 * 10^{8}  & 3.163 * 10^{6}  & 1.012 * 10^{-2} \\
-50, 7   & 7.813 * 10^{11} & 2.319 * 10^{8}  & 2.969 * 10^{-4} \\
-100, 5  & 1.000 * 10^{10} & 9.196 * 10^{7}  & 9.196 * 10^{-3} \\
-100, 7  & 1.000 * 10^{14} & 2.437 * 10^{10} & 2.437 * 10^{-4} \\
-150, 5  & 7.594 * 10^{10} & 6.760 * 10^{8}  & 8.902 * 10^{-3} \\
-150, 7  & 1.709 * 10^{15} & 3.892 * 10^{11} & 2.278 * 10^{-4} \\
+50, 5   & 3.125 * 10^{8}  & 3.163 * 10^{6}  & 1.012 * 10^{-2} & 8.333 * 10^{-3} \\
+50, 7   & 7.813 * 10^{11} & 2.319 * 10^{8}  & 2.969 * 10^{-4} & 1.984 * 10^{-4} \\
+100, 5  & 1.000 * 10^{10} & 9.196 * 10^{7}  & 9.196 * 10^{-3} & 8.333 * 10^{-3} \\
+100, 7  & 1.000 * 10^{14} & 2.437 * 10^{10} & 2.437 * 10^{-4} & 1.984 * 10^{-4} \\
+150, 5  & 7.594 * 10^{10} & 6.760 * 10^{8}  & 8.902 * 10^{-3} & 8.333 * 10^{-3} \\
+150, 7  & 1.709 * 10^{15} & 3.892 * 10^{11} & 2.278 * 10^{-4} & 1.984 * 10^{-4} \\
 \end{array}
 $$
 
